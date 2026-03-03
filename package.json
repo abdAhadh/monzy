@@ -12,6 +12,8 @@
   "dependencies": {
     "framer-motion": "^12.34.2",
     "lucide-react": "^0.575.0",
+    "posthog-js": "^1.357.1",
+    "puppeteer": "^24.37.5",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
