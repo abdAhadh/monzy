@@ -1154,7 +1154,7 @@ function startVideo(){
   }
   audio.play().catch(e=>console.warn('Audio:',e));
   const bgm=document.getElementById('bgm');
-  if(bgm){bgm.volume=0.3;bgm.playbackRate=1.1;bgm.currentTime=0;bgm.play().catch(()=>{})}
+  if(bgm){bgm.volume=0.27;bgm.playbackRate=1.1;bgm.currentTime=0;bgm.play().catch(()=>{})}
   isPlaying=true;
   if(window.posthog)posthog.capture('demo_started');
   document.getElementById('pp-btn').style.display='inline-block';
