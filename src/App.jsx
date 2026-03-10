@@ -436,6 +436,7 @@ return (
 const FinalCTA = () => {
 const [email, setEmail] = useState('');
 const [isSubmitted, setIsSubmitted] = useState(false);
+const [isLoading, setIsLoading] = useState(false);
 const [error, setError] = useState('');
 
 const isWorkEmail = (e) => {
@@ -444,7 +445,7 @@ const domain = e.split('@')[1];
 return domain && !freeDomains.includes(domain.toLowerCase());
 };
 
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
 if (!email || !email.includes('@')) {
       setError('Please enter a valid email.');
@@ -455,6 +456,19 @@ if (!isWorkEmail(email)) {
 return;
 }
     setError('');
+    setIsLoading(true);
+
+    try {
+      await fetch('/api/slack-notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+    } catch (err) {
+      console.error('Submission error:', err);
+    }
+
+    setIsLoading(false);
     setIsSubmitted(true);
 };
 
@@ -489,9 +503,10 @@ type="email"
                   />
 <button
 type="submit"
-                    className="px-6 md:px-8 py-4 bg-white text-black font-bold rounded-sm hover:bg-slate-200 transition-all text-sm uppercase tracking-widest shrink-0"
+                    disabled={isLoading}
+                    className="px-6 md:px-8 py-4 bg-white text-black font-bold rounded-sm hover:bg-slate-200 transition-all text-sm uppercase tracking-widest shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
 >
-Request Demo
+{isLoading ? 'Submitting...' : 'Request Demo'}
 </button>
 </div>
 {error && (
