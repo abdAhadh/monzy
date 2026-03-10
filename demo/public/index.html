@@ -1308,6 +1308,30 @@ document.getElementById('progress-bar').addEventListener('click',function(e){
 
 document.getElementById('vo').addEventListener('ended',()=>{const bgm=document.getElementById('bgm');if(bgm){bgm.pause();bgm.currentTime=0}if(window.posthog)posthog.capture('demo_completed')});
 window.addEventListener('beforeunload',()=>{timers.forEach(clearTimeout);cursorTimers.forEach(clearTimeout);if(animFrame)cancelAnimationFrame(animFrame)});
+
+/* === Iframe embed mode === */
+(function(){
+  if(window.self===window.top)return; // Not in iframe, skip
+  // Hide native controls, progress bar, timestamp, start screen
+  var style=document.createElement('style');
+  style.textContent='#controls,#progress-bar,#timestamp,#start-screen{display:none!important}#subtitle-bar{bottom:0!important}';
+  document.head.appendChild(style);
+  // Listen for parent commands
+  window.addEventListener('message',function(e){
+    if(!e.data||!e.data.action)return;
+    if(e.data.action==='play'){
+      if(!isPlaying) startVideo();
+    }else if(e.data.action==='pause'){
+      if(isPlaying) togglePlayPause();
+    }else if(e.data.action==='toggle'){
+      togglePlayPause();
+    }
+  });
+  // Notify parent of state changes
+  var origStart=startVideo;
+  startVideo=function(){origStart();window.parent.postMessage({type:'monzy-demo',state:'playing'},'*')};
+  document.getElementById('vo').addEventListener('ended',function(){window.parent.postMessage({type:'monzy-demo',state:'ended'},'*')});
+})();
 </script>
 </body>
 </html>
