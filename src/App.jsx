@@ -201,6 +201,114 @@ const scrollToDemo = () => {
   }
 };
 
+// --- Demo Embed Section ---
+const DEMO_URL = 'https://demo.monzyai.com';
+
+const DemoEmbed = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+  const iframeRef = React.useRef(null);
+
+  const handleHover = (hovering) => {
+    setIsHovering(hovering);
+    if (iframeRef.current?.contentWindow) {
+      iframeRef.current.contentWindow.postMessage({ action: 'hover', value: hovering }, '*');
+    }
+  };
+
+  const handleToggle = (e) => {
+    e.stopPropagation();
+    if (iframeRef.current?.contentWindow) {
+      iframeRef.current.contentWindow.postMessage({ action: 'toggle' }, '*');
+    }
+    setIsPlaying(prev => !prev);
+  };
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.data?.type === 'monzy-demo') {
+        if (e.data.state === 'playing') setIsPlaying(true);
+        if (e.data.state === 'ended') setIsPlaying(false);
+      }
+    };
+    window.addEventListener('message', handler);
+    return () => window.removeEventListener('message', handler);
+  }, []);
+
+  return (
+    <section className="py-16 md:py-24 border-b border-white/5 bg-[#0a0c10]">
+      <div className="max-w-6xl mx-auto px-4 md:px-6">
+        <div className="text-center mb-8 md:mb-12">
+          <span className="inline-block px-2 py-1 mb-4 text-[10px] font-bold tracking-widest uppercase border border-white/20 text-orange-500 rounded-sm bg-orange-500/5">
+            See It In Action
+          </span>
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium tracking-tight text-white mb-4 md:mb-6 leading-tight">
+            Watch Monzy work
+          </h2>
+          <p className="text-slate-400 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
+            See how a Monzy agent drives NetRevPAR for Hotels.
+          </p>
+        </div>
+
+        <div
+          className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black"
+          onMouseEnter={() => handleHover(true)}
+          onMouseLeave={() => handleHover(false)}
+        >
+          {/* Iframe — always loaded with Scene 1 preloaded; user clicks go through to iframe's start screen */}
+          <iframe
+            ref={iframeRef}
+            src={DEMO_URL}
+            className="absolute inset-0 w-full h-full"
+            allow="autoplay"
+            style={{ border: 'none' }}
+          />
+
+          {/* Visual play indicator — pointer-events:none so clicks pass through to iframe */}
+          {!isPlaying && (
+            <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" className="text-white ml-1">
+                  <path d="M8 5.14v13.72a1 1 0 001.5.86l11.04-6.86a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor" />
+                </svg>
+              </div>
+            </div>
+          )}
+
+          {/* Hover pause/play overlay (only when playing) */}
+          {isPlaying && (
+            <AnimatePresence>
+              {isHovering && (
+                <motion.button
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  onClick={handleToggle}
+                  className="absolute inset-0 z-30 flex items-center justify-center cursor-pointer bg-black/20"
+                >
+                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/25 hover:scale-110 transition-all duration-200">
+                    {isPlaying ? (
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" className="text-white">
+                        <rect x="6" y="4" width="4" height="16" rx="1" fill="currentColor" />
+                        <rect x="14" y="4" width="4" height="16" rx="1" fill="currentColor" />
+                      </svg>
+                    ) : (
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" className="text-white ml-1">
+                        <path d="M8 5.14v13.72a1 1 0 001.5.86l11.04-6.86a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor" />
+                      </svg>
+                    )}
+                  </div>
+                </motion.button>
+              )}
+            </AnimatePresence>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // --- Sections ---
 const Navbar = () => (
 <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-[#0a0c10]/80 backdrop-blur-md">
@@ -654,6 +762,7 @@ return (
 <Navbar />
 <main className="tech-grid overflow-hidden">
 <Hero />
+<DemoEmbed />
 <ProblemSection />
 <BentoGrid />
 <FinalCTA />
