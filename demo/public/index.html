@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background:#0C0F15">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
 <title>Monzy AI — Product Walkthrough</title>
 <script>!function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init ir nr qi rr ar Ze er capture calculateEventProperties dr register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty cr hr createPersonProfile setInternalOrTestUser pr Xe gr opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing lr debug At vr getPageViewId captureTraceFeedback captureTraceMetric Je".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);posthog.init('phc_cc1bwpzA7VZrM9gb0VyA5WjvLXoECC2SpYJz70F44IE',{api_host:'https://us.i.posthog.com',defaults:'2026-01-30',person_profiles:'identified_only'})</script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1135,12 +1136,7 @@ function tick(){
 }
 
 function startVideo(){
-  document.getElementById('start-screen').classList.add('hidden');
-  videoStart=Date.now();
-  agentsHighlighted=false;
-  lastSubText='';
-  currentScene=-1;
-
+  // Setup audio first (may cause brief main-thread pause for AudioContext creation)
   const audio=document.getElementById('vo');
   audio.currentTime=0;
   audio.playbackRate=1.1;
@@ -1155,6 +1151,13 @@ function startVideo(){
   audio.play().catch(e=>console.warn('Audio:',e));
   const bgm=document.getElementById('bgm');
   if(bgm){bgm.volume=0.27;bgm.playbackRate=1.1;bgm.currentTime=0;bgm.play().catch(()=>{})}
+
+  // Now do visual changes after audio is set up
+  document.getElementById('start-screen').classList.add('hidden');
+  videoStart=Date.now();
+  agentsHighlighted=false;
+  lastSubText='';
+  currentScene=-1;
   isPlaying=true;
   if(window.posthog)posthog.capture('demo_started');
   document.getElementById('pp-btn').style.display='inline-block';
@@ -1315,12 +1318,14 @@ window.addEventListener('beforeunload',()=>{timers.forEach(clearTimeout);cursorT
   var style=document.createElement('style');
   style.textContent=[
     // Fill entire iframe — no gap
-    'body{background:var(--bg)!important;min-height:100%!important;display:block!important}',
+    'html,body{background:var(--bg)!important;min-height:100%!important}',
+    'body{display:block!important}',
     '#stage{width:100%!important;max-width:100%!important;height:100vh!important;aspect-ratio:auto!important;border-radius:0!important;box-shadow:none!important}',
     // Hide native play/pause controls
     '#controls{display:none!important}',
     // Start screen transparent click target
-    '#start-screen{background:transparent!important;cursor:pointer}',
+    '#start-screen{background:transparent!important;cursor:pointer;transition:opacity .15s ease}',
+    '#start-screen.hidden{display:flex!important;opacity:0!important;pointer-events:none!important}',
     '#start-screen *{visibility:hidden!important}',
     // Progress bar: positioned at bottom of stage, hidden until parent says hover
     '#progress-bar{position:absolute!important;bottom:0!important;left:0!important;right:0!important;z-index:201!important;opacity:0;transition:opacity .25s ease!important}',
@@ -1349,6 +1354,14 @@ window.addEventListener('beforeunload',()=>{timers.forEach(clearTimeout);cursorT
     }
   });
   // Notify parent of state changes
+  // Override revealIn on first play to prevent flicker — Scene 0 elements are already
+  // revealed from the embed preload, so don't strip and re-add .show class
+  var origRevealIn=revealIn;
+  var firstPlay=true;
+  revealIn=function(container){
+    if(firstPlay&&container.id===SCENES[0].id){firstPlay=false;return;}
+    origRevealIn(container);
+  };
   var origStart=startVideo;
   startVideo=function(){origStart();window.parent.postMessage({type:'monzy-demo',state:'playing'},'*')};
   document.getElementById('vo').addEventListener('ended',function(){

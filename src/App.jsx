@@ -206,6 +206,7 @@ const DEMO_URL = 'https://demo.monzyai.com';
 
 const DemoEmbed = () => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const iframeRef = React.useRef(null);
 
@@ -227,8 +228,8 @@ const DemoEmbed = () => {
   useEffect(() => {
     const handler = (e) => {
       if (e.data?.type === 'monzy-demo') {
-        if (e.data.state === 'playing') setIsPlaying(true);
-        if (e.data.state === 'ended') setIsPlaying(false);
+        if (e.data.state === 'playing') { setIsPlaying(true); setHasStarted(true); }
+        if (e.data.state === 'ended') { setIsPlaying(false); setHasStarted(false); }
       }
     };
     window.addEventListener('message', handler);
@@ -251,7 +252,7 @@ const DemoEmbed = () => {
         </div>
 
         <div
-          className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black"
+          className="relative w-full aspect-video rounded-2xl overflow-hidden bg-[#0C0F15]"
           onMouseEnter={() => handleHover(true)}
           onMouseLeave={() => handleHover(false)}
         >
@@ -261,11 +262,11 @@ const DemoEmbed = () => {
             src={DEMO_URL}
             className="absolute inset-0 w-full h-full"
             allow="autoplay"
-            style={{ border: 'none' }}
+            style={{ border: 'none', backgroundColor: '#0C0F15', colorScheme: 'dark' }}
           />
 
-          {/* Visual play indicator — pointer-events:none so clicks pass through to iframe */}
-          {!isPlaying && (
+          {/* Play overlay: pass-through before first play, clickable when paused */}
+          {!isPlaying && !hasStarted && (
             <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
               <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" className="text-white ml-1">
@@ -273,6 +274,20 @@ const DemoEmbed = () => {
                 </svg>
               </div>
             </div>
+          )}
+
+          {/* Clickable play button when paused after having started */}
+          {!isPlaying && hasStarted && (
+            <button
+              onClick={handleToggle}
+              className="absolute inset-0 z-20 flex items-center justify-center cursor-pointer bg-black/20"
+            >
+              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/25 hover:scale-110 transition-all duration-200">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" className="text-white ml-1">
+                  <path d="M8 5.14v13.72a1 1 0 001.5.86l11.04-6.86a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor" />
+                </svg>
+              </div>
+            </button>
           )}
 
           {/* Hover pause/play overlay (only when playing) */}
