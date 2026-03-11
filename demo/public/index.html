@@ -1312,25 +1312,53 @@ window.addEventListener('beforeunload',()=>{timers.forEach(clearTimeout);cursorT
 /* === Iframe embed mode === */
 (function(){
   if(window.self===window.top)return; // Not in iframe, skip
-  // Hide native controls, progress bar, timestamp, start screen
   var style=document.createElement('style');
-  style.textContent='#controls,#progress-bar,#timestamp,#start-screen{display:none!important}#subtitle-bar{bottom:0!important}';
+  style.textContent=[
+    // Fill entire iframe — no gap
+    'body{background:var(--bg)!important;min-height:100%!important;display:block!important}',
+    '#stage{width:100%!important;max-width:100%!important;height:100vh!important;aspect-ratio:auto!important;border-radius:0!important;box-shadow:none!important}',
+    // Hide native play/pause controls
+    '#controls{display:none!important}',
+    // Start screen transparent click target
+    '#start-screen{background:transparent!important;cursor:pointer}',
+    '#start-screen *{visibility:hidden!important}',
+    // Progress bar: positioned at bottom of stage, hidden until parent says hover
+    '#progress-bar{position:absolute!important;bottom:0!important;left:0!important;right:0!important;z-index:201!important;opacity:0;transition:opacity .25s ease!important}',
+    '#progress-bar.embed-show{opacity:1}',
+    '#timestamp{position:absolute!important;bottom:18px!important;left:12px!important;z-index:202!important;opacity:0;transition:opacity .25s ease!important}',
+    '#timestamp.embed-show{opacity:1}',
+    '#subtitle-bar{bottom:0!important}'
+  ].join('');
   document.head.appendChild(style);
+  // Make the entire start screen clickable (children are hidden, so onclick on button won't fire)
+  document.getElementById('start-screen').addEventListener('click',function(){ if(!isPlaying) startVideo(); });
+  // Preload Scene 1 visuals behind the transparent start screen
+  setTimeout(function(){ showScene(0); },100);
   // Listen for parent commands
   window.addEventListener('message',function(e){
     if(!e.data||!e.data.action)return;
-    if(e.data.action==='play'){
-      if(!isPlaying) startVideo();
-    }else if(e.data.action==='pause'){
+    if(e.data.action==='pause'){
       if(isPlaying) togglePlayPause();
     }else if(e.data.action==='toggle'){
       togglePlayPause();
+    }else if(e.data.action==='hover'){
+      var pb=document.getElementById('progress-bar');
+      var ts=document.getElementById('timestamp');
+      if(e.data.value){pb.classList.add('embed-show');ts.classList.add('embed-show')}
+      else{pb.classList.remove('embed-show');ts.classList.remove('embed-show')}
     }
   });
   // Notify parent of state changes
   var origStart=startVideo;
   startVideo=function(){origStart();window.parent.postMessage({type:'monzy-demo',state:'playing'},'*')};
-  document.getElementById('vo').addEventListener('ended',function(){window.parent.postMessage({type:'monzy-demo',state:'ended'},'*')});
+  document.getElementById('vo').addEventListener('ended',function(){
+    window.parent.postMessage({type:'monzy-demo',state:'ended'},'*');
+    // Reset to Scene 1 visuals and re-show start screen for replay
+    setTimeout(function(){
+      showScene(0);
+      document.getElementById('start-screen').classList.remove('hidden');
+    },600);
+  });
 })();
 </script>
 </body>
