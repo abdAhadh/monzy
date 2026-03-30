@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -162,7 +162,7 @@ nav {
 .hero {
   position: relative;
   z-index: 1;
-  max-width: 720px;
+  max-width: 840px;
   margin: 0 auto;
   padding: 80px 24px 60px;
   text-align: center;
@@ -173,7 +173,7 @@ nav {
   background: rgba(14, 14, 14, 0.6);
   border: 1px solid var(--border);
   border-radius: 2px;
-  padding: 60px 40px 48px;
+  padding: 72px 60px 64px;
 }
 
 .hero-card::before,
@@ -201,25 +201,23 @@ nav {
 
 .hero h1 {
   font-family: 'Inter', sans-serif;
-  font-size: 42px;
+  font-size: 52px;
   font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.5px;
-  margin-bottom: 20px;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  margin-bottom: 24px;
 }
 
 .hero h1 em {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
+  font-style: normal;
   color: var(--gold);
-  font-weight: 400;
 }
 
 .hero-sub {
-  font-size: 15px;
+  font-size: 16px;
   color: var(--text-secondary);
-  max-width: 440px;
-  margin: 0 auto 32px;
+  max-width: 500px;
+  margin: 0 auto 36px;
   line-height: 1.7;
 }
 
@@ -345,10 +343,8 @@ nav {
 }
 
 .agents h2 em {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
+  font-style: normal;
   color: var(--gold);
-  font-weight: 400;
 }
 
 .agents-sub {
@@ -364,6 +360,7 @@ nav {
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   margin-bottom: 40px;
+  align-items: stretch;
 }
 
 .agent-card {
@@ -373,11 +370,34 @@ nav {
   padding: 28px 24px;
   text-align: left;
   transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
 }
 
 .agent-card:hover {
   border-color: var(--gold-border);
   background: var(--bg-card-hover);
+}
+
+.agent-stat {
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-border);
+  border-radius: 4px;
+}
+
+.agent-card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 20px;
 }
 
 .agent-icon {
@@ -399,11 +419,6 @@ nav {
   margin-bottom: 8px;
 }
 
-.agent-card p {
-  font-size: 13px;
-  color: var(--text-secondary);
-  line-height: 1.65;
-}
 
 .agents-more {
   font-size: 14px;
@@ -433,10 +448,8 @@ nav {
 }
 
 .faq h2 em {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
+  font-style: normal;
   color: var(--gold);
-  font-weight: 400;
 }
 
 .faq-sub {
@@ -459,7 +472,7 @@ nav {
   border-radius: 10px;
   padding: 20px 24px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: border-color 0.2s, background 0.2s;
 }
 
 .faq-item:hover {
@@ -602,14 +615,13 @@ footer {
     padding: 10px 16px;
   }
 
-  .nav-links { gap: 16px; }
-  .nav-links a { font-size: 13px; }
+  .nav-links { display: none; }
   .nav-cta { padding: 7px 16px; font-size: 12px; }
 
   .hero { padding: 60px 16px 40px; }
-  .hero h1 { font-size: 28px; }
-  .hero-card { padding: 40px 20px 32px; }
-  .hero-sub { font-size: 14px; margin-bottom: 24px; }
+  .hero h1 { font-size: 36px; letter-spacing: -0.5px; }
+  .hero-card { padding: 48px 24px 40px; }
+  .hero-sub { font-size: 15px; margin-bottom: 24px; }
 
   .hero-form {
     flex-direction: column;

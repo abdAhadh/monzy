@@ -14,29 +14,30 @@ function isWorkEmail(email) {
 // Fade-in on scroll
 function useFadeIn() {
   const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) el.classList.add('visible'); },
+      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
       { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
-  return ref;
+  return [ref, visible];
 }
 
 function FadeIn({ children, className = '', as: Tag = 'div' }) {
-  const ref = useFadeIn();
-  return <Tag ref={ref} className={`fade-in ${className}`}>{children}</Tag>;
+  const [ref, visible] = useFadeIn();
+  return <Tag ref={ref} className={`fade-in ${visible ? 'visible' : ''} ${className}`}>{children}</Tag>;
 }
 
 function FaqItem({ question, answer, defaultOpen = false }) {
   const [open, setOpen] = useState(defaultOpen);
-  const ref = useFadeIn();
+  const [ref, visible] = useFadeIn();
   return (
-    <div ref={ref} className={`faq-item fade-in ${open ? 'open' : ''}`}>
+    <div ref={ref} className={`faq-item fade-in ${visible ? 'visible' : ''} ${open ? 'open' : ''}`}>
       <div className="faq-question" onClick={() => setOpen(!open)}>
         <h3>{question}</h3>
         <span className="faq-toggle">×</span>
@@ -56,8 +57,8 @@ export default function App() {
 
   const scrollToForm = (e) => {
     e.preventDefault();
-    emailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    setTimeout(() => emailRef.current?.focus(), 400);
+    emailRef.current?.focus({ preventScroll: false });
+    emailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   };
 
   const handleSubmit = async (e) => {
@@ -106,7 +107,7 @@ export default function App() {
           <li><a href="#agents">How it works</a></li>
           <li><a href="#faq">FAQs</a></li>
         </ul>
-        <a href="#" className="nav-cta" onClick={scrollToForm}>Join Beta</a>
+        <a href="#" className="nav-cta" onClick={scrollToForm}>Get Early Access</a>
       </nav>
 
       {/* HERO */}
@@ -116,10 +117,10 @@ export default function App() {
           <FadeIn className="hero-card">
             <div className="corner-dot-tr" />
             <div className="corner-dot-bl" />
-            <h1>AI agents for modern<br /><em>finance teams</em></h1>
+            <h1>AI Agents for <em>Accounts Receivables</em></h1>
             <p className="hero-sub">
-              AI agents that sits on top of your existing tools to automate
-              bookkeeping, reconciliation, and compliance.
+              AI agents that cut DSO by 50%, eliminate cash application errors, and give
+              your AR team 3x the capacity, without adding headcount.
             </p>
             <form className="hero-form" onSubmit={handleSubmit}>
               <input
@@ -132,22 +133,22 @@ export default function App() {
                 autoComplete="email"
               />
               <button type="submit" disabled={loading}>
-                {loading ? 'Submitting...' : 'Join Beta'}
+                {loading ? 'Submitting...' : 'Get Early Access'}
               </button>
             </form>
             <p className={`form-message ${message.type}`}>{message.text}</p>
             <div className="hero-pills">
               <span className="hero-pill">
                 <svg viewBox="0 0 24 24"><path d="M16 18l2-2-2-2" /><path d="M8 6L6 8l2 2" /><path d="M12 2v20" /></svg>
-                Automated bookkeeping
+                50% DSO reduction
               </span>
               <span className="hero-pill">
                 <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4" /><circle cx="12" cy="12" r="10" /></svg>
-                Smart reconciliation
+                3x AR capacity
               </span>
               <span className="hero-pill">
                 <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-                Compliance-ready
+                Zero manual matching
               </span>
             </div>
           </FadeIn>
@@ -156,42 +157,44 @@ export default function App() {
 
       {/* AGENTS */}
       <section className="agents" id="agents">
-        <FadeIn as="p" className="section-label">MEET YOUR AGENTS</FadeIn>
-        <FadeIn as="h2">Experts that never <em>sleep</em></FadeIn>
+        <FadeIn as="p" className="section-label">WHAT YOU GET</FadeIn>
+        <FadeIn as="h2">Your entire AR workflow, <em>automated</em></FadeIn>
         <FadeIn as="p" className="agents-sub">
-          Purpose-built AI agents that automates time-consuming tasks at finance
-          teams at fast-growing Indian brands.
+          From credit decisions to cash in your account.
         </FadeIn>
         <div className="agents-grid">
+          <FadeIn className="agent-card">
+            <div className="agent-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .84h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+              </svg>
+            </div>
+            <h3>Collections Agent</h3>
+            <p>Ranks invoices by risk. Runs your entire follow-up sequence. Escalates only what needs you.</p>
+            <div className="agent-stat">40% faster payments</div>
+          </FadeIn>
           <FadeIn className="agent-card">
             <div className="agent-icon">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M2 10h20M2 14h20M6 6l-4 4 4 4M18 6l4 4-4 4" />
               </svg>
             </div>
-            <h3>Recon Agent</h3>
-            <p>Matches bank statements with invoices, payment gateways, and platform settlements. Every rupee accounted for, automatically.</p>
+            <h3>Cash Application Agent</h3>
+            <p>Matches every payment to the right invoice instantly. UPI, NEFT, cheques, PDCs, TDS deductions included.</p>
+            <div className="agent-stat">Zero manual matching</div>
           </FadeIn>
           <FadeIn className="agent-card">
             <div className="agent-icon">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M9 12l2 2 4-4" /><circle cx="12" cy="12" r="10" />
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
             </div>
-            <h3>Compliance Agent</h3>
-            <p>Prepares GST returns, matches ITC, tracks TDS deductions, and flags issues before they become problems.</p>
-          </FadeIn>
-          <FadeIn className="agent-card">
-            <div className="agent-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18M9 3v18" />
-              </svg>
-            </div>
-            <h3>Vendor Agent</h3>
-            <p>Manages payables, schedules payments, generates TDS certificates, and keeps vendor relationships healthy.</p>
+            <h3>Credit Agent</h3>
+            <p>Evaluates creditworthiness before you extend terms. Flags risky buyers before they default.</p>
+            <div className="agent-stat">Prevent bad debt upfront</div>
           </FadeIn>
         </div>
-        <FadeIn as="p" className="agents-more">......and more agents built for your workflow.</FadeIn>
+        <FadeIn as="p" className="agents-more">......and more agents built for your AR workflow.</FadeIn>
       </section>
 
       {/* FAQ */}
@@ -201,18 +204,18 @@ export default function App() {
         <FadeIn as="p" className="faq-sub">Everything you need to know<br />before getting started.</FadeIn>
         <div className="faq-list">
           <FaqItem
-            question="Do I need to replace any existing software I use?"
-            answer="No. Our agents work alongside your current tools — Tally, Zoho Books, Busy, or any other software you already use. Think of us as an extra team member which automates your specialised workflows."
+            question="Do I need to replace my existing ERP or accounting software?"
+            answer="No. Monzy integrates with Tally, Zoho Books, SAP, and other tools you already use. Our agents sit on top of your existing stack. No migration, no rip-and-replace."
             defaultOpen
           />
           <FaqItem
-            question="Is my financial data secure?"
-            answer="Yes. Your data is encrypted in transit and at rest. We don't store raw financial data longer than needed for processing, and we never share it with third parties. You stay in control."
+            question="How does TDS reconciliation work?"
+            answer="When customers pay net of TDS, our Cash Application Agent automatically accounts for the deduction and matches the payment to the correct invoice. No manual adjustment or journal entry needed."
             defaultOpen
           />
           <FaqItem
-            question="How long does it take to get started?"
-            answer="Most teams are up and running in a few hours. Connect your tools, configure your first agent, and start seeing results — no lengthy implementation cycles."
+            question="How quickly can we get started?"
+            answer="Most teams are live within 1-2 weeks, depending on the complexity of your existing process."
             defaultOpen
           />
         </div>
@@ -226,7 +229,7 @@ export default function App() {
               <span className="nav-logo-mark">///</span>
               <span>Monzy</span>
             </a>
-            <p className="footer-tagline">AI agents for finance teams.</p>
+            <p className="footer-tagline">AI agents for accounts receivable.</p>
           </div>
           <div className="footer-links">
             <a href="#">Home</a>
