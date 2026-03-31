@@ -157,7 +157,7 @@ export default function App() {
       {/* PROBLEM */}
       <section className="problem" id="problem">
         <FadeIn as="p" className="section-label">THE PROBLEM</FadeIn>
-        <FadeIn as="h2" className="problem-heading">Your AR team spends their day<br />on work that shouldn't be theirs</FadeIn>
+        <FadeIn as="h2" className="problem-heading">Work your AR team does<br />that software should</FadeIn>
         <FadeIn as="p" className="problem-sub">
           As your customer base grows, so does the manual work. Most of it is repetitive, error-prone, and completely automatable.
         </FadeIn>
