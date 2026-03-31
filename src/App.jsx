@@ -11,7 +11,6 @@ function isWorkEmail(email) {
   return domain && !FREE_DOMAINS.includes(domain.toLowerCase());
 }
 
-// Fade-in on scroll
 function useFadeIn() {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
@@ -57,8 +56,8 @@ export default function App() {
 
   const scrollToForm = (e) => {
     e.preventDefault();
-    emailRef.current?.focus({ preventScroll: false });
-    emailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    emailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => emailRef.current?.focus({ preventScroll: true }), 600);
   };
 
   const handleSubmit = async (e) => {
@@ -104,8 +103,9 @@ export default function App() {
           <span>Monzy</span>
         </a>
         <ul className="nav-links">
+          <li><a href="#problem">The Problem</a></li>
           <li><a href="#agents">How it works</a></li>
-          <li><a href="#faq">FAQs</a></li>
+          <li><a href="#faq">FAQ</a></li>
         </ul>
         <a href="#" className="nav-cta" onClick={scrollToForm}>Get Early Access</a>
       </nav>
@@ -117,10 +117,9 @@ export default function App() {
           <FadeIn className="hero-card">
             <div className="corner-dot-tr" />
             <div className="corner-dot-bl" />
-            <h1>AI Agents for <em>Accounts Receivables</em></h1>
+            <h1>Get paid on time.<br /><em>Every time.</em></h1>
             <p className="hero-sub">
-              AI agents that cut DSO by 50%, eliminate cash application errors, and give
-              your AR team 3x the capacity, without adding headcount.
+              AI agents that chase overdue invoices, match every incoming payment, and reconcile TDS deductions. Without your team lifting a finger.
             </p>
             <form className="hero-form" onSubmit={handleSubmit}>
               <input
@@ -155,12 +154,212 @@ export default function App() {
         </div>
       </section>
 
+      {/* PROBLEM */}
+      <section className="problem" id="problem">
+        <FadeIn as="p" className="section-label">THE PROBLEM</FadeIn>
+        <FadeIn as="h2" className="problem-heading">Your AR team spends their day<br />on work that shouldn't be theirs</FadeIn>
+        <FadeIn as="p" className="problem-sub">
+          As your customer base grows, so does the manual work. Most of it is repetitive, error-prone, and completely automatable.
+        </FadeIn>
+
+        {/* Problem Row 1 — Follow-ups */}
+        <FadeIn className="problem-row">
+          <div className="problem-text">
+            <div className="problem-tag">Collections</div>
+            <h3>Sending the same follow-up for the 4th time</h3>
+            <p>Your AR team copy-pastes the same email, changes the date, and hits send. Again. Some customers never reply. Escalations happen on instinct, not data. Every follow-up is a manual decision.</p>
+          </div>
+          <div className="problem-visual">
+            <div className="mock-window">
+              <div className="mock-titlebar">
+                <span className="mock-dot red" /><span className="mock-dot yellow" /><span className="mock-dot green" />
+                <span className="mock-title">Inbox</span>
+              </div>
+              <div className="mock-email-list">
+                <div className="mock-email-item unread">
+                  <div className="mock-avatar">YO</div>
+                  <div className="mock-email-body">
+                    <div className="mock-email-top">
+                      <span className="mock-email-to">You → Priya Sharma</span>
+                      <span className="mock-email-time">Today, 10:14 AM</span>
+                    </div>
+                    <div className="mock-email-subject">4th Reminder: INV-2847 · ₹2,40,000 overdue</div>
+                    <div className="mock-email-preview">Hi Priya, just following up again on the outstanding invoice...</div>
+                  </div>
+                </div>
+                <div className="mock-email-item">
+                  <div className="mock-avatar">YO</div>
+                  <div className="mock-email-body">
+                    <div className="mock-email-top">
+                      <span className="mock-email-to">You → Priya Sharma</span>
+                      <span className="mock-email-time">7 days ago</span>
+                    </div>
+                    <div className="mock-email-subject">3rd Reminder: INV-2847 · ₹2,40,000 overdue</div>
+                    <div className="mock-email-preview">Hi Priya, could you please let us know the payment status...</div>
+                  </div>
+                </div>
+                <div className="mock-email-item">
+                  <div className="mock-avatar">YO</div>
+                  <div className="mock-email-body">
+                    <div className="mock-email-top">
+                      <span className="mock-email-to">You → Priya Sharma</span>
+                      <span className="mock-email-time">14 days ago</span>
+                    </div>
+                    <div className="mock-email-subject">2nd Reminder: INV-2847 · Payment pending</div>
+                    <div className="mock-email-preview">Hi Priya, this is a gentle reminder about the invoice...</div>
+                  </div>
+                </div>
+              </div>
+              <div className="mock-alert warning">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                3 follow-ups sent. No reply. 45 days overdue.
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+
+        {/* Problem Row 2 — TDS / Cash Application */}
+        <FadeIn className="problem-row reverse">
+          <div className="problem-visual">
+            <div className="mock-window">
+              <div className="mock-titlebar">
+                <span className="mock-dot red" /><span className="mock-dot yellow" /><span className="mock-dot green" />
+                <span className="mock-title">Payment Matching · January 2025</span>
+              </div>
+              <div className="mock-table">
+                <div className="mock-table-header">
+                  <span>Date</span>
+                  <span>Reference</span>
+                  <span>Amount</span>
+                  <span>Invoice</span>
+                  <span>Status</span>
+                </div>
+                <div className="mock-table-row">
+                  <span>Jan 14</span>
+                  <span className="mock-ref">NEFT/88231...</span>
+                  <span>₹87,200</span>
+                  <span className="mock-inv">INV-2104</span>
+                  <span className="mock-badge unmatched">Unmatched</span>
+                </div>
+                <div className="mock-table-row">
+                  <span>Jan 15</span>
+                  <span className="mock-ref">UPI/Ref44219</span>
+                  <span>₹1,34,550</span>
+                  <span className="mock-inv">INV-2091?</span>
+                  <span className="mock-badge unmatched">Unmatched</span>
+                </div>
+                <div className="mock-table-row">
+                  <span>Jan 18</span>
+                  <span className="mock-ref">CHQ/003847</span>
+                  <span>₹45,000</span>
+                  <span className="mock-inv">INV-2118?</span>
+                  <span className="mock-badge unmatched">Unmatched</span>
+                </div>
+                <div className="mock-table-row muted">
+                  <span>Jan 22</span>
+                  <span className="mock-ref">NEFT/91004...</span>
+                  <span>₹2,16,000</span>
+                  <span className="mock-inv">INV-2099</span>
+                  <span className="mock-badge matched">Matched</span>
+                </div>
+              </div>
+              <div className="mock-alert error">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                INV-2104: ₹1,00,000 raised. ₹87,200 received. TDS deducted?
+              </div>
+            </div>
+          </div>
+          <div className="problem-text">
+            <div className="problem-tag">Cash Application</div>
+            <h3>Payments that never match the invoice</h3>
+            <p>Customers deduct TDS and pay net. Payments arrive with no remittance advice. Your team spends hours cross-referencing bank statements, WhatsApp messages, and invoices just to figure out what each payment is for.</p>
+          </div>
+        </FadeIn>
+
+        {/* Problem Row 3 — Credit Decisions */}
+        <FadeIn className="problem-row">
+          <div className="problem-text">
+            <div className="problem-tag">Credit Management</div>
+            <h3>Extending credit based on gut feel</h3>
+            <p>Sales closes a deal and someone decides credit terms on instinct. No payment history, no risk score, no credit limit logic. Bad debt shows up months later, long after it could have been prevented.</p>
+          </div>
+          <div className="problem-visual">
+            <div className="mock-window">
+              <div className="mock-titlebar">
+                <span className="mock-dot red" /><span className="mock-dot yellow" /><span className="mock-dot green" />
+                <span className="mock-title">New Customer · Credit Evaluation</span>
+              </div>
+              <div className="mock-profile">
+                <div className="mock-profile-header">
+                  <div className="mock-profile-avatar">ZT</div>
+                  <div>
+                    <div className="mock-profile-name">Zenith Traders Pvt. Ltd.</div>
+                    <div className="mock-profile-meta">Mumbai · Manufacturing · Added by Rajan (Sales)</div>
+                  </div>
+                  <span className="mock-badge bounced-badge" style={{marginLeft:'auto', alignSelf:'flex-start'}}>High Risk</span>
+                </div>
+                <div className="mock-profile-fields">
+                  <div className="mock-field">
+                    <span className="mock-field-label">Credit Limit Requested</span>
+                    <span className="mock-field-value">₹5,00,000</span>
+                  </div>
+                  <div className="mock-field">
+                    <span className="mock-field-label">Payment Terms</span>
+                    <span className="mock-field-value">Net 60</span>
+                  </div>
+                  <div className="mock-field">
+                    <span className="mock-field-label">References Checked</span>
+                    <span className="mock-field-value muted-val">Not checked</span>
+                  </div>
+                  <div className="mock-field">
+                    <span className="mock-field-label">Past Payment History</span>
+                    <span className="mock-field-value muted-val">Unknown</span>
+                  </div>
+                  <div className="mock-field">
+                    <span className="mock-field-label">Risk Assessment</span>
+                    <span className="mock-field-value muted-val italic-val">"Seems fine, Rajan knows them"</span>
+                  </div>
+                  <div className="mock-field">
+                    <span className="mock-field-label">Decision</span>
+                    <span className="mock-badge matched">Approved</span>
+                  </div>
+                </div>
+              </div>
+              <div className="mock-alert error">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                ₹5,00,000 extended. First invoice unpaid at 90 days.
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+      </section>
+
+      {/* METRICS */}
+      <section className="metrics">
+        <FadeIn className="metrics-grid">
+          <div className="metric-item">
+            <span className="metric-number">50%</span>
+            <span className="metric-label">reduction in DSO</span>
+          </div>
+          <div className="metric-divider" />
+          <div className="metric-item">
+            <span className="metric-number">80%</span>
+            <span className="metric-label">less time on manual follow-ups</span>
+          </div>
+          <div className="metric-divider" />
+          <div className="metric-item">
+            <span className="metric-number">3x</span>
+            <span className="metric-label">more invoices per AR team member</span>
+          </div>
+        </FadeIn>
+      </section>
+
       {/* AGENTS */}
       <section className="agents" id="agents">
-        <FadeIn as="p" className="section-label">WHAT YOU GET</FadeIn>
-        <FadeIn as="h2">Your entire AR workflow, <em>automated</em></FadeIn>
+        <FadeIn as="p" className="section-label">HOW IT WORKS</FadeIn>
+        <FadeIn as="h2">Three agents. Your entire AR lifecycle.</FadeIn>
         <FadeIn as="p" className="agents-sub">
-          From credit decisions to cash in your account.
+          From deciding who gets credit, to chasing what's overdue, to matching every payment that comes in.
         </FadeIn>
         <div className="agents-grid">
           <FadeIn className="agent-card">
@@ -170,8 +369,8 @@ export default function App() {
               </svg>
             </div>
             <h3>Collections Agent</h3>
-            <p>Ranks invoices by risk. Runs your entire follow-up sequence. Escalates only what needs you.</p>
-            <div className="agent-stat">40% faster payments</div>
+            <p>Ranks every invoice by risk and payment history. Runs your follow-up sequences automatically. Escalates only when it needs a human.</p>
+            <div className="agent-stat">40% faster collections</div>
           </FadeIn>
           <FadeIn className="agent-card">
             <div className="agent-icon">
@@ -180,7 +379,7 @@ export default function App() {
               </svg>
             </div>
             <h3>Cash Application Agent</h3>
-            <p>Matches every payment to the right invoice instantly. UPI, NEFT, cheques, PDCs, TDS deductions included.</p>
+            <p>Matches every payment to the right invoice instantly. UPI, NEFT, RTGS, cheques, PDCs. Accounts for TDS deductions so your books never have a mismatch.</p>
             <div className="agent-stat">Zero manual matching</div>
           </FadeIn>
           <FadeIn className="agent-card">
@@ -190,18 +389,19 @@ export default function App() {
               </svg>
             </div>
             <h3>Credit Agent</h3>
-            <p>Evaluates creditworthiness before you extend terms. Flags risky buyers before they default.</p>
+            <p>Evaluates every customer's creditworthiness before you extend terms. Sets credit limits. Flags risky buyers before they become a collections problem.</p>
             <div className="agent-stat">Prevent bad debt upfront</div>
           </FadeIn>
         </div>
-        <FadeIn as="p" className="agents-more">......and more agents built for your AR workflow.</FadeIn>
+        <FadeIn as="p" className="agents-more">and more agents built for your AR workflow.</FadeIn>
       </section>
+
 
       {/* FAQ */}
       <section className="faq" id="faq">
         <FadeIn as="p" className="section-label">FAQ</FadeIn>
-        <FadeIn as="h2">Here to help with<br />all your <em>questions</em></FadeIn>
-        <FadeIn as="p" className="faq-sub">Everything you need to know<br />before getting started.</FadeIn>
+        <FadeIn as="h2">Questions, answered</FadeIn>
+        <FadeIn as="p" className="faq-sub">Everything you need to know before getting started.</FadeIn>
         <div className="faq-list">
           <FaqItem
             question="Do I need to replace my existing ERP or accounting software?"
@@ -211,14 +411,44 @@ export default function App() {
           <FaqItem
             question="How does TDS reconciliation work?"
             answer="When customers pay net of TDS, our Cash Application Agent automatically accounts for the deduction and matches the payment to the correct invoice. No manual adjustment or journal entry needed."
-            defaultOpen
+          />
+          <FaqItem
+            question="Which channels does Monzy use to follow up?"
+            answer="Email, WhatsApp, and AI-powered phone calls. The Collections Agent learns which channel each customer actually responds to, and uses that channel going forward. No manual configuration needed."
           />
           <FaqItem
             question="How quickly can we get started?"
-            answer="Most teams are live within 1-2 weeks, depending on the complexity of your existing process."
-            defaultOpen
+            answer="Most teams are live within 1 to 2 weeks, depending on the complexity of your existing process."
+          />
+          <FaqItem
+            question="Which ERPs do you support?"
+            answer="We currently support Tally, Zoho Books, QuickBooks, and SAP B1. If you're on a different ERP, reach out and we'll tell you what's possible."
           />
         </div>
+      </section>
+
+      {/* CLOSING CTA */}
+      <section className="cta-section">
+        <FadeIn className="cta-card">
+          <div className="corner-dot-tr" />
+          <div className="corner-dot-bl" />
+          <p className="section-label" style={{ marginBottom: '16px' }}>GET STARTED</p>
+          <h2 className="cta-heading">Your AR team will thank you.</h2>
+          <p className="cta-sub">Join finance teams already using Monzy to collect faster and reconcile automatically.</p>
+          <form className="hero-form" onSubmit={handleSubmit}>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Work email address"
+              autoComplete="email"
+            />
+            <button type="submit" disabled={loading}>
+              {loading ? 'Submitting...' : 'Get Early Access'}
+            </button>
+          </form>
+          <p className={`form-message ${message.type}`}>{message.text}</p>
+        </FadeIn>
       </section>
 
       {/* FOOTER */}
@@ -232,7 +462,7 @@ export default function App() {
             <p className="footer-tagline">AI agents for accounts receivable.</p>
           </div>
           <div className="footer-links">
-            <a href="#">Home</a>
+            <a href="#problem">The Problem</a>
             <a href="#agents">How it works</a>
             <a href="#faq">FAQs</a>
           </div>

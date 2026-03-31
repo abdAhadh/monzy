@@ -24,6 +24,7 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   min-width: 320px;
+  max-width: 100vw;
 }
 
 /* ---- NAVBAR ---- */
@@ -111,6 +112,8 @@ nav {
   left: 0;
   width: 100%;
   height: 420px;
+  overflow: hidden;
+  contain: paint;
   background: linear-gradient(180deg,
     rgba(120, 90, 40, 0.25) 0%,
     rgba(80, 60, 20, 0.12) 40%,
@@ -313,6 +316,481 @@ nav {
   stroke: var(--text-secondary);
   fill: none;
   stroke-width: 1.5;
+}
+
+/* ---- PROBLEM SECTION ---- */
+.problem {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 100px 24px 60px;
+  text-align: center;
+}
+
+.problem-heading {
+  font-family: 'Inter', sans-serif;
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+  margin-bottom: 16px;
+}
+
+.problem-sub {
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 480px;
+  margin: 0 auto 72px;
+  line-height: 1.7;
+}
+
+/* Alternating rows */
+.problem-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 120px;
+  text-align: left;
+}
+
+
+.problem-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-border);
+  border-radius: 4px;
+  padding: 3px 8px;
+  margin-bottom: 16px;
+}
+
+.problem-text h3 {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+  margin-bottom: 14px;
+}
+
+.problem-text p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  max-width: 380px;
+}
+
+/* ---- MOCK UI COMPONENTS ---- */
+.problem-visual {
+  position: relative;
+}
+
+.mock-window {
+  background: #1a1a1a;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+}
+
+.mock-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: #111;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.mock-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.mock-dot.red    { background: #ff5f57; }
+.mock-dot.yellow { background: #ffbd2e; }
+.mock-dot.green  { background: #28ca41; }
+
+.mock-title {
+  font-size: 11px;
+  color: #555;
+  margin-left: 8px;
+  font-weight: 500;
+}
+
+/* Email list */
+.mock-email-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.mock-email-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: background 0.15s;
+}
+
+.mock-email-item.unread {
+  background: rgba(201, 168, 76, 0.05);
+}
+
+.mock-avatar {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(201,168,76,0.2);
+  border: 1px solid var(--gold-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+}
+
+.mock-email-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.mock-email-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3px;
+}
+
+.mock-email-to {
+  font-size: 11px;
+  font-weight: 600;
+  color: #ccc;
+}
+
+.mock-email-time {
+  font-size: 10px;
+  color: #555;
+  flex-shrink: 0;
+}
+
+.mock-email-subject {
+  font-size: 11px;
+  font-weight: 500;
+  color: #aaa;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mock-email-preview {
+  font-size: 10px;
+  color: #555;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Table (payment matching) */
+.mock-table {
+  padding: 0;
+}
+
+.mock-table-header,
+.mock-table-row {
+  display: grid;
+  grid-template-columns: 56px 1fr 80px 80px 84px;
+  gap: 8px;
+  align-items: center;
+  padding: 9px 14px;
+  font-size: 11px;
+}
+
+.mock-table-header {
+  background: #111;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  color: #555;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 9px;
+  letter-spacing: 0.5px;
+}
+
+.mock-table-row {
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: #bbb;
+}
+
+.mock-table-row.muted {
+  opacity: 0.45;
+}
+
+.mock-ref {
+  color: #777;
+  font-family: monospace;
+  font-size: 10px;
+}
+
+.mock-inv {
+  color: #888;
+  font-size: 10px;
+}
+
+/* Spreadsheet */
+.mock-spreadsheet {
+  padding: 0;
+}
+
+.mock-sheet-header,
+.mock-sheet-row {
+  display: grid;
+  grid-template-columns: 1.4fr 80px 90px 60px 76px;
+  gap: 8px;
+  align-items: center;
+  padding: 9px 14px;
+  font-size: 11px;
+}
+
+.mock-sheet-header {
+  background: #111;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  color: #555;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 9px;
+  letter-spacing: 0.5px;
+}
+
+.mock-sheet-row {
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: #bbb;
+}
+
+.mock-sheet-row.bounced {
+  background: rgba(239, 68, 68, 0.05);
+}
+
+/* Badges */
+.mock-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.mock-badge.unmatched {
+  background: rgba(251,146,60,0.15);
+  color: #fb923c;
+  border: 1px solid rgba(251,146,60,0.3);
+}
+
+.mock-badge.matched {
+  background: rgba(74,222,128,0.1);
+  color: #4ade80;
+  border: 1px solid rgba(74,222,128,0.2);
+}
+
+.mock-badge.pending {
+  background: rgba(148,163,184,0.1);
+  color: #94a3b8;
+  border: 1px solid rgba(148,163,184,0.2);
+}
+
+.mock-badge.bounced-badge {
+  background: rgba(239,68,68,0.15);
+  color: #f87171;
+  border: 1px solid rgba(239,68,68,0.3);
+}
+
+/* Customer profile mockup */
+.mock-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.mock-profile-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(201,168,76,0.15);
+  border: 1px solid var(--gold-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.mock-profile-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ddd;
+  margin-bottom: 3px;
+}
+
+.mock-profile-meta {
+  font-size: 10px;
+  color: #555;
+}
+
+.mock-profile-fields {
+  padding: 4px 0;
+}
+
+.mock-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  gap: 12px;
+}
+
+.mock-field-label {
+  font-size: 10px;
+  color: #555;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.mock-field-value {
+  font-size: 11px;
+  color: #bbb;
+  text-align: right;
+}
+
+.mock-field-value.muted-val {
+  color: #555;
+}
+
+.mock-field-value.italic-val {
+  font-style: italic;
+  font-size: 10px;
+}
+
+/* Alert bar */
+.mock-alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  font-size: 10px;
+  font-weight: 500;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.mock-alert svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+.mock-alert.warning {
+  color: #fb923c;
+  background: rgba(251,146,60,0.06);
+}
+
+.mock-alert.error {
+  color: #f87171;
+  background: rgba(239,68,68,0.06);
+}
+
+/* ---- METRICS ---- */
+.metrics {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 20px 24px 80px;
+}
+
+.metrics-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.metric-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 40px 24px;
+}
+
+.metric-number {
+  font-size: 48px;
+  font-weight: 600;
+  letter-spacing: -2px;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.metric-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-align: center;
+  max-width: 140px;
+  line-height: 1.5;
+}
+
+.metric-divider {
+  width: 1px;
+  height: 64px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+
+/* ---- CLOSING CTA ---- */
+.cta-section {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 0 24px 100px;
+}
+
+.cta-card {
+  position: relative;
+  background: rgba(14, 14, 14, 0.6);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 64px 60px;
+  text-align: center;
+}
+
+.cta-heading {
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  margin-bottom: 12px;
+}
+
+.cta-sub {
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 420px;
+  margin: 0 auto 32px;
+  line-height: 1.7;
 }
 
 /* ---- AGENTS SECTION ---- */
@@ -640,6 +1118,35 @@ footer {
     gap: 12px;
     flex-direction: column;
   }
+
+  .problem { padding: 60px 16px 40px; }
+  .problem-heading { font-size: 26px; }
+  .problem-row { grid-template-columns: 1fr; gap: 28px; margin-bottom: 56px; }
+  .problem-text h3 { font-size: 18px; }
+  .problem-visual { max-width: 100%; overflow: hidden; }
+  .mock-window { max-width: 100%; }
+
+  /* Payment table: hide Invoice column on mobile, show Date/Ref/Amount/Status */
+  .mock-table-header,
+  .mock-table-row { grid-template-columns: 44px 1fr 68px 76px; font-size: 10px; padding: 8px 10px; }
+  .mock-table-header span:nth-child(4),
+  .mock-table-row span:nth-child(4) { display: none; }
+
+  /* Spreadsheet: hide Cheque col on mobile */
+  .mock-sheet-header,
+  .mock-sheet-row { grid-template-columns: 1fr 72px 50px 72px; font-size: 10px; padding: 8px 10px; }
+  .mock-sheet-header span:nth-child(2),
+  .mock-sheet-row span:nth-child(2) { display: none; }
+
+  .metrics { padding: 20px 16px 60px; }
+  .metrics-grid { flex-direction: column; gap: 0; }
+  .metric-item { padding: 28px 24px; width: 100%; }
+  .metric-number { font-size: 40px; }
+  .metric-divider { width: 100%; height: 1px; }
+
+  .cta-section { padding: 0 16px 60px; }
+  .cta-card { padding: 40px 24px; }
+  .cta-heading { font-size: 26px; }
 
   .agents { padding: 60px 16px 40px; }
   .agents h2 { font-size: 26px; }
