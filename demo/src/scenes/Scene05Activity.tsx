@@ -7,35 +7,35 @@ export type ActivityVariant = 'whatsapp' | 'call' | 'email' | 'dispute';
 
 interface Props { isActive: boolean; variant?: ActivityVariant; }
 
-// ── Timeline (ms from scene start) ───────────────────────────────────────────
+// ── Timeline (ms from scene start) — calibrated to VO audio ─────────────────
 const T = {
-  CARD1:             800,
-  WA_DELIVERED:     2000,
-  WA_REPLY:         3600,
-  WA_AR:            4800,
-  WA_BADGE:         5500,
+  CARD1:              800,
+  WA_DELIVERED:      2200,
+  WA_REPLY:          4000,
+  WA_AR:             5400,
+  WA_BADGE:          6200,
 
-  CARD2:            6700,
-  CALL_L1:          7900,
-  CALL_L2:          8900,
-  CALL_L3:         10000,
-  CALL_DONE:       10900,
-  CALL_AR:         11300,
-  CALL_BADGE:      11900,
+  CARD2:             7500,   // VO: "When a customer prefers a call..."
+  CALL_L1:           7900,
+  CALL_L2:           8400,
+  CALL_L3:           8900,
+  CALL_DONE:         9500,
+  CALL_AR:           9900,
+  CALL_BADGE:       10300,
 
-  CARD3:           13100,
-  EMAIL_REPLY:     14300,
-  EMAIL_EXTRACT:   15300,
-  EMAIL_AR:        16300,
-  EMAIL_BADGE:     16800,
+  CARD3:            11000,   // VO: "An email reply comes in..."
+  EMAIL_REPLY:      11800,
+  EMAIL_EXTRACT:    12800,
+  EMAIL_AR:         13600,
+  EMAIL_BADGE:      14200,
 
-  CARD4:           18200,
-  DISPUTE_MSG:     19400,
-  DISPUTE_DETECTED:20800,
-  DISPUTE_AR:      22000,
-  DISPUTE_BADGE:   24100,
+  CARD4:            16900,   // VO: "We know you run into disputes..."
+  DISPUTE_MSG:      18400,
+  DISPUTE_DETECTED: 21000,
+  DISPUTE_AR:       23500,
+  DISPUTE_BADGE:    26000,
 
-  TAGLINE:         25200,
+  TAGLINE:          29900,   // VO: "Every customer handled..."
 };
 
 // ── AR update sheet — slides up from bottom of right panel ───────────────────
