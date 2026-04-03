@@ -1342,10 +1342,17 @@ window.addEventListener('beforeunload',()=>{timers.forEach(clearTimeout);cursorT
   // Listen for parent commands
   window.addEventListener('message',function(e){
     if(!e.data||!e.data.action)return;
-    if(e.data.action==='pause'){
+    if(e.data.action==='start'){
+      // Start from beginning (used by parent's play button on mobile)
+      if(!isPlaying) startVideo();
+    }else if(e.data.action==='pause'){
       if(isPlaying) togglePlayPause();
     }else if(e.data.action==='toggle'){
-      togglePlayPause();
+      if(!isPlaying && document.getElementById('vo').currentTime===0){
+        startVideo(); // First play via toggle
+      } else {
+        togglePlayPause();
+      }
     }else if(e.data.action==='hover'){
       var pb=document.getElementById('progress-bar');
       var ts=document.getElementById('timestamp');

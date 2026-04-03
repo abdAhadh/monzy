@@ -180,33 +180,30 @@ export default function App() {
                   <div className="mock-avatar">YO</div>
                   <div className="mock-email-body">
                     <div className="mock-email-top">
-                      <span className="mock-email-to">You → Priya Sharma</span>
-                      <span className="mock-email-time">Today, 10:14 AM</span>
+                      <span className="mock-email-to">Priya Sharma</span>
+                      <span className="mock-email-time">Today</span>
                     </div>
                     <div className="mock-email-subject">4th Reminder: INV-2847 · ₹2,40,000 overdue</div>
-                    <div className="mock-email-preview">Hi Priya, just following up again on the outstanding invoice...</div>
                   </div>
                 </div>
                 <div className="mock-email-item">
                   <div className="mock-avatar">YO</div>
                   <div className="mock-email-body">
                     <div className="mock-email-top">
-                      <span className="mock-email-to">You → Priya Sharma</span>
+                      <span className="mock-email-to">Priya Sharma</span>
                       <span className="mock-email-time">7 days ago</span>
                     </div>
                     <div className="mock-email-subject">3rd Reminder: INV-2847 · ₹2,40,000 overdue</div>
-                    <div className="mock-email-preview">Hi Priya, could you please let us know the payment status...</div>
                   </div>
                 </div>
                 <div className="mock-email-item">
                   <div className="mock-avatar">YO</div>
                   <div className="mock-email-body">
                     <div className="mock-email-top">
-                      <span className="mock-email-to">You → Priya Sharma</span>
+                      <span className="mock-email-to">Priya Sharma</span>
                       <span className="mock-email-time">14 days ago</span>
                     </div>
                     <div className="mock-email-subject">2nd Reminder: INV-2847 · Payment pending</div>
-                    <div className="mock-email-preview">Hi Priya, this is a gentle reminder about the invoice...</div>
                   </div>
                 </div>
               </div>
@@ -228,35 +225,30 @@ export default function App() {
               </div>
               <div className="mock-table">
                 <div className="mock-table-header">
-                  <span>Date</span>
                   <span>Reference</span>
                   <span>Amount</span>
                   <span>Invoice</span>
                   <span>Status</span>
                 </div>
                 <div className="mock-table-row">
-                  <span>Jan 14</span>
                   <span className="mock-ref">NEFT/88231...</span>
                   <span>₹87,200</span>
                   <span className="mock-inv">INV-2104</span>
                   <span className="mock-badge unmatched">Unmatched</span>
                 </div>
                 <div className="mock-table-row">
-                  <span>Jan 15</span>
                   <span className="mock-ref">UPI/Ref44219</span>
                   <span>₹1,34,550</span>
                   <span className="mock-inv">INV-2091?</span>
                   <span className="mock-badge unmatched">Unmatched</span>
                 </div>
                 <div className="mock-table-row">
-                  <span>Jan 18</span>
                   <span className="mock-ref">CHQ/003847</span>
                   <span>₹45,000</span>
                   <span className="mock-inv">INV-2118?</span>
                   <span className="mock-badge unmatched">Unmatched</span>
                 </div>
                 <div className="mock-table-row muted">
-                  <span>Jan 22</span>
                   <span className="mock-ref">NEFT/91004...</span>
                   <span>₹2,16,000</span>
                   <span className="mock-inv">INV-2099</span>
@@ -294,13 +286,13 @@ export default function App() {
                   <div className="mock-profile-avatar">ZT</div>
                   <div>
                     <div className="mock-profile-name">Zenith Traders Pvt. Ltd.</div>
-                    <div className="mock-profile-meta">Mumbai · Manufacturing · Added by Rajan (Sales)</div>
+                    <div className="mock-profile-meta">Mumbai · Manufacturing</div>
                   </div>
                   <span className="mock-badge bounced-badge" style={{marginLeft:'auto', alignSelf:'flex-start'}}>High Risk</span>
                 </div>
                 <div className="mock-profile-fields">
                   <div className="mock-field">
-                    <span className="mock-field-label">Credit Limit Requested</span>
+                    <span className="mock-field-label">Credit Limit</span>
                     <span className="mock-field-value">₹5,00,000</span>
                   </div>
                   <div className="mock-field">
@@ -308,11 +300,7 @@ export default function App() {
                     <span className="mock-field-value">Net 60</span>
                   </div>
                   <div className="mock-field">
-                    <span className="mock-field-label">References Checked</span>
-                    <span className="mock-field-value muted-val">Not checked</span>
-                  </div>
-                  <div className="mock-field">
-                    <span className="mock-field-label">Past Payment History</span>
+                    <span className="mock-field-label">Payment History</span>
                     <span className="mock-field-value muted-val">Unknown</span>
                   </div>
                   <div className="mock-field">
