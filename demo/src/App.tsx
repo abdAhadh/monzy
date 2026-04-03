@@ -80,7 +80,8 @@ function SceneRenderer({ scene, isActive }: { scene: number; isActive: boolean }
 
 export default function App() {
   const [currentScene, setCurrentScene] = useState(1);
-  const [isPlaying, setIsPlaying]       = useState(true);
+  const [isPlaying, setIsPlaying]       = useState(false);
+  const [hasStarted, setHasStarted]     = useState(false);
   const [progress, setProgress]         = useState(0);
   const [voTime, setVoTime]             = useState(0);
 
@@ -95,6 +96,12 @@ export default function App() {
     setCurrentScene(Math.min(Math.max(1, n), totalScenes));
     setProgress(0);
   }, [totalScenes]);
+
+  const startDemo = useCallback(() => {
+    if (hasStarted) return;
+    setHasStarted(true);
+    setIsPlaying(true);
+  }, [hasStarted]);
 
   // Auto-advance timer — stops at last scene
   useEffect(() => {
@@ -219,6 +226,33 @@ export default function App() {
         className="fixed right-0 top-12 bottom-0 w-16 z-40 cursor-e-resize"
         onClick={() => goToScene(currentScene + 1)}
       />
+
+      {/* Click-to-start overlay — dismissed on first interaction */}
+      <AnimatePresence>
+        {!hasStarted && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 z-[60] flex items-center justify-center cursor-pointer"
+            onClick={startDemo}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-col items-center gap-3"
+            >
+              <div className="w-16 h-16 rounded-full bg-[#635BFF] flex items-center justify-center shadow-lg">
+                <svg width="20" height="24" viewBox="0 0 20 24" fill="none">
+                  <path d="M2 2L18 12L2 22V2Z" fill="white" />
+                </svg>
+              </div>
+              <span className="text-sm text-[#697386] font-medium">Click to start</span>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
