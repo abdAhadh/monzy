@@ -17,19 +17,19 @@ export default function Scene01Intro({ isActive }: Props) {
           style={{ background: '#EBFAF3' }} />
       </div>
 
-      {/* Monzy branding — top */}
-      <motion.div
-        initial={{ opacity: 0, y: -12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 flex items-center gap-2.5 pt-8 px-8"
-      >
-        <MonzyLogo size={32} />
-        <span className="text-xl font-semibold text-[#1A1F36] tracking-tight">Monzy</span>
-      </motion.div>
-
       {/* Center content */}
       <div className="flex-1 flex flex-col items-center justify-center relative z-10 text-center px-8 gap-5">
+        {/* Monzy branding — above headline */}
+        <motion.div
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="flex items-center gap-2.5"
+        >
+          <MonzyLogo size={32} />
+          <span className="text-xl font-semibold text-[#1A1F36] tracking-tight">Monzy</span>
+        </motion.div>
+
         <motion.h1
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
