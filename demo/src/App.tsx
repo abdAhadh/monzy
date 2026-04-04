@@ -92,18 +92,14 @@ function SubtitleOverlay({ time }: { time: number }) {
 // ── Seekable progress bar ─────────────────────────────────────────────────────
 function ProgressBar({
   voTime,
-  isPlaying,
+  hovered,
   onSeek,
-  onTogglePlay,
 }: {
   voTime: number;
-  isPlaying: boolean;
+  hovered: boolean;
   onSeek: (t: number) => void;
-  onTogglePlay: () => void;
 }) {
-  const [hovered, setHovered] = useState(false);
   const barRef = useRef<HTMLDivElement>(null);
-
   const progress = Math.min(voTime / TOTAL_DURATION, 1);
 
   const handleBarClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -114,12 +110,8 @@ function ProgressBar({
   };
 
   return (
-    <div
-      className="fixed bottom-0 left-0 right-0 z-50 select-none"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      {/* Timestamp + play/pause — visible on hover */}
+    <div className="fixed bottom-0 left-0 right-0 z-50 select-none">
+      {/* Timestamp — visible on hover */}
       <AnimatePresence>
         {hovered && (
           <motion.div
@@ -127,26 +119,8 @@ function ProgressBar({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 4 }}
             transition={{ duration: 0.15 }}
-            className="flex items-center justify-between px-4 py-1.5"
+            className="flex items-center justify-end px-4 py-1.5"
           >
-            {/* Play/pause button */}
-            <button
-              onClick={onTogglePlay}
-              className="flex items-center justify-center w-6 h-6 rounded-full text-[#635BFF] hover:text-[#4f46e5] transition-colors"
-            >
-              {isPlaying ? (
-                <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor">
-                  <rect x="0" y="0" width="3" height="12" rx="1" />
-                  <rect x="6" y="0" width="3" height="12" rx="1" />
-                </svg>
-              ) : (
-                <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor">
-                  <path d="M1 1l8 5-8 5V1z" />
-                </svg>
-              )}
-            </button>
-
-            {/* Time */}
             <span className="text-[11px] font-mono text-[#8792A2]">
               {formatTime(voTime)} <span className="text-[#C8D4E0]">/</span> {formatTime(TOTAL_DURATION)}
             </span>
@@ -161,12 +135,10 @@ function ProgressBar({
         className="w-full bg-[#E3E8EF] cursor-pointer relative"
         style={{ height: hovered ? 6 : 2, transition: 'height 0.15s ease' }}
       >
-        {/* Fill */}
         <div
           className="h-full bg-[#635BFF] transition-none"
           style={{ width: `${progress * 100}%` }}
         />
-        {/* Scrubber dot — visible on hover */}
         {hovered && (
           <div
             className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#635BFF] border-2 border-white shadow-md pointer-events-none"
@@ -199,6 +171,7 @@ export default function App() {
   const [isPlaying, setIsPlaying]       = useState(false);
   const [hasStarted, setHasStarted]     = useState(false);
   const [voTime, setVoTime]             = useState(0);
+  const [screenHovered, setScreenHovered] = useState(false);
 
   const voRef  = useRef<HTMLAudioElement>(null);
   const bgmRef = useRef<HTMLAudioElement>(null);
@@ -269,7 +242,12 @@ export default function App() {
   }, [hasStarted]);
 
   return (
-    <div className="w-screen h-screen flex flex-col overflow-hidden bg-white font-sans">
+    <div
+      className="w-screen h-screen flex flex-col overflow-hidden bg-white font-sans"
+      onMouseEnter={() => setScreenHovered(true)}
+      onMouseLeave={() => setScreenHovered(false)}
+      onMouseMove={() => setScreenHovered(true)}
+    >
       <audio
         ref={voRef}
         src="/vo.mp3"
@@ -311,11 +289,39 @@ export default function App() {
       {hasStarted && (
         <ProgressBar
           voTime={voTime}
-          isPlaying={isPlaying}
+          hovered={screenHovered}
           onSeek={handleSeek}
-          onTogglePlay={() => setIsPlaying(p => !p)}
         />
       )}
+
+      {/* Centered play/pause — appears on hover while playing */}
+      <AnimatePresence>
+        {hasStarted && screenHovered && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.85 }}
+            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 z-[55] flex items-center justify-center pointer-events-none"
+          >
+            <button
+              className="w-20 h-20 rounded-full bg-[#635BFF] flex items-center justify-center shadow-xl pointer-events-auto"
+              onClick={() => setIsPlaying(p => !p)}
+            >
+              {isPlaying ? (
+                <svg width="22" height="26" viewBox="0 0 22 26" fill="none">
+                  <rect x="1" y="1" width="7" height="24" rx="2" fill="white" />
+                  <rect x="13" y="1" width="7" height="24" rx="2" fill="white" />
+                </svg>
+              ) : (
+                <svg width="24" height="28" viewBox="0 0 20 24" fill="none">
+                  <path d="M2 2L18 12L2 22V2Z" fill="white" />
+                </svg>
+              )}
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Click-to-start overlay */}
       <AnimatePresence>

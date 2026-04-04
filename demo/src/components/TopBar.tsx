@@ -34,34 +34,8 @@ export default function TopBar({ currentScene, onSceneChange, isPlaying, onToggl
           </motion.span>
         </div>
 
-        {/* Right: Nav dots + play/pause */}
-        <div className="flex items-center gap-3">
-          <NavDots
-            total={NAV_GROUPS.length}
-            active={groupIndex}
-            onSelect={(i) => {
-              const group = NAV_GROUPS[i];
-              const firstScene = SCENES.find(s => s.group === group);
-              if (firstScene) onSceneChange(firstScene.id);
-            }}
-          />
-          <button
-            onClick={onTogglePlay}
-            className="w-7 h-7 flex items-center justify-center rounded-md hover:bg-[#F0F4F8] transition-colors text-[#8792A2] hover:text-[#425466]"
-            title={isPlaying ? 'Pause' : 'Play'}
-          >
-            {isPlaying ? (
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
-                <rect x="1" y="1" width="3.5" height="10" rx="1"/>
-                <rect x="7.5" y="1" width="3.5" height="10" rx="1"/>
-              </svg>
-            ) : (
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
-                <path d="M2 1.5l9 4.5-9 4.5V1.5z"/>
-              </svg>
-            )}
-          </button>
-        </div>
+        {/* Right: empty — controls are in hover overlay */}
+        <div />
       </div>
 
       {/* Progress bar */}
