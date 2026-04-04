@@ -172,6 +172,7 @@ export default function App() {
   const [hasStarted, setHasStarted]     = useState(false);
   const [voTime, setVoTime]             = useState(0);
   const [screenHovered, setScreenHovered] = useState(false);
+  const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const voRef  = useRef<HTMLAudioElement>(null);
   const bgmRef = useRef<HTMLAudioElement>(null);
@@ -244,9 +245,15 @@ export default function App() {
   return (
     <div
       className="w-screen h-screen flex flex-col overflow-hidden bg-white font-sans"
-      onMouseEnter={() => setScreenHovered(true)}
-      onMouseLeave={() => setScreenHovered(false)}
-      onMouseMove={() => setScreenHovered(true)}
+        onMouseMove={() => {
+        setScreenHovered(true);
+        if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
+        hoverTimerRef.current = setTimeout(() => setScreenHovered(false), 2000);
+      }}
+      onMouseLeave={() => {
+        setScreenHovered(false);
+        if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
+      }}
     >
       <audio
         ref={voRef}
