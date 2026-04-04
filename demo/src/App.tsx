@@ -235,20 +235,19 @@ export default function App() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
             className="fixed inset-0 z-[60] flex items-center justify-center cursor-pointer"
+            style={{ background: 'rgba(255,255,255,0.55)' }}
             onClick={startDemo}
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col items-center gap-3"
             >
-              <div className="w-16 h-16 rounded-full bg-[#635BFF] flex items-center justify-center shadow-lg">
+              <div className="w-16 h-16 rounded-full bg-[#635BFF] flex items-center justify-center shadow-xl">
                 <svg width="20" height="24" viewBox="0 0 20 24" fill="none">
                   <path d="M2 2L18 12L2 22V2Z" fill="white" />
                 </svg>
               </div>
-              <span className="text-sm text-[#697386] font-medium">Click to start</span>
             </motion.div>
           </motion.div>
         )}
