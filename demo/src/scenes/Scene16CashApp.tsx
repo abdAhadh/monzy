@@ -77,19 +77,8 @@ function CursorSVG() {
 /* ── ICICI Bank Logo ──────────────────────────────────────────── */
 function ICICILogo() {
   return (
-    <div className="flex items-center gap-2">
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <ellipse cx="14" cy="14" rx="13" ry="13" fill="white" fillOpacity="0.15"
-          stroke="white" strokeOpacity="0.4" strokeWidth="1" />
-        <text x="14" y="19" textAnchor="middle" fontFamily="Georgia, serif"
-          fontSize="15" fontWeight="bold" fill="white">i</text>
-      </svg>
-      <div className="flex flex-col leading-none">
-        <span style={{ fontFamily: 'Arial, sans-serif', fontWeight: 700, fontSize: 13,
-          letterSpacing: '0.12em', color: 'white' }}>ICICI</span>
-        <span style={{ fontFamily: 'Arial, sans-serif', fontWeight: 400, fontSize: 8,
-          letterSpacing: '0.25em', color: 'rgba(255,255,255,0.75)' }}>BANK</span>
-      </div>
+    <div className="bg-white rounded-md px-2 py-1 flex items-center">
+      <img src="/logos/icici.svg" alt="ICICI Bank" style={{ height: 24, width: 'auto' }} />
     </div>
   );
 }
@@ -97,12 +86,7 @@ function ICICILogo() {
 /* ── Slack Logo ───────────────────────────────────────────────── */
 function SlackLogo({ size = 18 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 36 36" fill="none">
-      <rect x="13.5" y="1"  width="9" height="20" rx="4.5" fill="#36C5F0" />
-      <rect x="1"    y="13.5" width="20" height="9" rx="4.5" fill="#2EB67D" />
-      <rect x="13.5" y="15" width="9" height="20" rx="4.5" fill="#ECB22E" />
-      <rect x="15"   y="13.5" width="20" height="9" rx="4.5" fill="#E01E5A" />
-    </svg>
+    <img src="/logos/slack.svg" alt="Slack" width={size} height={size} style={{ objectFit: 'contain' }} />
   );
 }
 

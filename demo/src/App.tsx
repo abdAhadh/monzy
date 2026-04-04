@@ -319,14 +319,14 @@ export default function App() {
       <AnimatePresence>
         {hasStarted && screenHovered && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.85 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-0 z-[55] flex items-center justify-center pointer-events-none"
           >
             <button
-              className="w-20 h-20 rounded-full bg-[#635BFF] flex items-center justify-center shadow-xl pointer-events-auto"
+              className="w-24 h-24 rounded-full bg-[#635BFF] flex items-center justify-center shadow-xl pointer-events-auto"
               onClick={togglePlay}
             >
               {isPlaying ? (

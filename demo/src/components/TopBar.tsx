@@ -38,15 +38,7 @@ export default function TopBar({ currentScene, onSceneChange, isPlaying, onToggl
         <div />
       </div>
 
-      {/* Progress bar */}
-      <div className="h-[2px] bg-[#F0F4F8]">
-        <motion.div
-          className="h-full bg-[#635BFF]"
-          initial={false}
-          animate={{ width: `${(currentScene / SCENES.length) * 100}%` }}
-          transition={{ duration: 0.4, ease: 'easeOut' }}
-        />
-      </div>
+
     </div>
   );
 }

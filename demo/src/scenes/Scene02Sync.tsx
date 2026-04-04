@@ -4,12 +4,12 @@ import { motion } from 'framer-motion';
 interface Props { isActive: boolean; }
 
 const INTEGRATIONS = [
-  { name: 'Tally',      color: '#1E40AF', letter: 'T' },
-  { name: 'Zoho Books', color: '#E44D26', letter: 'Z' },
-  { name: 'SAP',        color: '#0070C0', letter: 'S' },
-  { name: 'QuickBooks', color: '#2CA01C', letter: 'Q' },
-  { name: 'Razorpay',   color: '#3395FF', letter: 'R' },
-  { name: 'Custom ERP', color: '#635BFF', letter: 'C' },
+  { name: 'Tally',          logo: '/logos/tally.svg',      color: '#ED1C24' },
+  { name: 'Zoho Books',     logo: '/logos/zoho-books.svg', color: '#226DB4' },
+  { name: 'SAP',            logo: '/logos/sap.svg',        color: '#1870C5' },
+  { name: 'QuickBooks',     logo: '/logos/quickbooks.svg', color: '#2CA01C' },
+  { name: 'Razorpay',       logo: '/logos/razorpay.svg',   color: '#3395FF' },
+  { name: 'Oracle NetSuite',logo: '/logos/netsuite.svg',   color: '#E41817' },
 ];
 
 function CountUp({ to, duration = 1200 }: { to: number; duration?: number }) {
@@ -46,19 +46,11 @@ function TilesContent() {
             className="bg-white border border-[#E3E8EF] rounded-xl flex flex-col items-center justify-center gap-3"
             style={{ height: 120, boxShadow: '0 1px 3px 0 rgba(0,0,0,0.06)' }}
           >
-            <div className="relative">
-              <div
-                className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-semibold text-sm"
-                style={{ backgroundColor: intg.color }}
-              >
-                {intg.letter}
-              </div>
-              <motion.div
-                className="absolute inset-[-4px] rounded-[12px] border-2 pointer-events-none"
-                style={{ borderColor: intg.color }}
-                animate={{ scale: [1, 1.35, 1], opacity: [0.5, 0, 0.5] }}
-                transition={{ duration: 1.8, delay: i * 0.25, repeat: Infinity, ease: 'easeOut' }}
-              />
+            <div
+              className="rounded-lg flex items-center justify-center"
+              style={{ width: 92, height: 36, background: '#F6F9FC', border: '1px solid #E3E8EF' }}
+            >
+              <img src={intg.logo} alt={intg.name} style={{ maxWidth: 76, maxHeight: 28, objectFit: 'contain' }} />
             </div>
             <span className="text-xs font-medium text-[#425466] text-center leading-tight px-2">
               {intg.name}
@@ -73,6 +65,7 @@ function TilesContent() {
           </motion.div>
         ))}
       </div>
+      <p className="text-sm text-[#8792A2] text-center">....and many more.</p>
     </>
   );
 }
@@ -96,11 +89,8 @@ function StatsContent() {
             className="flex items-center gap-1.5 bg-white border border-[#E3E8EF] rounded px-2.5 py-1.5"
             style={{ boxShadow: '0 1px 2px 0 rgba(0,0,0,0.04)' }}
           >
-            <div
-              className="w-4 h-4 rounded flex items-center justify-center text-white font-semibold flex-shrink-0"
-              style={{ backgroundColor: intg.color, fontSize: 9 }}
-            >
-              {intg.letter}
+            <div className="flex items-center justify-center flex-shrink-0" style={{ width: 44, height: 16 }}>
+              <img src={intg.logo} alt={intg.name} style={{ maxWidth: 44, maxHeight: 14, objectFit: 'contain' }} />
             </div>
             <span className="text-[11px] text-[#425466] font-medium whitespace-nowrap">{intg.name}</span>
           </motion.div>
