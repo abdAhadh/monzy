@@ -20,6 +20,35 @@ const SCENE_VARIANTS = {
   exit: { opacity: 0, y: -20 },
 };
 
+// ── Audio-driven timeline ─────────────────────────────────────────────────────
+// Playthrough order (scenes 6 & 7 are skipped via scene 5's skipTo)
+const PLAYTHROUGH_IDS = [1, 2, 3, 4, 5, 8, 9, 10, 11, 12];
+
+const SCENE_TIMELINE = (() => {
+  let t = 0;
+  return PLAYTHROUGH_IDS.map(id => {
+    const s = SCENES.find(s => s.id === id)!;
+    const entry = { id, start: t, end: t + s.duration };
+    t += s.duration;
+    return entry;
+  });
+})();
+
+const TOTAL_DURATION = SCENE_TIMELINE[SCENE_TIMELINE.length - 1].end;
+
+function sceneAtTime(t: number): number {
+  for (const e of SCENE_TIMELINE) {
+    if (t < e.end) return e.id;
+  }
+  return SCENE_TIMELINE[SCENE_TIMELINE.length - 1].id;
+}
+
+function formatTime(s: number): string {
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return `${m}:${sec.toString().padStart(2, '0')}`;
+}
+
 // ── Subtitle cues — keyed to actual audio timestamps ─────────────────────────
 const SUBTITLE_CUES: { start: number; end: number; text: string }[] = [
   { start: 0.0,   end: 3.8,   text: "This is Monzy. Your AI Accounts Receivables Specialist." },
@@ -49,7 +78,7 @@ function SubtitleOverlay({ time }: { time: number }) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -4 }}
           transition={{ duration: 0.25 }}
-          className="fixed bottom-4 left-0 right-0 z-50 flex justify-center px-6 pointer-events-none"
+          className="fixed bottom-10 left-0 right-0 z-50 flex justify-center px-6 pointer-events-none"
         >
           <div className="bg-black/65 text-white text-[15px] font-medium px-4 py-2 rounded-lg leading-relaxed backdrop-blur-sm text-center max-w-2xl">
             {cue.text}
@@ -60,6 +89,95 @@ function SubtitleOverlay({ time }: { time: number }) {
   );
 }
 
+// ── Seekable progress bar ─────────────────────────────────────────────────────
+function ProgressBar({
+  voTime,
+  isPlaying,
+  onSeek,
+  onTogglePlay,
+}: {
+  voTime: number;
+  isPlaying: boolean;
+  onSeek: (t: number) => void;
+  onTogglePlay: () => void;
+}) {
+  const [hovered, setHovered] = useState(false);
+  const barRef = useRef<HTMLDivElement>(null);
+
+  const progress = Math.min(voTime / TOTAL_DURATION, 1);
+
+  const handleBarClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!barRef.current) return;
+    const rect = barRef.current.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    onSeek(ratio * TOTAL_DURATION);
+  };
+
+  return (
+    <div
+      className="fixed bottom-0 left-0 right-0 z-50 select-none"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Timestamp + play/pause — visible on hover */}
+      <AnimatePresence>
+        {hovered && (
+          <motion.div
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 4 }}
+            transition={{ duration: 0.15 }}
+            className="flex items-center justify-between px-4 py-1.5"
+          >
+            {/* Play/pause button */}
+            <button
+              onClick={onTogglePlay}
+              className="flex items-center justify-center w-6 h-6 rounded-full text-[#635BFF] hover:text-[#4f46e5] transition-colors"
+            >
+              {isPlaying ? (
+                <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor">
+                  <rect x="0" y="0" width="3" height="12" rx="1" />
+                  <rect x="6" y="0" width="3" height="12" rx="1" />
+                </svg>
+              ) : (
+                <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor">
+                  <path d="M1 1l8 5-8 5V1z" />
+                </svg>
+              )}
+            </button>
+
+            {/* Time */}
+            <span className="text-[11px] font-mono text-[#8792A2]">
+              {formatTime(voTime)} <span className="text-[#C8D4E0]">/</span> {formatTime(TOTAL_DURATION)}
+            </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Track */}
+      <div
+        ref={barRef}
+        onClick={handleBarClick}
+        className="w-full bg-[#E3E8EF] cursor-pointer relative"
+        style={{ height: hovered ? 6 : 2, transition: 'height 0.15s ease' }}
+      >
+        {/* Fill */}
+        <div
+          className="h-full bg-[#635BFF] transition-none"
+          style={{ width: `${progress * 100}%` }}
+        />
+        {/* Scrubber dot — visible on hover */}
+        {hovered && (
+          <div
+            className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#635BFF] border-2 border-white shadow-md pointer-events-none"
+            style={{ left: `${progress * 100}%`, marginLeft: -6 }}
+          />
+        )}
+      </div>
+    </div>
+  );
+}
+
 function SceneRenderer({ scene, isActive }: { scene: number; isActive: boolean }) {
   switch (scene) {
     case 1:  return <Scene01Intro isActive={isActive} />;
@@ -67,8 +185,6 @@ function SceneRenderer({ scene, isActive }: { scene: number; isActive: boolean }
     case 3:  return <Scene03Segmentation isActive={isActive} />;
     case 4:  return <Scene04Collections isActive={isActive} />;
     case 5:  return <Scene05Activity isActive={isActive} />;
-    case 6:  return <Scene05Activity isActive={isActive} />;
-    case 7:  return <Scene05Activity isActive={isActive} />;
     case 8:  return <Scene08ARTable isActive={isActive} />;
     case 9:  return <Scene14Credit isActive={isActive} />;
     case 10: return <Scene16CashApp isActive={isActive} />;
@@ -82,20 +198,19 @@ export default function App() {
   const [currentScene, setCurrentScene] = useState(1);
   const [isPlaying, setIsPlaying]       = useState(false);
   const [hasStarted, setHasStarted]     = useState(false);
-  const [progress, setProgress]         = useState(0);
   const [voTime, setVoTime]             = useState(0);
 
   const voRef  = useRef<HTMLAudioElement>(null);
   const bgmRef = useRef<HTMLAudioElement>(null);
 
-  const totalScenes = SCENES.length;
-  const sceneDef    = SCENES[currentScene - 1];
-  const isLastScene = currentScene === totalScenes;
-
-  const goToScene = useCallback((n: number) => {
-    setCurrentScene(Math.min(Math.max(1, n), totalScenes));
-    setProgress(0);
-  }, [totalScenes]);
+  const resetToStart = useCallback(() => {
+    setIsPlaying(false);
+    setHasStarted(false);
+    setCurrentScene(1);
+    setVoTime(0);
+    if (voRef.current)  { voRef.current.pause();  voRef.current.currentTime  = 0; }
+    if (bgmRef.current) { bgmRef.current.pause(); bgmRef.current.currentTime = 0; }
+  }, []);
 
   const startDemo = useCallback(() => {
     if (hasStarted) return;
@@ -103,41 +218,13 @@ export default function App() {
     setIsPlaying(true);
   }, [hasStarted]);
 
-  // Auto-advance timer — stops at last scene
+  // Drive currentScene from audio time
   useEffect(() => {
-    if (!isPlaying) return;
+    if (!hasStarted) return;
+    setCurrentScene(sceneAtTime(voTime));
+  }, [voTime, hasStarted]);
 
-    const duration = sceneDef.duration * 1000;
-    let elapsed = 0;
-    const interval = 50;
-
-    const timer = setInterval(() => {
-      elapsed += interval;
-      setProgress(Math.min(elapsed / duration, 1));
-      if (elapsed >= duration) {
-        clearInterval(timer);
-        if (isLastScene) {
-          // End of demo — reset to cover with play overlay
-          setIsPlaying(false);
-          setHasStarted(false);
-          setCurrentScene(1);
-          setProgress(0);
-          if (voRef.current) voRef.current.currentTime = 0;
-          if (bgmRef.current) { bgmRef.current.pause(); bgmRef.current.currentTime = 0; }
-        } else {
-          setCurrentScene(prev => {
-            const next = sceneDef.skipTo ?? prev + 1;
-            setProgress(0);
-            return next;
-          });
-        }
-      }
-    }, interval);
-
-    return () => clearInterval(timer);
-  }, [currentScene, isPlaying, sceneDef.duration, isLastScene, sceneDef.skipTo]);
-
-  // Audio: play/pause with demo
+  // Audio: play/pause
   useEffect(() => {
     const vo  = voRef.current;
     const bgm = bgmRef.current;
@@ -151,15 +238,7 @@ export default function App() {
     }
   }, [isPlaying]);
 
-  // Audio: restart VO when navigating back to scene 1
-  useEffect(() => {
-    if (currentScene === 1 && voRef.current) {
-      voRef.current.currentTime = 0;
-      if (isPlaying) voRef.current.play().catch(() => {});
-    }
-  }, [currentScene]);
-
-  // Subtitle: track VO currentTime
+  // Track VO currentTime → voTime
   useEffect(() => {
     const vo = voRef.current;
     if (!vo) return;
@@ -168,27 +247,42 @@ export default function App() {
     return () => vo.removeEventListener('timeupdate', update);
   }, []);
 
-  // Keyboard navigation
+  // Seek handler
+  const handleSeek = useCallback((t: number) => {
+    if (voRef.current) {
+      voRef.current.currentTime = t;
+      setVoTime(t);
+    }
+    setCurrentScene(sceneAtTime(t));
+    if (!isPlaying && hasStarted) {
+      setIsPlaying(true);
+    }
+  }, [isPlaying, hasStarted]);
+
+  // Space bar → play/pause
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goToScene(currentScene + 1);
-      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goToScene(currentScene - 1);
-      if (e.key === ' ') { e.preventDefault(); setIsPlaying(p => !p); }
+      if (e.key === ' ' && hasStarted) { e.preventDefault(); setIsPlaying(p => !p); }
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [currentScene, goToScene]);
+  }, [hasStarted]);
 
   return (
     <div className="w-screen h-screen flex flex-col overflow-hidden bg-white font-sans">
-      <audio ref={voRef}  src="/vo.mp3"  preload="auto"
-        onCanPlay={() => { if (voRef.current) voRef.current.volume = 1.0; }} />
+      <audio
+        ref={voRef}
+        src="/vo.mp3"
+        preload="auto"
+        onCanPlay={() => { if (voRef.current) voRef.current.volume = 1.0; }}
+        onEnded={resetToStart}
+      />
       <audio ref={bgmRef} src="/bgm.mp3" preload="auto" loop
         onCanPlay={() => { if (bgmRef.current) bgmRef.current.volume = 0.16; }} />
 
       <TopBar
         currentScene={currentScene}
-        onSceneChange={goToScene}
+        onSceneChange={() => {}}
         isPlaying={isPlaying}
         onTogglePlay={() => setIsPlaying(p => !p)}
       />
@@ -213,26 +307,17 @@ export default function App() {
       {/* Subtitles */}
       <SubtitleOverlay time={voTime} />
 
-      {/* Scene timer bar (bottom) */}
-      <div className="fixed bottom-0 left-0 right-0 h-0.5 bg-[#F0F4F8] z-50">
-        <motion.div
-          className="h-full bg-[#635BFF]"
-          style={{ width: `${progress * 100}%` }}
-          transition={{ duration: 0.05 }}
+      {/* Seekable progress bar */}
+      {hasStarted && (
+        <ProgressBar
+          voTime={voTime}
+          isPlaying={isPlaying}
+          onSeek={handleSeek}
+          onTogglePlay={() => setIsPlaying(p => !p)}
         />
-      </div>
+      )}
 
-      {/* Click zones for prev/next */}
-      <div
-        className="fixed left-0 top-12 bottom-0 w-16 z-40 cursor-w-resize"
-        onClick={() => goToScene(currentScene - 1)}
-      />
-      <div
-        className="fixed right-0 top-12 bottom-0 w-16 z-40 cursor-e-resize"
-        onClick={() => goToScene(currentScene + 1)}
-      />
-
-      {/* Click-to-start overlay — dismissed on first interaction */}
+      {/* Click-to-start overlay */}
       <AnimatePresence>
         {!hasStarted && (
           <motion.div
