@@ -243,8 +243,8 @@ export default function App() {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="w-16 h-16 rounded-full bg-[#635BFF] flex items-center justify-center shadow-xl">
-                <svg width="20" height="24" viewBox="0 0 20 24" fill="none">
+              <div className="w-24 h-24 rounded-full bg-[#635BFF] flex items-center justify-center shadow-xl">
+                <svg width="28" height="34" viewBox="0 0 20 24" fill="none">
                   <path d="M2 2L18 12L2 22V2Z" fill="white" />
                 </svg>
               </div>
