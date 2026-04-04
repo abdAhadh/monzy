@@ -52,19 +52,20 @@ function formatTime(s: number): string {
 // ── Subtitle cues — keyed to actual audio timestamps ─────────────────────────
 const SUBTITLE_CUES: { start: number; end: number; text: string }[] = [
   { start: 0.0,   end: 3.8,   text: "This is Monzy. Your AI Accounts Receivables Specialist." },
-  { start: 4.8,   end: 13.6,  text: "It connects to your ERP, CRM, Accounting systems and Bank Accounts to extract your AR data automatically." },
-  { start: 14.6,  end: 20.4,  text: "Then it reads all payment history and automatically buckets customers by their risk levels." },
-  { start: 21.2,  end: 27.3,  text: "For each bucket, you can set a follow-up journey. Monzy runs it for every customer, automatically." },
-  { start: 28.1,  end: 35.5,  text: "A WhatsApp reminder goes out — the customer replies with a commitment date, Monzy updates the AR record instantly." },
-  { start: 36.0,  end: 38.8,  text: "When a customer prefers a call, Monzy remembers it, gets data on the receivables and updates your AR record." },
-  { start: 39.5,  end: 44.8,  text: "An email reply comes in, and payment details are extracted automatically." },
-  { start: 45.4,  end: 59.5,  text: "We know you run into disputes, which let's say is a quantity mismatch. Monzy documents it, and escalates it to the right person in your team." },
-  { start: 60.1,  end: 63.3,  text: "Every customer handled. Every record updated." },
-  { start: 64.1,  end: 75.4,  text: "By ensuring communication with each and every customer or partner, Monzy ensures a real-time AR view — their status, risk level, and last update." },
-  { start: 76.2,  end: 91.3,  text: "Monzy also tracks credit health over time. Ratan Distributors has been slipping — more delays, more disputes. So Monzy recommends pulling back their credit limit and tightening the payment window to reduce your risk." },
-  { start: 91.9,  end: 102.8, text: "Monzy handles cash applications as well. Bank transactions come in, Monzy matches them to invoices — TDS reconciled, PDCs logged, all automatically. If a payment doesn't match, Monzy flags it and pings the AR manager on Slack before anyone even notices." },
-  { start: 103.3, end: 111.5, text: "Get a real-time view of your AR, while Monzy runs in the background." },
-  { start: 112.3, end: 125.3, text: "Let your AR team focus on what actually matters, while Monzy cuts your DSO in half." },
+  { start: 4.8,   end: 13.6,  text: "It connects to your ERP, CRM, accounting systems and bank accounts to extract your AR data automatically." },
+  { start: 14.6,  end: 20.2,  text: "Then it reads your payment history and automatically buckets customers by their risk levels." },
+  { start: 21.2,  end: 27.0,  text: "For each bucket, you can set a follow-up journey. Monzy runs it for every customer automatically." },
+  { start: 27.9,  end: 35.3,  text: "A WhatsApp reminder goes out. The customer replies with a commitment date. Monzy updates the AR record instantly." },
+  { start: 35.8,  end: 42.7,  text: "When a customer prefers a call, Monzy remembers it, gets data on the receivables and updates your AR record." },
+  { start: 43.1,  end: 48.8,  text: "An email reply comes in and payment details are extracted automatically." },
+  { start: 49.3,  end: 59.4,  text: "We know you run into disputes, which let's say is a quantity mismatch. Monzy documents it and escalates it to the right person in your team." },
+  { start: 60.0,  end: 63.0,  text: "Every customer handled. Every record updated." },
+  { start: 63.9,  end: 75.2,  text: "By ensuring communication with each and every customer or partner, Monzy ensures a real-time AR view — their status, risk level, and last update." },
+  { start: 76.2,  end: 90.8,  text: "Monzy also tracks credit health over time. If one of your distributors has been slipping with more delays, more disputes, Monzy recommends pulling back their credit limit and tightening the payment window to reduce your risk." },
+  { start: 91.8,  end: 102.7, text: "Monzy handles cash applications as well. Bank transactions come in, Monzy matches them to invoices. TDS reconciled, PDCs logged, all automatically." },
+  { start: 103.3, end: 111.2, text: "If a payment doesn't match, Monzy flags it and pings the AR manager on Slack before anyone even notices." },
+  { start: 112.1, end: 116.6, text: "Get a real-time view of your AR, while Monzy runs in the background." },
+  { start: 117.6, end: 125.0, text: "Let your AR team only focus on high risk accounts, while Monzy surfaces them and cuts your DSO in half." },
 ];
 
 function SubtitleOverlay({ time }: { time: number }) {
