@@ -117,9 +117,13 @@ export default function App() {
       if (elapsed >= duration) {
         clearInterval(timer);
         if (isLastScene) {
-          // End of demo — stop playing
+          // End of demo — reset to cover with play overlay
           setIsPlaying(false);
-          setProgress(1);
+          setHasStarted(false);
+          setCurrentScene(1);
+          setProgress(0);
+          if (voRef.current) voRef.current.currentTime = 0;
+          if (bgmRef.current) { bgmRef.current.pause(); bgmRef.current.currentTime = 0; }
         } else {
           setCurrentScene(prev => {
             const next = sceneDef.skipTo ?? prev + 1;
@@ -177,9 +181,10 @@ export default function App() {
 
   return (
     <div className="w-screen h-screen flex flex-col overflow-hidden bg-white font-sans">
-      <audio ref={voRef}  src="/vo.mp3"  preload="auto" />
+      <audio ref={voRef}  src="/vo.mp3"  preload="auto"
+        onCanPlay={() => { if (voRef.current) voRef.current.volume = 1.0; }} />
       <audio ref={bgmRef} src="/bgm.mp3" preload="auto" loop
-        onCanPlay={() => { if (bgmRef.current) bgmRef.current.volume = 0.18; }} />
+        onCanPlay={() => { if (bgmRef.current) bgmRef.current.volume = 0.16; }} />
 
       <TopBar
         currentScene={currentScene}
