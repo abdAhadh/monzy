@@ -233,14 +233,26 @@ export default function App() {
     }
   }, [isPlaying, hasStarted]);
 
+  const togglePlay = useCallback(() => {
+    setIsPlaying(p => {
+      const next = !p;
+      if (!next) {
+        // Pausing — keep controls visible indefinitely
+        if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
+        setScreenHovered(true);
+      }
+      return next;
+    });
+  }, []);
+
   // Space bar → play/pause
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (e.key === ' ' && hasStarted) { e.preventDefault(); setIsPlaying(p => !p); }
+      if (e.key === ' ' && hasStarted) { e.preventDefault(); togglePlay(); }
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [hasStarted]);
+  }, [hasStarted, togglePlay]);
 
   return (
     <div
@@ -248,10 +260,12 @@ export default function App() {
         onMouseMove={() => {
         setScreenHovered(true);
         if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
-        hoverTimerRef.current = setTimeout(() => setScreenHovered(false), 2000);
+        if (isPlaying) {
+          hoverTimerRef.current = setTimeout(() => setScreenHovered(false), 2000);
+        }
       }}
       onMouseLeave={() => {
-        setScreenHovered(false);
+        if (isPlaying) setScreenHovered(false);
         if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
       }}
     >
@@ -269,7 +283,7 @@ export default function App() {
         currentScene={currentScene}
         onSceneChange={() => {}}
         isPlaying={isPlaying}
-        onTogglePlay={() => setIsPlaying(p => !p)}
+        onTogglePlay={togglePlay}
       />
 
       {/* Main scene area */}
@@ -313,7 +327,7 @@ export default function App() {
           >
             <button
               className="w-20 h-20 rounded-full bg-[#635BFF] flex items-center justify-center shadow-xl pointer-events-auto"
-              onClick={() => setIsPlaying(p => !p)}
+              onClick={togglePlay}
             >
               {isPlaying ? (
                 <svg width="22" height="26" viewBox="0 0 22 26" fill="none">
