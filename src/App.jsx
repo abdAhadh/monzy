@@ -65,35 +65,58 @@ export default function App() {
     if (demoFs) {
       if (wrap) wrap.style.height = '';
 
-      // Apply contain-scaling so the 1280×768 demo fits within the screen while
-      // keeping identical pixel density to the embedded view. This means:
-      //  • Portrait mobile: same scale as embedded (width-constrained), centred vertically
-      //  • Landscape mobile: taller screen lets scale grow → "true" fullscreen feel
-      //  • Desktop (≥ 1280×768): clear inline styles and let CSS fill naturally
+      // ── Lock body scroll so the page cannot be scrolled behind the overlay ──
+      const savedOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      // iOS Safari needs preventDefault on touchmove to stop rubber-band scroll
+      const blockTouch = (e) => e.preventDefault();
+      document.addEventListener('touchmove', blockTouch, { passive: false });
+
+      // ── Apply contain-scaling ──────────────────────────────────────────────
+      const controls = wrap?.querySelector('.demo-overlay-controls');
+
       const applyFs = () => {
         if (!iframe) return;
         const vw = window.innerWidth;
         const vh = window.innerHeight;
         const scale = Math.min(vw / IFRAME_W, vh / IFRAME_H);
+        const offsetX = Math.max(0, (vw - IFRAME_W * scale) / 2);
+        const offsetY = Math.max(0, (vh - IFRAME_H * scale) / 2);
 
         if (scale >= 1) {
-          // Large screen: CSS handles width:100% / height:100% / transform:none
+          // Large screen: CSS handles width/height/transform
           iframe.style.width     = '';
           iframe.style.height    = '';
           iframe.style.transform = '';
+          // Reset controls to CSS defaults
+          if (controls) { controls.style.bottom = ''; controls.style.right = ''; }
         } else {
-          // Small screen: keep 1280×768 source size, scale to contain + centre
-          const offsetX = Math.max(0, (vw - IFRAME_W * scale) / 2);
-          const offsetY = Math.max(0, (vh - IFRAME_H * scale) / 2);
+          // Mobile/small: scale to contain + centre with letterboxing
           iframe.style.width     = `${IFRAME_W}px`;
           iframe.style.height    = `${IFRAME_H}px`;
           iframe.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+          // Pin controls to the bottom-right corner of the VIDEO area, not the
+          // screen — so they don't float in the empty letterbox region
+          if (controls) {
+            const bottomLetterbox = vh - (offsetY + IFRAME_H * scale);
+            controls.style.bottom = `${bottomLetterbox + 20}px`;
+            controls.style.right  = `${offsetX + 20}px`;
+          }
         }
       };
 
       applyFs();
       window.addEventListener('resize', applyFs);
-      return () => window.removeEventListener('resize', applyFs);
+
+      return () => {
+        window.removeEventListener('resize', applyFs);
+        document.removeEventListener('touchmove', blockTouch);
+        document.body.style.overflow = savedOverflow;
+        document.documentElement.style.overflow = '';
+        // Reset controls positioning back to CSS defaults
+        if (controls) { controls.style.bottom = ''; controls.style.right = ''; }
+      };
     }
 
     const apply = () => {

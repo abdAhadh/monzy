@@ -1027,6 +1027,7 @@ nav {
   border-radius: 0;
   z-index: 9999;
   background: #FAF9F6; /* matches demo background — seamless letterboxing */
+  touch-action: none;  /* prevent iOS rubber-band scroll in letterbox areas */
 }
 
 /* Large screens (≥1280×768): fill naturally.
