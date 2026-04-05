@@ -99,7 +99,10 @@ export default function App() {
       {/* NAVBAR */}
       <nav>
         <a href="#" className="nav-logo">
-          <span className="nav-logo-mark">///</span>
+          <svg width="28" height="28" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" className="nav-logo-icon">
+            <path d="M11.974 35C5.361 35 0 29.639 0 23.026V11.974C0 5.361 5.361 0 11.974 0H23.026C29.639 0 35 5.361 35 11.974V23.026C35 29.639 29.639 35 23.026 35H11.974Z" fill="#111111"/>
+            <path d="M13.7021 15.125C16.7591 13.666 19.1901 11.156 20.5521 8.05396C19.6631 7.11996 18.5061 6.45296 17.2611 6.05296L16.5941 5.82996C16.5441 5.92696 16.5131 6.03296 16.5051 6.14096C15.4371 9.16696 13.2571 11.612 10.3231 12.991C8.27605 13.97 6.76405 15.749 6.05205 17.885L5.83105 18.551C5.92705 18.601 6.03305 18.631 6.14105 18.64C6.98705 18.951 7.83105 19.352 8.63205 19.842C9.78905 17.78 11.5621 16.13 13.7021 15.125ZM26.6031 15.304C24.9401 17.826 22.6161 19.841 19.8851 21.131C17.6181 22.199 15.8821 24.2 15.0821 26.602L14.8591 27.358C15.7231 28.124 16.7391 28.699 17.8401 29.048L18.5061 29.271C18.5571 29.174 18.5871 29.068 18.5961 28.959C19.6631 25.934 21.8431 23.488 24.7781 22.11C26.8241 21.131 28.3811 19.352 29.0491 17.216L29.2711 16.55C28.3371 16.283 27.4471 15.837 26.6031 15.304ZM13.0791 25.047C14.1871 22.37 16.2471 20.199 18.8621 18.952C21.2641 17.796 23.2651 16.018 24.6441 13.838C23.6211 12.859 22.7761 11.747 22.1541 10.413C20.4881 13.459 17.9041 15.903 14.7701 17.396C12.9461 18.241 11.4781 19.709 10.5881 21.488C11.5671 22.423 12.3681 23.579 12.9901 24.868L13.0791 25.047Z" fill="white"/>
+          </svg>
           <span>Monzy</span>
         </a>
         <ul className="nav-links">
@@ -107,19 +110,25 @@ export default function App() {
           <li><a href="#agents">How it works</a></li>
           <li><a href="#faq">FAQ</a></li>
         </ul>
-        <a href="#" className="nav-cta" onClick={scrollToForm}>Get Early Access</a>
+        <a href="#" className="nav-cta" onClick={scrollToForm}>Request Demo</a>
       </nav>
 
       {/* HERO */}
       <section className="hero-wrapper">
         <div className="hero-bg" />
+        <div className="hero-ambient" aria-hidden="true">
+          <span className="hero-blob hero-blob-1" />
+          <span className="hero-blob hero-blob-2" />
+          <span className="hero-blob hero-blob-3" />
+          <span className="hero-blob hero-blob-4" />
+        </div>
         <div className="hero">
           <FadeIn className="hero-card">
             <div className="corner-dot-tr" />
             <div className="corner-dot-bl" />
-            <h1>Get paid on time.<br /><em>Every time.</em></h1>
+            <h1>Your AI <em>Accounts Receivables</em> specialist.</h1>
             <p className="hero-sub">
-              AI agents that chase overdue invoices, match every incoming payment, and reconcile TDS deductions. Without your team lifting a finger.
+              AI agents that chase overdue invoices, match every incoming payment, and reconcile TDS deductions.
             </p>
             <form className="hero-form" onSubmit={handleSubmit}>
               <input
@@ -132,7 +141,7 @@ export default function App() {
                 autoComplete="email"
               />
               <button type="submit" disabled={loading}>
-                {loading ? 'Submitting...' : 'Get Early Access'}
+                {loading ? 'Submitting...' : 'Request Demo'}
               </button>
             </form>
             <p className={`form-message ${message.type}`}>{message.text}</p>
@@ -322,26 +331,6 @@ export default function App() {
         </FadeIn>
       </section>
 
-      {/* METRICS */}
-      <section className="metrics">
-        <FadeIn className="metrics-grid">
-          <div className="metric-item">
-            <span className="metric-number">50%</span>
-            <span className="metric-label">reduction in DSO</span>
-          </div>
-          <div className="metric-divider" />
-          <div className="metric-item">
-            <span className="metric-number">80%</span>
-            <span className="metric-label">less time on manual follow-ups</span>
-          </div>
-          <div className="metric-divider" />
-          <div className="metric-item">
-            <span className="metric-number">3x</span>
-            <span className="metric-label">more invoices per AR team member</span>
-          </div>
-        </FadeIn>
-      </section>
-
       {/* AGENTS */}
       <section className="agents" id="agents">
         <FadeIn as="p" className="section-label">HOW IT WORKS</FadeIn>
@@ -382,6 +371,23 @@ export default function App() {
           </FadeIn>
         </div>
         <FadeIn as="p" className="agents-more">and more agents built for your AR workflow.</FadeIn>
+
+        <FadeIn className="metrics-grid">
+          <div className="metric-item">
+            <span className="metric-number">50%</span>
+            <span className="metric-label">reduction in DSO</span>
+          </div>
+          <div className="metric-divider" />
+          <div className="metric-item">
+            <span className="metric-number">80%</span>
+            <span className="metric-label">less time on manual follow-ups</span>
+          </div>
+          <div className="metric-divider" />
+          <div className="metric-item">
+            <span className="metric-number">3x</span>
+            <span className="metric-label">more invoices per AR team member</span>
+          </div>
+        </FadeIn>
       </section>
 
 
@@ -418,6 +424,11 @@ export default function App() {
       {/* CLOSING CTA */}
       <section className="cta-section">
         <FadeIn className="cta-card">
+          <div className="cta-ambient" aria-hidden="true">
+            <span className="cta-blob cta-blob-1" />
+            <span className="cta-blob cta-blob-2" />
+            <span className="cta-blob cta-blob-3" />
+          </div>
           <div className="corner-dot-tr" />
           <div className="corner-dot-bl" />
           <p className="section-label" style={{ marginBottom: '16px' }}>GET STARTED</p>
@@ -432,7 +443,7 @@ export default function App() {
               autoComplete="email"
             />
             <button type="submit" disabled={loading}>
-              {loading ? 'Submitting...' : 'Get Early Access'}
+              {loading ? 'Submitting...' : 'Request Demo'}
             </button>
           </form>
           <p className={`form-message ${message.type}`}>{message.text}</p>
@@ -444,7 +455,10 @@ export default function App() {
         <div className="footer-top">
           <div className="footer-brand">
             <a href="#" className="nav-logo">
-              <span className="nav-logo-mark">///</span>
+              <svg width="28" height="28" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" className="nav-logo-icon">
+                <path d="M11.974 35C5.361 35 0 29.639 0 23.026V11.974C0 5.361 5.361 0 11.974 0H23.026C29.639 0 35 5.361 35 11.974V23.026C35 29.639 29.639 35 23.026 35H11.974Z" fill="#111111"/>
+                <path d="M13.7021 15.125C16.7591 13.666 19.1901 11.156 20.5521 8.05396C19.6631 7.11996 18.5061 6.45296 17.2611 6.05296L16.5941 5.82996C16.5441 5.92696 16.5131 6.03296 16.5051 6.14096C15.4371 9.16696 13.2571 11.612 10.3231 12.991C8.27605 13.97 6.76405 15.749 6.05205 17.885L5.83105 18.551C5.92705 18.601 6.03305 18.631 6.14105 18.64C6.98705 18.951 7.83105 19.352 8.63205 19.842C9.78905 17.78 11.5621 16.13 13.7021 15.125ZM26.6031 15.304C24.9401 17.826 22.6161 19.841 19.8851 21.131C17.6181 22.199 15.8821 24.2 15.0821 26.602L14.8591 27.358C15.7231 28.124 16.7391 28.699 17.8401 29.048L18.5061 29.271C18.5571 29.174 18.5871 29.068 18.5961 28.959C19.6631 25.934 21.8431 23.488 24.7781 22.11C26.8241 21.131 28.3811 19.352 29.0491 17.216L29.2711 16.55C28.3371 16.283 27.4471 15.837 26.6031 15.304ZM13.0791 25.047C14.1871 22.37 16.2471 20.199 18.8621 18.952C21.2641 17.796 23.2651 16.018 24.6441 13.838C23.6211 12.859 22.7761 11.747 22.1541 10.413C20.4881 13.459 17.9041 15.903 14.7701 17.396C12.9461 18.241 11.4781 19.709 10.5881 21.488C11.5671 22.423 12.3681 23.579 12.9901 24.868L13.0791 25.047Z" fill="white"/>
+              </svg>
               <span>Monzy</span>
             </a>
             <p className="footer-tagline">AI agents for accounts receivable.</p>

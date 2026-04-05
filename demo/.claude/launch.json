@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "demo",
+      "runtimeExecutable": "/bin/bash",
+      "runtimeArgs": ["/Users/ahadh/Claude/monzy/demo/start-dev.sh"],
+      "port": 5174
+    }
+  ]
+}
