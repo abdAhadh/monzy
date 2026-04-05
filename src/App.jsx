@@ -59,18 +59,27 @@ export default function App() {
   useEffect(() => {
     const IFRAME_W = 1280;
     const IFRAME_H = 768;
+    const wrap = document.querySelector('.demo-embed-wrap');
+    const iframe = wrap?.querySelector('iframe');
+
+    if (demoFs) {
+      // Clear JS-applied inline styles so the CSS fullscreen rules take over cleanly.
+      // (Inline styles always beat CSS rules, so transform:none in the stylesheet
+      //  would be ignored if we left scale() in place.)
+      if (wrap)   wrap.style.height    = '';
+      if (iframe) iframe.style.transform = '';
+      return;
+    }
+
     const apply = () => {
-      const wrap = document.querySelector('.demo-embed-wrap');
-      if (!wrap || demoFs) return;
-      const w = wrap.offsetWidth;
+      const w = wrap?.offsetWidth;
+      if (!wrap || !w) return;
       const scale = w / IFRAME_W;
-      const h = Math.round(IFRAME_H * scale);
-      wrap.style.height = `${h}px`;
-      const iframe = wrap.querySelector('iframe');
-      if (iframe) iframe.style.transform = `scale(${scale})`;
+      wrap.style.height = `${Math.round(IFRAME_H * scale)}px`;
+      const iframeEl = wrap.querySelector('iframe');
+      if (iframeEl) iframeEl.style.transform = `scale(${scale})`;
     };
     apply();
-    const wrap = document.querySelector('.demo-embed-wrap');
     const ro = new ResizeObserver(apply);
     if (wrap) ro.observe(wrap);
     return () => ro.disconnect();
