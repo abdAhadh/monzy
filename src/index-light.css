@@ -1028,6 +1028,8 @@ nav {
   z-index: 9999;
   background: #FAF9F6; /* matches demo background — seamless letterboxing */
   touch-action: none;  /* prevent iOS rubber-band scroll in letterbox areas */
+  opacity: 1 !important; /* FadeIn wrapper must be fully visible regardless of animation state */
+  transform: none !important; /* FadeIn uses transform for enter animation — reset it */
 }
 
 /* Large screens (≥1280×768): fill naturally.
@@ -1093,9 +1095,13 @@ nav {
   transform: scale(1.08);
 }
 
-/* In fullscreen, shift controls to full-viewport corner */
+/* In fullscreen, controls are always visible (no :hover needed on mobile)
+   and positioned via JS using window.innerHeight for iOS accuracy */
 .demo-embed-wrap.demo-fs .demo-overlay-controls {
-  bottom: 20px;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  position: fixed !important; /* relative to visual viewport, not wrapper */
+  bottom: 20px; /* JS overrides this with the correct letterbox-aware value */
   right: 20px;
 }
 

@@ -78,6 +78,8 @@ export default function App() {
 
       const applyFs = () => {
         if (!iframe) return;
+        // Use window.inner* — on iOS these reflect the actual VISUAL viewport,
+        // whereas CSS 100vh can be the larger layout viewport (behind browser chrome)
         const vw = window.innerWidth;
         const vh = window.innerHeight;
         const scale = Math.min(vw / IFRAME_W, vh / IFRAME_H);
@@ -85,24 +87,22 @@ export default function App() {
         const offsetY = Math.max(0, (vh - IFRAME_H * scale) / 2);
 
         if (scale >= 1) {
-          // Large screen: CSS handles width/height/transform
           iframe.style.width     = '';
           iframe.style.height    = '';
           iframe.style.transform = '';
-          // Reset controls to CSS defaults
-          if (controls) { controls.style.bottom = ''; controls.style.right = ''; }
         } else {
-          // Mobile/small: scale to contain + centre with letterboxing
           iframe.style.width     = `${IFRAME_W}px`;
           iframe.style.height    = `${IFRAME_H}px`;
           iframe.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
-          // Pin controls to the bottom-right corner of the VIDEO area, not the
-          // screen — so they don't float in the empty letterbox region
-          if (controls) {
-            const bottomLetterbox = vh - (offsetY + IFRAME_H * scale);
-            controls.style.bottom = `${bottomLetterbox + 20}px`;
-            controls.style.right  = `${offsetX + 20}px`;
-          }
+        }
+
+        // Controls use position:fixed (set in CSS) so they're always relative
+        // to the visual viewport — immune to 100vh vs innerHeight discrepancy.
+        // Pin them to the bottom-right corner of the VIDEO content area.
+        if (controls) {
+          const videoBottomFromViewportBottom = vh - (offsetY + IFRAME_H * scale);
+          controls.style.bottom = `${videoBottomFromViewportBottom + 20}px`;
+          controls.style.right  = `${offsetX + 20}px`;
         }
       };
 
@@ -114,8 +114,12 @@ export default function App() {
         document.removeEventListener('touchmove', blockTouch);
         document.body.style.overflow = savedOverflow;
         document.documentElement.style.overflow = '';
-        // Reset controls positioning back to CSS defaults
-        if (controls) { controls.style.bottom = ''; controls.style.right = ''; }
+        // Reset all inline overrides — CSS defaults take over
+        if (controls) {
+          controls.style.bottom   = '';
+          controls.style.right    = '';
+          controls.style.position = '';
+        }
       };
     }
 
