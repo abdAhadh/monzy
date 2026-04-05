@@ -63,12 +63,37 @@ export default function App() {
     const iframe = wrap?.querySelector('iframe');
 
     if (demoFs) {
-      // Clear JS-applied inline styles so the CSS fullscreen rules take over cleanly.
-      // (Inline styles always beat CSS rules, so transform:none in the stylesheet
-      //  would be ignored if we left scale() in place.)
-      if (wrap)   wrap.style.height    = '';
-      if (iframe) iframe.style.transform = '';
-      return;
+      if (wrap) wrap.style.height = '';
+
+      // Apply contain-scaling so the 1280×768 demo fits within the screen while
+      // keeping identical pixel density to the embedded view. This means:
+      //  • Portrait mobile: same scale as embedded (width-constrained), centred vertically
+      //  • Landscape mobile: taller screen lets scale grow → "true" fullscreen feel
+      //  • Desktop (≥ 1280×768): clear inline styles and let CSS fill naturally
+      const applyFs = () => {
+        if (!iframe) return;
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const scale = Math.min(vw / IFRAME_W, vh / IFRAME_H);
+
+        if (scale >= 1) {
+          // Large screen: CSS handles width:100% / height:100% / transform:none
+          iframe.style.width     = '';
+          iframe.style.height    = '';
+          iframe.style.transform = '';
+        } else {
+          // Small screen: keep 1280×768 source size, scale to contain + centre
+          const offsetX = Math.max(0, (vw - IFRAME_W * scale) / 2);
+          const offsetY = Math.max(0, (vh - IFRAME_H * scale) / 2);
+          iframe.style.width     = `${IFRAME_W}px`;
+          iframe.style.height    = `${IFRAME_H}px`;
+          iframe.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+        }
+      };
+
+      applyFs();
+      window.addEventListener('resize', applyFs);
+      return () => window.removeEventListener('resize', applyFs);
     }
 
     const apply = () => {
