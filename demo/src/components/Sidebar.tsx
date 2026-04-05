@@ -14,7 +14,7 @@ interface SidebarProps {
 
 export default function Sidebar({ items }: SidebarProps) {
   return (
-    <div className="w-44 flex-shrink-0 border-r border-gray-100 bg-white/60 flex flex-col pt-4 pb-4 gap-0.5 px-2">
+    <div className="w-44 flex-shrink-0 border-r border-[#E8E4DC] bg-[#FAF9F6]/60 flex flex-col pt-4 pb-4 gap-0.5 px-2">
       {items.map((item) => (
         <motion.div
           key={item.label}
@@ -22,12 +22,12 @@ export default function Sidebar({ items }: SidebarProps) {
           animate={{ opacity: 1, x: 0 }}
           className={`flex items-center gap-2.5 px-2.5 py-1.5 rounded-md cursor-default select-none ${
             item.active
-              ? 'bg-blue-50 text-blue-700'
-              : 'text-gray-500 hover:bg-gray-50'
+              ? 'bg-[#FDF6E8] text-[#7A5A1E]'
+              : 'text-[#777777] hover:bg-[#FAF9F6]'
           }`}
         >
           <span className="text-sm">{item.icon}</span>
-          <span className={`text-xs font-medium flex-1 ${item.active ? 'text-blue-700' : 'text-gray-600'}`}>
+          <span className={`text-xs font-medium flex-1 ${item.active ? 'text-[#7A5A1E]' : 'text-[#555555]'}`}>
             {item.label}
           </span>
           {item.hasGreenDot && (

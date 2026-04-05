@@ -8,12 +8,12 @@
 }
 
 body {
-  background: #FFFFFF;
+  background: #FAF9F6;
   font-family: 'Inter', system-ui, sans-serif;
   overflow: hidden;
   margin: 0;
   padding: 0;
-  color: #1A1F36;
+  color: #111111;
 }
 
 @keyframes waveform {
@@ -49,6 +49,6 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #E5E7EB;
+  background: #E8E4DC;
   border-radius: 2px;
 }

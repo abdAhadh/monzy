@@ -25,7 +25,7 @@ export default function Scene14Credit({ isActive }: Props) {
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="text-[10px] font-semibold tracking-widest text-[#8792A2] uppercase"
+        className="text-[10px] font-semibold tracking-widest text-[#999999] uppercase"
       >
         Customer Credit Profile: Ratan Distributors
       </motion.div>
@@ -37,15 +37,15 @@ export default function Scene14Credit({ isActive }: Props) {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="flex-1 bg-white border border-[#E3E8EF] rounded-lg p-5"
+          className="flex-1 bg-white border border-[#E8E4DC] rounded-lg p-5"
           style={{ boxShadow: '0 1px 3px 0 rgba(0,0,0,0.06)' }}
         >
-          <div className="text-[10px] font-semibold tracking-widest text-[#8792A2] uppercase mb-3">Before: 6 Months Ago</div>
+          <div className="text-[10px] font-semibold tracking-widest text-[#999999] uppercase mb-3">Before: 6 Months Ago</div>
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-sm font-semibold text-[#1A1F36] mb-1">Avg delay: 18 days</div>
-              <div className="text-xs text-[#697386]">Disputes: 1</div>
-              <div className="text-xs text-[#697386] mt-0.5">Risk score: 42</div>
+              <div className="text-sm font-semibold text-[#111111] mb-1">Avg delay: 18 days</div>
+              <div className="text-xs text-[#777777]">Disputes: 1</div>
+              <div className="text-xs text-[#777777] mt-0.5">Risk score: 42</div>
             </div>
             <CircleGauge value={42} color="#1EA672" size={72} strokeWidth={6} />
           </div>
@@ -57,7 +57,7 @@ export default function Scene14Credit({ isActive }: Props) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.4, duration: 0.3 }}
           className="text-2xl flex-shrink-0"
-          style={{ color: '#C8D4E0' }}
+          style={{ color: '#E8E4DC' }}
         >
           →
         </motion.div>
@@ -95,7 +95,7 @@ export default function Scene14Credit({ isActive }: Props) {
             initial={{ opacity: 0, y: 14, filter: 'blur(6px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full max-w-2xl bg-white border border-[#E3E8EF] rounded-lg p-5"
+            className="w-full max-w-2xl bg-white border border-[#E8E4DC] rounded-lg p-5"
             style={{ boxShadow: '0 1px 3px 0 rgba(0,0,0,0.06)' }}
           >
             <div className="flex items-center justify-between mb-1">
@@ -103,7 +103,7 @@ export default function Scene14Credit({ isActive }: Props) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
-                className="text-sm font-semibold text-[#1A1F36]"
+                className="text-sm font-semibold text-[#111111]"
               >
                 Monzy Recommendation: Next Cycle
               </motion.span>
@@ -112,7 +112,7 @@ export default function Scene14Credit({ isActive }: Props) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.45 }}
-              className="text-xs text-[#8792A2] mb-4"
+              className="text-xs text-[#999999] mb-4"
             >
               based on 14 months of interactions
             </motion.p>
@@ -124,9 +124,9 @@ export default function Scene14Credit({ isActive }: Props) {
                 transition={{ delay: 0.42, duration: 0.45 }}
                 className="flex items-center gap-3"
               >
-                <span className="text-xs text-[#697386] w-28">Credit limit:</span>
-                <span className="font-mono text-sm line-through" style={{ color: '#8792A2' }}>₹5L</span>
-                <span style={{ color: '#E3E8EF' }}>→</span>
+                <span className="text-xs text-[#777777] w-28">Credit limit:</span>
+                <span className="font-mono text-sm line-through" style={{ color: '#999999' }}>₹5L</span>
+                <span style={{ color: '#E8E4DC' }}>→</span>
                 <motion.span
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -143,9 +143,9 @@ export default function Scene14Credit({ isActive }: Props) {
                 transition={{ delay: 0.54, duration: 0.45 }}
                 className="flex items-center gap-3"
               >
-                <span className="text-xs text-[#697386] w-28">Credit period:</span>
-                <span className="font-mono text-sm line-through" style={{ color: '#8792A2' }}>Net 45</span>
-                <span style={{ color: '#E3E8EF' }}>→</span>
+                <span className="text-xs text-[#777777] w-28">Credit period:</span>
+                <span className="font-mono text-sm line-through" style={{ color: '#999999' }}>Net 45</span>
+                <span style={{ color: '#E8E4DC' }}>→</span>
                 <motion.span
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}

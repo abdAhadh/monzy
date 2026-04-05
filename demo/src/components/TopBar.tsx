@@ -17,18 +17,18 @@ export default function TopBar({ currentScene, onSceneChange, isPlaying, onToggl
   const groupIndex = NAV_GROUPS.indexOf(activeGroup);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-[#E3E8EF]">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-[#E8E4DC]">
       <div className="flex items-center justify-between px-5 h-12">
         {/* Left: Logo + title */}
         <div className="flex items-center gap-2.5">
           <MonzyLogo size={24} />
-          <span className="font-semibold text-[#1A1F36] text-sm tracking-tight">Monzy AR</span>
-          <span className="text-[#E3E8EF] text-sm font-light">|</span>
+          <span className="font-semibold text-[#111111] text-sm tracking-tight">Monzy AR</span>
+          <span className="text-[#E8E4DC] text-sm font-light">|</span>
           <motion.span
             key={scene?.title}
             initial={{ opacity: 0, x: -4 }}
             animate={{ opacity: 1, x: 0 }}
-            className="text-[#697386] text-xs font-medium"
+            className="text-[#777777] text-xs font-medium"
           >
             {scene?.title}
           </motion.span>

@@ -76,7 +76,7 @@ function CursorSVG() {
     <svg width="24" height="28" viewBox="0 0 24 28" fill="none"
       style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.25))' }}>
       <path d="M3 2L3 21L8 16L11.5 23.5L14.5 22L11 14.5L18 14.5L3 2Z"
-        fill="white" stroke="#1A1F36" strokeWidth="1.5" strokeLinejoin="round" />
+        fill="white" stroke="#111111" strokeWidth="1.5" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -94,12 +94,12 @@ function CustomerListLayer({ listKey }: { listKey: number }) {
           {DISPLAY_CUSTOMERS.map((c, i) => (
             <div
               key={i}
-              className="flex items-center px-6 border-b border-[#F0F4F8] bg-white"
+              className="flex items-center px-6 border-b border-[#F0EDE6] bg-white"
               style={{ height: ROW_H }}
             >
               <div className="w-2 h-2 rounded-full mr-3 flex-shrink-0"
                 style={{ backgroundColor: BUCKET_COLORS[c.bucket].dot }} />
-              <span className="flex-1 text-sm text-[#1A1F36] font-medium truncate">{c.name}</span>
+              <span className="flex-1 text-sm text-[#111111] font-medium truncate">{c.name}</span>
               <span className="text-xs font-medium ml-3 flex-shrink-0"
                 style={{ color: BUCKET_COLORS[c.bucket].text }}>{c.days}</span>
             </div>
@@ -140,8 +140,8 @@ function BucketCardsLayer({ clickingBucket }: { clickingBucket: number }) {
                 <div className="text-[10px] font-semibold tracking-widest mb-1.5" style={{ color: bucket.text }}>
                   {bucket.label}
                 </div>
-                <div className="text-sm font-semibold text-[#1A1F36] mb-1.5">{bucket.name}</div>
-                <div className="text-xs text-[#425466]">{bucket.customers}</div>
+                <div className="text-sm font-semibold text-[#111111] mb-1.5">{bucket.name}</div>
+                <div className="text-xs text-[#555555]">{bucket.customers}</div>
                 <div className="text-xs mt-0.5" style={{ color: bucket.text }}>{bucket.delay}</div>
               </motion.div>
             );

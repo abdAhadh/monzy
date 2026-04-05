@@ -61,7 +61,7 @@ function CursorSVG() {
     <svg width="24" height="28" viewBox="0 0 24 28" fill="none"
       style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.25))' }}>
       <path d="M3 2L3 21L8 16L11.5 23.5L14.5 22L11 14.5L18 14.5L3 2Z"
-        fill="white" stroke="#1A1F36" strokeWidth="1.5" strokeLinejoin="round" />
+        fill="white" stroke="#111111" strokeWidth="1.5" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -84,11 +84,11 @@ export default function Scene08ARTable({ isActive }: Props) {
   return (
     <div className="flex-1 flex flex-col overflow-hidden relative">
       <div className="flex-1 overflow-auto px-6 py-4">
-        <div className="bg-white border border-[#E3E8EF] rounded-lg overflow-hidden"
+        <div className="bg-white border border-[#E8E4DC] rounded-lg overflow-hidden"
           style={{ boxShadow: '0 1px 3px 0 rgba(0,0,0,0.06)' }}>
           {/* Table header */}
-          <div className="flex items-center px-4 py-2.5 border-b border-[#E3E8EF] text-[10px] font-semibold text-[#8792A2] uppercase tracking-widest"
-            style={{ background: '#F6F9FC' }}>
+          <div className="flex items-center px-4 py-2.5 border-b border-[#E8E4DC] text-[10px] font-semibold text-[#999999] uppercase tracking-widest"
+            style={{ background: '#FAF9F6' }}>
             <span className="flex-[3]">Company</span>
             <span className="flex-[2] text-right">Amount</span>
             <span className="flex-[2] text-center">Channel</span>
@@ -105,8 +105,8 @@ export default function Scene08ARTable({ isActive }: Props) {
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                className="relative flex items-center px-4 py-3.5 border-b border-[#F0F4F8] last:border-0 transition-colors duration-150"
-                style={cursorClicking && isRatan ? { backgroundColor: '#F0EFFF' } : {}}
+                className="relative flex items-center px-4 py-3.5 border-b border-[#F0EDE6] last:border-0 transition-colors duration-150"
+                style={cursorClicking && isRatan ? { backgroundColor: '#FDF6E8' } : {}}
               >
                 {/* Highlight flash on click */}
                 <AnimatePresence>
@@ -116,12 +116,12 @@ export default function Scene08ARTable({ isActive }: Props) {
                       animate={{ opacity: 0 }}
                       transition={{ duration: 1.0, delay: 0.1 }}
                       className="absolute inset-0 pointer-events-none"
-                      style={{ background: '#E0DEFF' }}
+                      style={{ background: '#F5E8C8' }}
                     />
                   )}
                 </AnimatePresence>
-                <span className="flex-[3] text-xs font-medium text-[#1A1F36]">{row.company}</span>
-                <span className="flex-[2] text-right font-mono text-xs font-semibold" style={{ color: '#635BFF' }}>{row.amount}</span>
+                <span className="flex-[3] text-xs font-medium text-[#111111]">{row.company}</span>
+                <span className="flex-[2] text-right font-mono text-xs font-semibold" style={{ color: '#A87C28' }}>{row.amount}</span>
                 <span className="flex-[2] flex justify-center">
                   <StatusBadge label={row.channel} variant={row.channelVariant} />
                 </span>
@@ -131,7 +131,7 @@ export default function Scene08ARTable({ isActive }: Props) {
                 <span className="flex-[2] flex justify-center">
                   <StatusBadge label={row.risk} variant={row.riskVariant} />
                 </span>
-                <span className="flex-[5] text-[11px] text-[#697386] pl-3">{row.update}</span>
+                <span className="flex-[5] text-[11px] text-[#777777] pl-3">{row.update}</span>
               </motion.div>
             );
           })}
@@ -144,8 +144,8 @@ export default function Scene08ARTable({ isActive }: Props) {
           transition={{ delay: 0.6, duration: 0.4 }}
           className="flex items-center gap-2 mt-4"
         >
-          <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#635BFF' }} />
-          <span className="text-[10px] text-[#8792A2] font-mono">Updated by Monzy · based on WhatsApp, call, email and dispute data · 10:12 AM</span>
+          <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#A87C28' }} />
+          <span className="text-[10px] text-[#999999] font-mono">Updated by Monzy · based on WhatsApp, call, email and dispute data · 10:12 AM</span>
         </motion.div>
       </div>
 
@@ -177,7 +177,7 @@ export default function Scene08ARTable({ isActive }: Props) {
                 left: '22%', top: 103,
                 width: 14, height: 14,
                 marginLeft: -7, marginTop: -7,
-                border: '2px solid #635BFF',
+                border: '2px solid #A87C28',
               }}
               initial={{ scale: 0.4, opacity: 0.9 }}
               animate={{ scale: 4.5, opacity: 0 }}

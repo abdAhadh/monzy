@@ -148,7 +148,7 @@ export default function Scene10Dispute({ isActive, variant }: Props) {
                 <span className="font-mono text-xs text-gray-500">#INV-2847</span>
               </div>
               <div className="text-xs text-gray-700 font-semibold mb-1">Ratan Distributors</div>
-              <div className="font-mono text-lg font-bold text-blue-600 mb-2">₹3,87,000</div>
+              <div className="font-mono text-lg font-bold text-[#A87C28] mb-2">₹3,87,000</div>
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-[10px] text-gray-500">Type:</span>
                 <span className="text-[10px] font-semibold text-orange-600">Quantity mismatch</span>
@@ -188,7 +188,7 @@ export default function Scene10Dispute({ isActive, variant }: Props) {
                   transition={{ delay: 0.6 }}
                   className="mt-2 pt-2 border-t border-gray-100"
                 >
-                  <div className="text-xs text-blue-600 font-medium">→ Awaiting payment</div>
+                  <div className="text-xs text-[#A87C28] font-medium">→ Awaiting payment</div>
                   <div className="text-[10px] text-gray-400 mt-1 italic">Resolved in 4 hrs — zero AR team involvement</div>
                 </motion.div>
               )}
@@ -209,14 +209,14 @@ export default function Scene10Dispute({ isActive, variant }: Props) {
               <div className="text-xs text-gray-700 mb-2">
                 Quantity mismatch → <span className="font-semibold">Ops / Warehouse team</span>
               </div>
-              <div className="bg-purple-50 border border-purple-100 rounded-lg px-3 py-2 mb-2">
-                <span className="text-xs font-semibold text-purple-700">@Priya (Warehouse)</span>
-                <span className="text-xs text-purple-600"> tagged in dispute</span>
-                <div className="text-[10px] text-purple-500 mt-0.5">Invoice #2847 — Ratan Dist. — qty mismatch</div>
+              <div className="bg-[#FDF6E8] border border-[#E8D5A0] rounded-lg px-3 py-2 mb-2">
+                <span className="text-xs font-semibold text-[#7A5A1E]">@Priya (Warehouse)</span>
+                <span className="text-xs text-[#A87C28]"> tagged in dispute</span>
+                <div className="text-[10px] text-[#C49A3A] mt-0.5">Invoice #2847 — Ratan Dist. — qty mismatch</div>
               </div>
 
               <div className="bg-gray-50 rounded-lg px-3 py-2">
-                <div className="text-xs font-semibold text-purple-700 mb-0.5">Priya (Warehouse)</div>
+                <div className="text-xs font-semibold text-[#7A5A1E] mb-0.5">Priya (Warehouse)</div>
                 <div className="text-xs text-gray-700 italic">"Confirmed — 180 units dispatched. Billing error."</div>
               </div>
 
@@ -230,12 +230,12 @@ export default function Scene10Dispute({ isActive, variant }: Props) {
                   {[0, 0.2, 0.4].map((d, i) => (
                     <motion.div
                       key={i}
-                      className="w-1.5 h-1.5 rounded-full bg-blue-400"
+                      className="w-1.5 h-1.5 rounded-full bg-[#C49A3A]"
                       animate={{ opacity: [1, 0.3, 1] }}
                       transition={{ duration: 0.8, delay: d, repeat: Infinity }}
                     />
                   ))}
-                  <span className="text-[10px] text-blue-600">Monzy updating invoice...</span>
+                  <span className="text-[10px] text-[#A87C28]">Monzy updating invoice...</span>
                 </motion.div>
               )}
             </motion.div>

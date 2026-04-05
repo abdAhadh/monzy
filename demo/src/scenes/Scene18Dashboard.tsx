@@ -9,7 +9,7 @@ const METRICS = [
     label: 'Outstanding',
     before: '₹4.2 Cr',
     after: '₹1.8 Cr',
-    afterColor: '#635BFF',
+    afterColor: '#A87C28',
   },
   {
     label: 'Overdue',
@@ -58,13 +58,13 @@ export default function Scene18Dashboard({ isActive }: Props) {
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.12, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  className="bg-white border border-[#E3E8EF] rounded-lg px-4 py-3.5"
+                  className="bg-white border border-[#E8E4DC] rounded-lg px-4 py-3.5"
                   style={{ boxShadow: '0 1px 3px 0 rgba(0,0,0,0.05)' }}
                 >
-                  <div className="text-[10px] font-semibold text-[#8792A2] uppercase tracking-widest mb-2">{m.label}</div>
+                  <div className="text-[10px] font-semibold text-[#999999] uppercase tracking-widest mb-2">{m.label}</div>
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-sm line-through" style={{ color: '#8792A2' }}>{m.before}</span>
-                    <span className="text-xs" style={{ color: '#E3E8EF' }}>→</span>
+                    <span className="font-mono text-sm line-through" style={{ color: '#999999' }}>{m.before}</span>
+                    <span className="text-xs" style={{ color: '#E8E4DC' }}>→</span>
                     <span className="font-mono text-xl font-semibold" style={{ color: m.afterColor }}>{m.after}</span>
                   </div>
                 </motion.div>
@@ -85,10 +85,10 @@ export default function Scene18Dashboard({ isActive }: Props) {
           </div>
 
           {/* Right: Activity feed */}
-          <div className="flex-[40] border-l border-[#E3E8EF] flex flex-col overflow-hidden">
-            <div className="px-4 py-3 border-b border-[#E3E8EF] bg-white flex items-center gap-2">
+          <div className="flex-[40] border-l border-[#E8E4DC] flex flex-col overflow-hidden">
+            <div className="px-4 py-3 border-b border-[#E8E4DC] bg-white flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#1EA672' }} />
-              <span className="text-xs font-medium text-[#1A1F36]">Monzy still working...</span>
+              <span className="text-xs font-medium text-[#111111]">Monzy still working...</span>
             </div>
             <div className="flex-1 overflow-auto bg-white">
               <ActivityFeed items={FEED_ITEMS} startDelay={0.2} />

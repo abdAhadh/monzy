@@ -10,11 +10,11 @@ export default function Scene01Intro({ isActive }: Props) {
       {/* Background blur blobs */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="w-96 h-96 rounded-full blur-3xl opacity-30 absolute -top-10 -left-20"
-          style={{ background: '#E0DEFF' }} />
+          style={{ background: 'rgba(184,140,50,0.18)' }} />
         <div className="w-80 h-80 rounded-full blur-3xl opacity-20 absolute bottom-10 right-10"
-          style={{ background: '#E8F4FD' }} />
+          style={{ background: 'rgba(184,140,50,0.10)' }} />
         <div className="w-64 h-64 rounded-full blur-3xl opacity-15 absolute top-20 right-32"
-          style={{ background: '#EBFAF3' }} />
+          style={{ background: 'rgba(184,140,50,0.07)' }} />
       </div>
 
       {/* Center content */}
@@ -27,14 +27,14 @@ export default function Scene01Intro({ isActive }: Props) {
           className="flex items-center gap-2.5"
         >
           <MonzyLogo size={32} />
-          <span className="text-xl font-semibold text-[#1A1F36] tracking-tight">Monzy</span>
+          <span className="text-xl font-semibold text-[#111111] tracking-tight">Monzy</span>
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-          className="text-5xl font-semibold text-[#1A1F36] tracking-tight leading-tight max-w-xl"
+          className="text-5xl font-semibold text-[#111111] tracking-tight leading-tight max-w-xl"
         >
           Your AI Accounts Receivables Specialist.
         </motion.h1>
@@ -43,7 +43,7 @@ export default function Scene01Intro({ isActive }: Props) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="text-lg text-[#697386] font-normal max-w-lg leading-relaxed"
+          className="text-lg text-[#777777] font-normal max-w-lg leading-relaxed"
         >
           AI agents that automate AR collections and cash applications without your team lifting a finger.
         </motion.p>

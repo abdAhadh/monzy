@@ -21,7 +21,7 @@ export default function CircleGauge({ value, color, size = 80, strokeWidth = 7 }
         <circle
           cx={cx} cy={cy} r={radius}
           fill="none"
-          stroke="#E3E8EF"
+          stroke="#E8E4DC"
           strokeWidth={strokeWidth}
         />
         <motion.circle

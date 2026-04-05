@@ -21,7 +21,7 @@ export default function NavDots({ total, active, onSelect }: NavDotsProps) {
             animate={{
               width: i === active ? 16 : 5,
               height: 5,
-              backgroundColor: i === active ? '#635BFF' : '#C8D4E0',
+              backgroundColor: i === active ? '#A87C28' : '#E8E4DC',
               borderRadius: 3,
             }}
             transition={{ duration: 0.25, ease: 'easeOut' }}

@@ -33,7 +33,7 @@ function CountUp({ to, duration = 1200 }: { to: number; duration?: number }) {
 function TilesContent() {
   return (
     <>
-      <p className="text-[11px] font-semibold tracking-widest uppercase text-[#8792A2]">
+      <p className="text-[11px] font-semibold tracking-widest uppercase text-[#999999]">
         Connecting to your existing tools
       </p>
       <div className="grid grid-cols-3 gap-4" style={{ width: 520 }}>
@@ -43,21 +43,21 @@ function TilesContent() {
             initial={{ opacity: 0, y: 18, scale: 0.93 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: i * 0.07 + 0.1, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            className="bg-white border border-[#E3E8EF] rounded-xl flex flex-col items-center justify-center gap-3"
+            className="bg-white border border-[#E8E4DC] rounded-xl flex flex-col items-center justify-center gap-3"
             style={{ height: 120, boxShadow: '0 1px 3px 0 rgba(0,0,0,0.06)' }}
           >
             <div
               className="rounded-lg flex items-center justify-center"
-              style={{ width: 92, height: 36, background: '#F6F9FC', border: '1px solid #E3E8EF' }}
+              style={{ width: 92, height: 36, background: '#FAF9F6', border: '1px solid #E8E4DC' }}
             >
               <img src={intg.logo} alt={intg.name} style={{ maxWidth: 76, maxHeight: 28, objectFit: 'contain' }} />
             </div>
-            <span className="text-xs font-medium text-[#425466] text-center leading-tight px-2">
+            <span className="text-xs font-medium text-[#555555] text-center leading-tight px-2">
               {intg.name}
             </span>
             <motion.div
               className="h-0.5 rounded-full overflow-hidden"
-              style={{ width: 56, background: '#E0DEFF' }}
+              style={{ width: 56, background: '#F5E8C8' }}
               initial={{ scaleX: 0, originX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ delay: i * 0.09 + 0.3, duration: 0.7, ease: 'easeOut' }}
@@ -65,7 +65,7 @@ function TilesContent() {
           </motion.div>
         ))}
       </div>
-      <p className="text-sm text-[#8792A2] text-center">....and many more.</p>
+      <p className="text-sm text-[#999999] text-center">....and many more.</p>
     </>
   );
 }
@@ -86,13 +86,13 @@ function StatsContent() {
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: i * 0.05, duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="flex items-center gap-1.5 bg-white border border-[#E3E8EF] rounded px-2.5 py-1.5"
+            className="flex items-center gap-1.5 bg-white border border-[#E8E4DC] rounded px-2.5 py-1.5"
             style={{ boxShadow: '0 1px 2px 0 rgba(0,0,0,0.04)' }}
           >
             <div className="flex items-center justify-center flex-shrink-0" style={{ width: 44, height: 16 }}>
               <img src={intg.logo} alt={intg.name} style={{ maxWidth: 44, maxHeight: 14, objectFit: 'contain' }} />
             </div>
-            <span className="text-[11px] text-[#425466] font-medium whitespace-nowrap">{intg.name}</span>
+            <span className="text-[11px] text-[#555555] font-medium whitespace-nowrap">{intg.name}</span>
           </motion.div>
         ))}
       </motion.div>
@@ -103,26 +103,26 @@ function StatsContent() {
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="flex-1 bg-white border border-[#E3E8EF] rounded-xl px-6 py-6 flex flex-col items-center gap-1"
+          className="flex-1 bg-white border border-[#E8E4DC] rounded-xl px-6 py-6 flex flex-col items-center gap-1"
           style={{ boxShadow: '0 1px 3px 0 rgba(0,0,0,0.06)' }}
         >
-          <span className="text-[52px] font-semibold leading-none text-[#1A1F36] tabular-nums">
+          <span className="text-[52px] font-semibold leading-none text-[#111111] tabular-nums">
             <CountUp to={847} />
           </span>
-          <span className="text-[10px] text-[#8792A2] font-semibold mt-2 tracking-widest uppercase">invoices synced</span>
+          <span className="text-[10px] text-[#999999] font-semibold mt-2 tracking-widest uppercase">invoices synced</span>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="flex-1 bg-white border border-[#E3E8EF] rounded-xl px-6 py-6 flex flex-col items-center gap-1"
+          className="flex-1 bg-white border border-[#E8E4DC] rounded-xl px-6 py-6 flex flex-col items-center gap-1"
           style={{ boxShadow: '0 1px 3px 0 rgba(0,0,0,0.06)' }}
         >
-          <span className="text-[52px] font-semibold leading-none text-[#1A1F36] tabular-nums">
+          <span className="text-[52px] font-semibold leading-none text-[#111111] tabular-nums">
             <CountUp to={214} />
           </span>
-          <span className="text-[10px] text-[#8792A2] font-semibold mt-2 tracking-widest uppercase">customers loaded</span>
+          <span className="text-[10px] text-[#999999] font-semibold mt-2 tracking-widest uppercase">customers loaded</span>
         </motion.div>
 
         <motion.div
@@ -131,16 +131,16 @@ function StatsContent() {
           transition={{ delay: 0.3, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="flex-1 bg-white border rounded-xl px-6 py-6 flex flex-col items-center gap-1"
           style={{
-            borderColor: '#C8C4FF',
-            boxShadow: '0 0 0 1px #E0DEFF, 0 1px 3px 0 rgba(99,91,255,0.08)',
+            borderColor: '#E8D5A0',
+            boxShadow: '0 0 0 1px #E8D5A0, 0 1px 3px 0 rgba(168,124,40,0.08)',
           }}
         >
           <div className="flex items-baseline gap-0.5 whitespace-nowrap leading-none">
-            <span className="text-[28px] font-semibold leading-none" style={{ color: '#635BFF' }}>₹</span>
-            <span className="text-[52px] font-semibold leading-none tabular-nums" style={{ color: '#635BFF' }}>4.2</span>
-            <span className="text-[22px] font-semibold leading-none ml-1" style={{ color: '#8F8BFF' }}>Cr</span>
+            <span className="text-[28px] font-semibold leading-none" style={{ color: '#A87C28' }}>₹</span>
+            <span className="text-[52px] font-semibold leading-none tabular-nums" style={{ color: '#A87C28' }}>4.2</span>
+            <span className="text-[22px] font-semibold leading-none ml-1" style={{ color: '#C49A3A' }}>Cr</span>
           </div>
-          <span className="text-[10px] text-[#8792A2] font-semibold mt-2 tracking-widest uppercase">outstanding imported</span>
+          <span className="text-[10px] text-[#999999] font-semibold mt-2 tracking-widest uppercase">outstanding imported</span>
         </motion.div>
       </div>
 

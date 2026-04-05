@@ -18,7 +18,7 @@ function CursorSVG() {
     <svg width="24" height="28" viewBox="0 0 24 28" fill="none"
       style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.25))' }}>
       <path d="M3 2L3 21L8 16L11.5 23.5L14.5 22L11 14.5L18 14.5L3 2Z"
-        fill="white" stroke="#1A1F36" strokeWidth="1.5" strokeLinejoin="round" />
+        fill="white" stroke="#111111" strokeWidth="1.5" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -65,7 +65,7 @@ export default function Scene04Collections({ isActive }: Props) {
         <div className="relative">
           <motion.div
             className="absolute left-[52px] top-4 bottom-4 w-px"
-            style={{ originY: 0, background: '#E3E8EF' }}
+            style={{ originY: 0, background: '#E8E4DC' }}
             initial={{ scaleY: 0 }}
             animate={{ scaleY: ready ? 1 : 0 }}
             transition={{ duration: 0.6, delay: 0.25, ease: 'easeOut' }}
@@ -90,18 +90,18 @@ export default function Scene04Collections({ isActive }: Props) {
                 </div>
                 <div
                   className="flex-shrink-0 w-5 h-5 rounded-full bg-white border-2 flex items-center justify-center mt-0.5 relative z-10 transition-colors duration-150"
-                  style={{ borderColor: cursorClicking && i === 2 ? '#D97706' : '#E3E8EF' }}
+                  style={{ borderColor: cursorClicking && i === 2 ? '#D97706' : '#E8E4DC' }}
                 >
                   <div
                     className="w-1.5 h-1.5 rounded-full transition-colors duration-150"
-                    style={{ backgroundColor: cursorClicking && i === 2 ? '#D97706' : '#C8D4E0' }}
+                    style={{ backgroundColor: cursorClicking && i === 2 ? '#D97706' : '#E8E4DC' }}
                   />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium text-[#1A1F36]">{step.label}</span>
+                    <span className="text-sm font-medium text-[#111111]">{step.label}</span>
                     {step.channel && (
-                      <span className="text-[10px] font-medium text-[#697386] bg-[#F0F4F8] px-2 py-0.5 rounded">
+                      <span className="text-[10px] font-medium text-[#777777] bg-[#F0EDE6] px-2 py-0.5 rounded">
                         {step.channel}
                       </span>
                     )}
