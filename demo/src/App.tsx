@@ -266,11 +266,11 @@ export default function App() {
         ref={voRef}
         src="/vo.mp3"
         preload="auto"
-        onCanPlay={() => { if (voRef.current) voRef.current.volume = 1.0; }}
+        onCanPlay={() => { if (voRef.current) voRef.current.volume = 1.0; }}   // already at browser max
         onEnded={resetToStart}
       />
       <audio ref={bgmRef} src="/bgm.mp3" preload="auto" loop
-        onCanPlay={() => { if (bgmRef.current) bgmRef.current.volume = 0.16; }} />
+        onCanPlay={() => { if (bgmRef.current) bgmRef.current.volume = 0.14; }} />
 
       <TopBar
         currentScene={currentScene}
