@@ -90,64 +90,21 @@ function SlackLogo({ size = 18 }: { size?: number }) {
   );
 }
 
-/* ── Ananya avatar — Indian woman ────────────────────────────── */
+/* ── Ananya avatar — real photo, head-cropped ────────────────── */
 function AnanyaAvatar({ size = 36 }: { size?: number }) {
   return (
     <div className="rounded-full overflow-hidden flex-shrink-0 border-2 border-white shadow-sm"
       style={{ width: size, height: size }}>
-      <svg width={size} height={size} viewBox="0 0 60 60" fill="none">
-        {/* Skin background */}
-        <rect width="60" height="60" fill="#C8845C" />
-        {/* Clothing — teal kurta */}
-        <ellipse cx="30" cy="66" rx="26" ry="18" fill="#0D9488" />
-        {/* Dupatta hint */}
-        <path d="M 10 52 Q 30 46 50 52" stroke="#5EEAD4" strokeWidth="3"
-          strokeLinecap="round" fill="none" opacity="0.7" />
-        {/* Neck */}
-        <rect x="24" y="42" width="12" height="10" rx="5" fill="#C8845C" />
-        {/* Hair — dark, sides and back */}
-        <ellipse cx="30" cy="16" rx="16" ry="13" fill="#18080A" />
-        <ellipse cx="13" cy="27" rx="6" ry="14" fill="#18080A" />
-        <ellipse cx="47" cy="27" rx="6" ry="14" fill="#18080A" />
-        {/* Face */}
-        <ellipse cx="30" cy="29" rx="14" ry="15" fill="#D4895F" />
-        {/* Forehead */}
-        <ellipse cx="30" cy="19" rx="13" ry="7" fill="#D4895F" />
-        {/* Bindi */}
-        <circle cx="30" cy="20" r="2" fill="#DC2626" />
-        {/* Left eye white */}
-        <ellipse cx="23" cy="28" rx="3.8" ry="3" fill="white" />
-        {/* Left iris */}
-        <circle cx="23" cy="28.3" r="2.2" fill="#18080A" />
-        {/* Left highlight */}
-        <circle cx="23.8" cy="27.6" r="0.6" fill="white" opacity="0.85" />
-        {/* Right eye white */}
-        <ellipse cx="37" cy="28" rx="3.8" ry="3" fill="white" />
-        {/* Right iris */}
-        <circle cx="37" cy="28.3" r="2.2" fill="#18080A" />
-        {/* Right highlight */}
-        <circle cx="37.8" cy="27.6" r="0.6" fill="white" opacity="0.85" />
-        {/* Eyebrows — strong, arched */}
-        <path d="M 19 24.5 Q 23 22.5 27 24.5" stroke="#18080A"
-          strokeWidth="1.8" strokeLinecap="round" fill="none" />
-        <path d="M 33 24.5 Q 37 22.5 41 24.5" stroke="#18080A"
-          strokeWidth="1.8" strokeLinecap="round" fill="none" />
-        {/* Nose */}
-        <ellipse cx="30" cy="33" rx="2.5" ry="1.8" fill="#B86A3C" opacity="0.4" />
-        <circle cx="27.5" cy="33.5" r="0.9" fill="#A05028" opacity="0.55" />
-        <circle cx="32.5" cy="33.5" r="0.9" fill="#A05028" opacity="0.55" />
-        {/* Nose stud */}
-        <circle cx="27.5" cy="33" r="0.75" fill="#F59E0B" />
-        {/* Upper lip */}
-        <path d="M 25 37 Q 27.5 35.5 30 36.2 Q 32.5 35.5 35 37 Q 32.5 38 30 37.5 Q 27.5 38 25 37 Z"
-          fill="#A0482A" />
-        {/* Lower lip */}
-        <path d="M 25 37 Q 30 40.5 35 37 Q 32.5 38 30 37.5 Q 27.5 38 25 37 Z"
-          fill="#C06040" />
-        {/* Cheek blush subtle */}
-        <ellipse cx="18" cy="31" rx="5" ry="3" fill="#E8785C" opacity="0.25" />
-        <ellipse cx="42" cy="31" rx="5" ry="3" fill="#E8785C" opacity="0.25" />
-      </svg>
+      <img
+        src="/ananya.jpg"
+        alt="Ananya Singh"
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: '50% 8%',
+        }}
+      />
     </div>
   );
 }
@@ -156,7 +113,7 @@ function AnanyaAvatar({ size = 36 }: { size?: number }) {
 function MonzyBotAvatar() {
   return (
     <svg width="32" height="32" viewBox="0 0 35 35" fill="none" className="flex-shrink-0 rounded-lg shadow-sm" style={{ borderRadius: 8 }}>
-      <path d="M11.974 35C5.361 35 0 29.639 0 23.026V11.974C0 5.361 5.361 0 11.974 0H23.026C29.639 0 35 5.361 35 11.974V23.026C35 29.639 29.639 35 23.026 35H11.974Z" fill="#5C30A8"/>
+      <path d="M11.974 35C5.361 35 0 29.639 0 23.026V11.974C0 5.361 5.361 0 11.974 0H23.026C29.639 0 35 5.361 35 11.974V23.026C35 29.639 29.639 35 23.026 35H11.974Z" fill="#111111"/>
       <path d="M13.7021 15.125C16.7591 13.666 19.1901 11.156 20.5521 8.05396C19.6631 7.11996 18.5061 6.45296 17.2611 6.05296L16.5941 5.82996C16.5441 5.92696 16.5131 6.03296 16.5051 6.14096C15.4371 9.16696 13.2571 11.612 10.3231 12.991C8.27605 13.97 6.76405 15.749 6.05205 17.885L5.83105 18.551C5.92705 18.601 6.03305 18.631 6.14105 18.64C6.98705 18.951 7.83105 19.352 8.63205 19.842C9.78905 17.78 11.5621 16.13 13.7021 15.125ZM26.6031 15.304C24.9401 17.826 22.6161 19.841 19.8851 21.131C17.6181 22.199 15.8821 24.2 15.0821 26.602L14.8591 27.358C15.7231 28.124 16.7391 28.699 17.8401 29.048L18.5061 29.271C18.5571 29.174 18.5871 29.068 18.5961 28.959C19.6631 25.934 21.8431 23.488 24.7781 22.11C26.8241 21.131 28.3811 19.352 29.0491 17.216L29.2711 16.55C28.3371 16.283 27.4471 15.837 26.6031 15.304ZM13.0791 25.047C14.1871 22.37 16.2471 20.199 18.8621 18.952C21.2641 17.796 23.2651 16.018 24.6441 13.838C23.6211 12.859 22.7761 11.747 22.1541 10.413C20.4881 13.459 17.9041 15.903 14.7701 17.396C12.9461 18.241 11.4781 19.709 10.5881 21.488C11.5671 22.423 12.3681 23.579 12.9901 24.868L13.0791 25.047Z" fill="white"/>
     </svg>
   );
@@ -171,7 +128,7 @@ function SlackNotification({ visible }: { visible: boolean }) {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-4 bg-white border border-[#E3E8EF] rounded-lg overflow-hidden"
+          className="mt-4 bg-white border border-[#E8E4DC] rounded-lg overflow-hidden"
           style={{ boxShadow: '0 1px 3px 0 rgba(0,0,0,0.08)' }}
         >
           {/* Slack channel header */}
@@ -190,24 +147,24 @@ function SlackNotification({ visible }: { visible: boolean }) {
               <MonzyBotAvatar />
               <div className="flex-1 min-w-0">
                 <div className="flex items-baseline gap-2 mb-1.5">
-                  <span className="text-sm font-semibold text-[#1A1F36]">Monzy</span>
-                  <span className="text-[10px] text-[#8792A2] font-mono">Today 10:33 AM</span>
+                  <span className="text-sm font-semibold text-[#111111]">Monzy</span>
+                  <span className="text-[10px] text-[#999999] font-mono">Today 10:33 AM</span>
                   <span className="ml-auto text-[10px] font-semibold px-2 py-0.5 rounded border"
-                    style={{ background: '#F0EFFF', borderColor: '#E0DEFF', color: '#635BFF' }}>APP</span>
+                    style={{ background: '#FDF6E8', borderColor: '#F5E8C8', color: '#A87C28' }}>APP</span>
                 </div>
 
-                <div className="text-xs leading-relaxed mb-3" style={{ color: '#425466' }}>
+                <div className="text-xs leading-relaxed mb-3" style={{ color: '#555555' }}>
                   <span className="font-bold" style={{ color: '#E5424D' }}>⚠ Unmatched Payment Detected</span><br />
-                  <span style={{ color: '#8792A2' }}>Amount:</span>{' '}
-                  <span className="font-mono font-semibold" style={{ color: '#1A1F36' }}>₹2,10,000</span>{' '}
-                  <span style={{ color: '#C8D4E0' }}>·</span>{' '}
-                  <span style={{ color: '#8792A2' }}>Type: NEFT</span><br />
-                  <span style={{ color: '#8792A2' }}>Ref:</span>{' '}
-                  <span className="font-mono" style={{ color: '#697386' }}>Unknown sender · no invoice match found</span><br />
+                  <span style={{ color: '#999999' }}>Amount:</span>{' '}
+                  <span className="font-mono font-semibold" style={{ color: '#111111' }}>₹2,10,000</span>{' '}
+                  <span style={{ color: '#E8E4DC' }}>·</span>{' '}
+                  <span style={{ color: '#999999' }}>Type: NEFT</span><br />
+                  <span style={{ color: '#999999' }}>Ref:</span>{' '}
+                  <span className="font-mono" style={{ color: '#777777' }}>Unknown sender · no invoice match found</span><br />
                   <br />
-                  <span style={{ color: '#697386' }}>Hey </span>
-                  <span className="font-semibold px-1 rounded" style={{ color: '#635BFF', background: '#F0EFFF' }}>@Ananya</span>
-                  <span style={{ color: '#697386' }}> · please review and resolve before EOD.</span>
+                  <span style={{ color: '#777777' }}>Hey </span>
+                  <span className="font-semibold px-1 rounded" style={{ color: '#A87C28', background: '#FDF6E8' }}>@Ananya</span>
+                  <span style={{ color: '#777777' }}> · please review and resolve before EOD.</span>
                 </div>
 
                 {/* Employee card */}
@@ -216,12 +173,12 @@ function SlackNotification({ visible }: { visible: boolean }) {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3, duration: 0.4 }}
                   className="flex items-center gap-3 border rounded-lg px-3 py-2.5"
-                  style={{ background: '#F6F9FC', borderColor: '#E3E8EF' }}
+                  style={{ background: '#FAF9F6', borderColor: '#E8E4DC' }}
                 >
                   <AnanyaAvatar size={34} />
                   <div className="flex-1 min-w-0">
-                    <div className="text-xs font-semibold text-[#1A1F36]">Ananya Singh</div>
-                    <div className="text-[10px] text-[#8792A2]">AR Manager · Accounts</div>
+                    <div className="text-xs font-semibold text-[#111111]">Ananya Singh</div>
+                    <div className="text-[10px] text-[#999999]">AR Manager · Accounts</div>
                   </div>
                   <div className="flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#1EA672' }} />
@@ -308,16 +265,16 @@ export default function Scene16CashApp({ isActive }: Props) {
           </div>
           <div className="flex items-center gap-2 px-4 py-2 bg-white">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-[10px] text-[#8792A2] font-mono">Monzy connected · pulling transactions live</span>
+            <span className="text-[10px] text-[#999999] font-mono">Monzy connected · pulling transactions live</span>
           </div>
         </motion.div>
 
         {/* Transaction table */}
-        <div className="bg-white border border-[#E3E8EF] rounded-lg overflow-hidden"
+        <div className="bg-white border border-[#E8E4DC] rounded-lg overflow-hidden"
           style={{ boxShadow: '0 1px 3px 0 rgba(0,0,0,0.06)' }}>
-          <div className="flex items-center px-4 py-2.5 border-b border-[#E3E8EF]
-            text-[10px] font-semibold text-[#8792A2] uppercase tracking-widest"
-            style={{ background: '#F6F9FC' }}>
+          <div className="flex items-center px-4 py-2.5 border-b border-[#E8E4DC]
+            text-[10px] font-semibold text-[#999999] uppercase tracking-widest"
+            style={{ background: '#FAF9F6' }}>
             <span className="w-14">Type</span>
             <span className="w-28">Amount</span>
             <span className="w-28">Reference</span>
@@ -332,7 +289,7 @@ export default function Scene16CashApp({ isActive }: Props) {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.15 + 0.1, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className={`relative flex items-center px-4 py-3 border-b border-[#F0F4F8] last:border-0
+              className={`relative flex items-center px-4 py-3 border-b border-[#F0EDE6] last:border-0
                 transition-colors duration-300 ${
                 row.unmatched
                   ? cursorClicking
@@ -354,12 +311,12 @@ export default function Scene16CashApp({ isActive }: Props) {
               </AnimatePresence>
 
               <span className="w-14 font-mono text-xs font-bold"
-                style={{ color: row.unmatched ? '#E5424D' : '#635BFF' }}>{row.type}</span>
+                style={{ color: row.unmatched ? '#E5424D' : '#A87C28' }}>{row.type}</span>
               <span className="w-28 font-mono text-xs font-semibold"
-                style={{ color: row.unmatched ? '#A81C26' : '#1A1F36' }}>{row.amount}</span>
-              <span className="w-28 font-mono text-xs text-[#697386]">{row.ref}</span>
-              <span className="flex-1 text-xs text-[#8792A2]">{row.note}</span>
-              <span className="w-40 text-xs text-[#697386] font-medium">{row.matched}</span>
+                style={{ color: row.unmatched ? '#A81C26' : '#111111' }}>{row.amount}</span>
+              <span className="w-28 font-mono text-xs text-[#777777]">{row.ref}</span>
+              <span className="flex-1 text-xs text-[#999999]">{row.note}</span>
+              <span className="w-40 text-xs text-[#777777] font-medium">{row.matched}</span>
               <span className="w-28 flex justify-end">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -382,11 +339,11 @@ export default function Scene16CashApp({ isActive }: Props) {
         >
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#1EA672' }} />
-            <span className="text-xs font-medium text-[#425466]">
-              Auto-matched: <span className="font-mono font-bold text-[#1A1F36]">4 / 5</span> payments
+            <span className="text-xs font-medium text-[#555555]">
+              Auto-matched: <span className="font-mono font-bold text-[#111111]">4 / 5</span> payments
             </span>
           </div>
-          <span className="text-xs text-[#8792A2] italic">
+          <span className="text-xs text-[#999999] italic">
             Human only intervenes when machine can't resolve it.
           </span>
         </motion.div>

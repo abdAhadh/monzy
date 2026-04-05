@@ -16,9 +16,9 @@ export const SCENES: SceneDefinition[] = [
   { id: 7,  duration: 1,    title: 'Collections: Email',   group: 'collections' },
   { id: 8,  duration: 12.2, title: 'AR Table',             group: 'ar' },
   { id: 9,  duration: 15.7, title: 'Credit Profile',       group: 'credit' },
-  { id: 10, duration: 11.4, title: 'Cash Application',     group: 'cash' },
-  { id: 11, duration: 9.0,  title: 'AR Overview',          group: 'overview' },
-  { id: 12, duration: 13.0, title: 'The Result',           group: 'end' },
+  { id: 10, duration: 20.0, title: 'Cash Application',     group: 'cash' },
+  { id: 11, duration: 5.5,  title: 'AR Overview',          group: 'overview' },
+  { id: 12, duration: 7.9,  title: 'The Result',           group: 'end' },
 ];
 
 export const NAV_GROUPS = ['intro', 'sync', 'collections', 'ar', 'credit', 'cash', 'overview', 'end'];

@@ -47,7 +47,7 @@ function ARUpdateSheet({ fields }: { fields: { label: string; value: string }[] 
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="px-4 pt-3.5 pb-4" style={{ background: '#635BFF' }}>
+      <div className="px-4 pt-3.5 pb-4" style={{ background: '#A87C28' }}>
         {/* Header */}
         <div className="flex items-center gap-2 mb-3">
           <motion.div
@@ -56,7 +56,7 @@ function ARUpdateSheet({ fields }: { fields: { label: string; value: string }[] 
             className="w-6 h-6 rounded-full bg-white flex items-center justify-center flex-shrink-0"
           >
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-              <path d="M2 6l3 3 5-5" stroke="#635BFF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M2 6l3 3 5-5" stroke="#A87C28" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </motion.div>
           <span className="text-sm font-bold text-white">AR Record Updated</span>
@@ -71,7 +71,7 @@ function ARUpdateSheet({ fields }: { fields: { label: string; value: string }[] 
               transition={{ delay: 0.35 + i * 0.08, duration: 0.25 }}
               className="flex items-center justify-between"
             >
-              <span className="text-xs text-indigo-200">{label}</span>
+              <span className="text-xs text-[#F5E8C8]">{label}</span>
               <span className="text-xs font-semibold text-white">{value}</span>
             </motion.div>
           ))}
@@ -107,7 +107,7 @@ function WhatsAppPanel({ delivered, reply, arUpdated }: { delivered: boolean; re
             <div className="flex items-center justify-end gap-1 mt-1">
               <span className="text-[9px] text-gray-400">10:02 AM</span>
               {delivered ? (
-                <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[10px] text-blue-500">✓✓</motion.span>
+                <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[10px] text-[#A87C28]">✓✓</motion.span>
               ) : (
                 <span className="text-[10px] text-gray-400">✓</span>
               )}
@@ -162,30 +162,30 @@ function CallPanel({ line1, line2, line3, done, arUpdated }: {
     <div className="flex flex-col h-full rounded-xl overflow-hidden border border-gray-100 shadow-sm bg-white relative">
       {/* Call header */}
       <div className="flex flex-col items-center justify-center gap-2 px-4 pt-5 pb-4 border-b border-gray-50 flex-shrink-0">
-        <div className="w-11 h-11 rounded-full flex items-center justify-center" style={{ background: '#F0EFFF' }}>
+        <div className="w-11 h-11 rounded-full flex items-center justify-center" style={{ background: '#FDF6E8' }}>
           <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
-            <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" fill="#635BFF"/>
+            <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" fill="#A87C28"/>
           </svg>
         </div>
         <div className="text-center">
-          <div className="text-sm font-semibold text-[#1A1F36]">Kapoor Enterprises</div>
-          <div className="text-[10px] text-[#8792A2] mt-0.5">{done ? 'Call completed' : 'Outgoing call'}</div>
+          <div className="text-sm font-semibold text-[#111111]">Kapoor Enterprises</div>
+          <div className="text-[10px] text-[#999999] mt-0.5">{done ? 'Call completed' : 'Outgoing call'}</div>
         </div>
-        <div className="font-mono text-xl font-semibold" style={{ color: '#635BFF' }}>{m}:{s}</div>
-        {!done && <Waveform bars={7} color="#635BFF" height={22} />}
-        <div className="text-[10px] text-[#8792A2]">AI voice agent · Monzy</div>
+        <div className="font-mono text-xl font-semibold" style={{ color: '#A87C28' }}>{m}:{s}</div>
+        {!done && <Waveform bars={7} color="#A87C28" height={22} />}
+        <div className="text-[10px] text-[#999999]">AI voice agent · Monzy</div>
       </div>
 
       {/* Subtitle-style transcript — one line at a time */}
-      <div className="flex-1 flex flex-col items-center justify-center px-5 min-h-0" style={{ background: '#F8FAFF' }}>
+      <div className="flex-1 flex flex-col items-center justify-center px-5 min-h-0" style={{ background: '#FAF9F6' }}>
         {(() => {
           // Derive the single active subtitle from flags
           const active = line3
-            ? { speaker: 'Monzy', color: '#635BFF', bg: '#F0EFFF', text: 'Understood. Logging payment promise of ₹1,20,000 within 7 days. Thank you.' }
+            ? { speaker: 'Monzy', color: '#A87C28', bg: '#FDF6E8', text: 'Understood. Logging payment promise of ₹1,20,000 within 7 days. Thank you.' }
             : line2
-            ? { speaker: 'Kapoor', color: '#425466', bg: '#F0F4F8', text: 'Yes, we are aware. Will process the full payment by next week, maximum.' }
+            ? { speaker: 'Kapoor', color: '#555555', bg: '#F0EDE6', text: 'Yes, we are aware. Will process the full payment by next week, maximum.' }
             : line1
-            ? { speaker: 'Monzy', color: '#635BFF', bg: '#F0EFFF', text: 'Hi, calling about Invoice #1234 for ₹1,20,000 overdue by 28 days. When can we expect payment?' }
+            ? { speaker: 'Monzy', color: '#A87C28', bg: '#FDF6E8', text: 'Hi, calling about Invoice #1234 for ₹1,20,000 overdue by 28 days. When can we expect payment?' }
             : null;
 
           const key = line3 ? 'l3' : line2 ? 'l2' : line1 ? 'l1' : 'none';
@@ -213,7 +213,7 @@ function CallPanel({ line1, line2, line3, done, arUpdated }: {
                 </motion.div>
               ) : (
                 <motion.p key="none" initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                  className="text-xs italic" style={{ color: '#C8D4E0' }}>
+                  className="text-xs italic" style={{ color: '#E8E4DC' }}>
                   Connecting…
                 </motion.p>
               )}
@@ -389,21 +389,13 @@ function PriyaAvatar({ size = 32 }: { size?: number }) {
   return (
     <div
       className="rounded-full overflow-hidden flex-shrink-0 border-2 border-white shadow-sm"
-      style={{ width: size, height: size, background: 'linear-gradient(160deg, #C68642 0%, #8B4513 100%)' }}
+      style={{ width: size, height: size }}
     >
-      <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
-        {/* Hair */}
-        <ellipse cx="16" cy="9" rx="8" ry="7" fill="#3B1F0A"/>
-        {/* Face */}
-        <ellipse cx="16" cy="13" rx="6" ry="6.5" fill="#C68642"/>
-        {/* Hair sides */}
-        <path d="M8 9 Q8 16 10 18" stroke="#3B1F0A" strokeWidth="3" strokeLinecap="round"/>
-        <path d="M24 9 Q24 16 22 18" stroke="#3B1F0A" strokeWidth="3" strokeLinecap="round"/>
-        {/* Shoulders / body */}
-        <ellipse cx="16" cy="30" rx="11" ry="8" fill="#7C3AED" opacity="0.9"/>
-        {/* Dupatta hint */}
-        <path d="M6 26 Q10 22 16 24 Q22 22 26 26" fill="#A78BFA" opacity="0.7"/>
-      </svg>
+      <img
+        src="/ananya.jpg"
+        alt="Priya"
+        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 8%' }}
+      />
     </div>
   );
 }
@@ -436,7 +428,7 @@ function DisputePanel({ msgVisible, detected, arUpdated }: {
             </p>
             <div className="flex items-center justify-end gap-1 mt-1">
               <span className="text-[9px] text-gray-400">10:09 AM</span>
-              <span className="text-[10px] text-blue-500">✓✓</span>
+              <span className="text-[10px] text-[#A87C28]">✓✓</span>
             </div>
           </div>
         </motion.div>
@@ -492,22 +484,22 @@ function DisputePanel({ msgVisible, detected, arUpdated }: {
         <motion.div
           initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="flex-shrink-0 border-t px-4 py-3" style={{ borderTopColor: '#8F8BFF', background: '#635BFF' }}
+          className="flex-shrink-0 border-t px-4 py-3" style={{ borderTopColor: '#C49A3A', background: '#A87C28' }}
         >
           <div className="flex items-center gap-2 mb-2.5">
             <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center flex-shrink-0">
               <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-                <path d="M2 6l3 3 5-5" stroke="#4F46E5" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M2 6l3 3 5-5" stroke="#8B6520" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
             <span className="text-xs font-bold text-white">AR Record Updated</span>
           </div>
 
           {/* Routed-to row with avatar */}
-          <div className="flex items-center gap-3 rounded-lg px-3 py-2.5 mb-2" style={{ background: '#5851E5' }}>
+          <div className="flex items-center gap-3 rounded-lg px-3 py-2.5 mb-2" style={{ background: '#8B6520' }}>
             <PriyaAvatar size={32} />
             <div className="flex flex-col min-w-0">
-              <span className="text-[10px] text-indigo-300 font-medium">Raised with</span>
+              <span className="text-[10px] text-[#E8D5A0] font-medium">Raised with</span>
               <span className="text-xs font-bold text-white">Priya · Warehouse Team</span>
             </div>
             <div className="ml-auto flex-shrink-0 w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -523,7 +515,7 @@ function DisputePanel({ msgVisible, detected, arUpdated }: {
                 transition={{ delay: 0.2 + i * 0.07, duration: 0.22 }}
                 className="flex flex-col"
               >
-                <span className="text-[9px] text-indigo-300">{label}</span>
+                <span className="text-[9px] text-[#E8D5A0]">{label}</span>
                 <span className="text-[10px] font-semibold text-white leading-tight">{value}</span>
               </motion.div>
             ))}
@@ -541,7 +533,7 @@ function ActivityCard({ children }: { children: React.ReactNode }) {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="bg-white border border-[#E3E8EF] rounded-lg p-3.5"
+      className="bg-white border border-[#E8E4DC] rounded-lg p-3.5"
       style={{ boxShadow: '0 1px 3px 0 rgba(0,0,0,0.05)' }}
     >
       {children}
@@ -554,8 +546,8 @@ function ARBadge() {
   return (
     <motion.div initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-      className="inline-flex items-center gap-1 mt-1.5 border rounded px-2 py-0.5" style={{ background: '#F0EFFF', borderColor: '#E0DEFF' }}>
-      <span className="text-[9px] font-semibold" style={{ color: '#635BFF' }}>✓ AR updated</span>
+      className="inline-flex items-center gap-1 mt-1.5 border rounded px-2 py-0.5" style={{ background: '#FDF6E8', borderColor: '#F5E8C8' }}>
+      <span className="text-[9px] font-semibold" style={{ color: '#A87C28' }}>✓ AR updated</span>
     </motion.div>
   );
 }
@@ -640,23 +632,23 @@ export default function Scene05Activity({ isActive }: Props) {
     <div className="flex-1 flex flex-col overflow-hidden">
       <div className="flex-1 flex overflow-hidden min-h-0">
         {/* ── Left: activity feed ── */}
-        <div className="flex-[6] flex flex-col gap-2 p-4 border-r border-[#E3E8EF] overflow-auto">
+        <div className="flex-[6] flex flex-col gap-2 p-4 border-r border-[#E8E4DC] overflow-auto">
 
           {numCards >= 1 && (
             <ActivityCard>
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-xs font-semibold text-[#1A1F36]">Ratan Distributors</span>
-                <span className="font-mono text-[10px] text-[#8792A2]">10:02 AM</span>
+                <span className="text-xs font-semibold text-[#111111]">Ratan Distributors</span>
+                <span className="font-mono text-[10px] text-[#999999]">10:02 AM</span>
               </div>
               <div className="flex items-center gap-2 mb-1.5">
-                <span className="font-mono text-sm font-semibold" style={{ color: '#635BFF' }}>₹3,87,000</span>
+                <span className="font-mono text-sm font-semibold" style={{ color: '#A87C28' }}>₹3,87,000</span>
                 <span className="text-[10px] font-medium" style={{ color: '#E5424D' }}>32 days overdue</span>
               </div>
               <div className="flex items-center gap-2 mb-1">
                 <StatusBadge label="WhatsApp" variant="whatsapp" />
-                <span className="text-xs text-[#697386]">WhatsApp message sent</span>
+                <span className="text-xs text-[#777777]">WhatsApp message sent</span>
               </div>
-              <p className="text-[10px] text-[#8792A2] italic">Prefers WhatsApp · confirmed Aug 2024</p>
+              <p className="text-[10px] text-[#999999] italic">Prefers WhatsApp · confirmed Aug 2024</p>
               {waBadge && <ARBadge />}
             </ActivityCard>
           )}
@@ -664,18 +656,18 @@ export default function Scene05Activity({ isActive }: Props) {
           {numCards >= 2 && (
             <ActivityCard>
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-xs font-semibold text-[#1A1F36]">Kapoor Enterprises</span>
-                <span className="font-mono text-[10px] text-[#8792A2]">10:04 AM</span>
+                <span className="text-xs font-semibold text-[#111111]">Kapoor Enterprises</span>
+                <span className="font-mono text-[10px] text-[#999999]">10:04 AM</span>
               </div>
               <div className="flex items-center gap-2 mb-1.5">
-                <span className="font-mono text-sm font-semibold" style={{ color: '#635BFF' }}>₹1,20,000</span>
+                <span className="font-mono text-sm font-semibold" style={{ color: '#A87C28' }}>₹1,20,000</span>
                 <span className="text-[10px] font-medium" style={{ color: '#E5424D' }}>28 days overdue</span>
               </div>
               <div className="flex items-center gap-2 mb-1">
                 <StatusBadge label="Call" variant="call" />
-                <span className="text-xs text-[#697386]">Voice call initiated</span>
+                <span className="text-xs text-[#777777]">Voice call initiated</span>
               </div>
-              <p className="text-[10px] text-[#8792A2] italic">Prefers call reminders</p>
+              <p className="text-[10px] text-[#999999] italic">Prefers call reminders</p>
               {callDone && (
                 <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}
                   className="text-[10px] font-medium mt-1" style={{ color: '#1EA672' }}>
@@ -689,18 +681,18 @@ export default function Scene05Activity({ isActive }: Props) {
           {numCards >= 3 && (
             <ActivityCard>
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-xs font-semibold text-[#1A1F36]">Mehta Foods</span>
-                <span className="font-mono text-[10px] text-[#8792A2]">10:06 AM</span>
+                <span className="text-xs font-semibold text-[#111111]">Mehta Foods</span>
+                <span className="font-mono text-[10px] text-[#999999]">10:06 AM</span>
               </div>
               <div className="flex items-center gap-2 mb-1.5">
-                <span className="font-mono text-sm font-semibold" style={{ color: '#635BFF' }}>₹88,000</span>
+                <span className="font-mono text-sm font-semibold" style={{ color: '#A87C28' }}>₹88,000</span>
                 <span className="text-[10px] font-medium" style={{ color: '#E68C2F' }}>15 days overdue</span>
               </div>
               <div className="flex items-center gap-2 mb-1">
                 <StatusBadge label="Email" variant="email" />
-                <span className="text-xs text-[#697386]">Email sent</span>
+                <span className="text-xs text-[#777777]">Email sent</span>
               </div>
-              <p className="text-[10px] text-[#8792A2] italic">Default channel</p>
+              <p className="text-[10px] text-[#999999] italic">Default channel</p>
               {emailBadge && <ARBadge />}
             </ActivityCard>
           )}
@@ -708,32 +700,32 @@ export default function Scene05Activity({ isActive }: Props) {
           {numCards >= 4 && (
             <ActivityCard>
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-xs font-semibold text-[#1A1F36]">Global Exports Ltd.</span>
-                <span className="font-mono text-[10px] text-[#8792A2]">10:12 AM</span>
+                <span className="text-xs font-semibold text-[#111111]">Global Exports Ltd.</span>
+                <span className="font-mono text-[10px] text-[#999999]">10:12 AM</span>
               </div>
               <div className="flex items-center gap-2 mb-1.5">
-                <span className="font-mono text-sm font-semibold" style={{ color: '#635BFF' }}>₹2,45,000</span>
+                <span className="font-mono text-sm font-semibold" style={{ color: '#A87C28' }}>₹2,45,000</span>
                 <span className="text-[10px] font-medium" style={{ color: '#E68C2F' }}>20 days overdue</span>
               </div>
               <div className="flex items-center gap-2 mb-1">
                 <StatusBadge label="Dispute" variant="orange" />
-                <span className="text-xs text-[#697386]">Quantity mismatch raised</span>
+                <span className="text-xs text-[#777777]">Quantity mismatch raised</span>
               </div>
-              <p className="text-[10px] text-[#8792A2] italic">AI-detected · auto-routed to warehouse</p>
+              <p className="text-[10px] text-[#999999] italic">AI-detected · auto-routed to warehouse</p>
               {disputeBadge && <ARBadge />}
             </ActivityCard>
           )}
 
           {tagline && (
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
-              className="text-xs text-[#8792A2] italic mt-1 text-center">
+              className="text-xs text-[#999999] italic mt-1 text-center">
               Four customers. Every channel. Every dispute. Zero manual effort.
             </motion.p>
           )}
         </div>
 
         {/* ── Right: communication preview ── */}
-        <div className="flex-[4] p-4 flex flex-col overflow-hidden bg-[#F6F9FC] min-h-0">
+        <div className="flex-[4] p-4 flex flex-col overflow-hidden bg-[#FAF9F6] min-h-0">
           <AnimatePresence mode="wait">
             {rightPanel === 'whatsapp' && numCards >= 1 && (
               <motion.div key="wa" className="flex-1 min-h-0 flex flex-col"

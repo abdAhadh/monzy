@@ -52,6 +52,45 @@ export default function App() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState({ text: '', type: '' });
   const [loading, setLoading] = useState(false);
+  const [demoFs, setDemoFs] = useState(false);
+  const [demoTime, setDemoTime] = useState({ current: 0, total: 0 });
+
+  // Dynamically scale the iframe to fill the wrapper at every viewport size
+  useEffect(() => {
+    const IFRAME_W = 1280;
+    const IFRAME_H = 768;
+    const apply = () => {
+      const wrap = document.querySelector('.demo-embed-wrap');
+      if (!wrap || demoFs) return;
+      const w = wrap.offsetWidth;
+      const scale = w / IFRAME_W;
+      const h = Math.round(IFRAME_H * scale);
+      wrap.style.height = `${h}px`;
+      const iframe = wrap.querySelector('iframe');
+      if (iframe) iframe.style.transform = `scale(${scale})`;
+    };
+    apply();
+    const wrap = document.querySelector('.demo-embed-wrap');
+    const ro = new ResizeObserver(apply);
+    if (wrap) ro.observe(wrap);
+    return () => ro.disconnect();
+  }, [demoFs]);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.data?.type === 'monzy-time') {
+        setDemoTime({ current: e.data.current, total: e.data.total });
+      }
+    };
+    window.addEventListener('message', handler);
+    return () => window.removeEventListener('message', handler);
+  }, []);
+
+  const fmtTime = (s) => {
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return `${m}:${sec.toString().padStart(2, '0')}`;
+  };
   const emailRef = useRef(null);
 
   const scrollToForm = (e) => {
@@ -337,6 +376,41 @@ export default function App() {
         <FadeIn as="h2">Three agents. Your entire AR lifecycle.</FadeIn>
         <FadeIn as="p" className="agents-sub">
           From deciding who gets credit, to chasing what's overdue, to matching every payment that comes in.
+        </FadeIn>
+
+        {/* Demo embed */}
+        <FadeIn className={`demo-embed-wrap${demoFs ? ' demo-fs' : ''}`}>
+          <iframe
+            src="https://demo.monzyai.com"
+            title="Monzy live demo"
+            className={`demo-embed-iframe${demoFs ? ' demo-fs' : ''}`}
+            allow="autoplay"
+          />
+          <div className="demo-overlay-controls">
+            <span className="demo-time-badge">
+              {fmtTime(demoTime.current)} / {fmtTime(demoTime.total)}
+            </span>
+            <button
+              className="demo-fs-btn"
+              onClick={() => setDemoFs(f => !f)}
+              title={demoFs ? 'Minimize' : 'Fullscreen'}
+              aria-label={demoFs ? 'Minimize demo' : 'Expand demo to fullscreen'}
+            >
+            {demoFs ? (
+              /* compress icon */
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M8 3v3a2 2 0 0 1-2 2H3"/><path d="M21 8h-3a2 2 0 0 1-2-2V3"/>
+                <path d="M3 16h3a2 2 0 0 1 2 2v3"/><path d="M16 21v-3a2 2 0 0 1 2-2h3"/>
+              </svg>
+            ) : (
+              /* expand icon */
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/>
+                <path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/>
+              </svg>
+            )}
+            </button>
+          </div>
         </FadeIn>
         <div className="agents-grid">
           <FadeIn className="agent-card">

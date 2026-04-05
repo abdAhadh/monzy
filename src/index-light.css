@@ -991,6 +991,120 @@ nav {
   line-height: 1.7;
 }
 
+/* ---- DEMO EMBED ---- */
+.demo-embed-wrap {
+  /* Break out of the agents section's 24px side padding so we
+     get the full 860 px parent width — no clipping on the right.
+     Height is set dynamically by JS (ResizeObserver). */
+  width: calc(100% + 48px);
+  margin-left: -24px;
+  margin-right: -24px;
+  margin-top: 8px;
+  margin-bottom: 48px;
+  overflow: hidden;
+  border-radius: 14px;
+  position: relative;
+  transition: border-radius 0.3s ease;
+}
+
+.demo-embed-iframe {
+  /* Always render at the real desktop size — JS scales it to fit. */
+  width: 1280px;
+  height: 768px;
+  border: none;
+  display: block;
+  transform-origin: top left;
+}
+
+/* Fullscreen state */
+.demo-embed-wrap.demo-fs {
+  position: fixed;
+  inset: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: none;
+  margin: 0 !important;
+  border-radius: 0;
+  z-index: 9999;
+}
+
+.demo-embed-iframe.demo-fs {
+  width: 100%;
+  height: 100%;
+  transform: none;
+}
+
+/* Overlay controls (timestamp + fullscreen btn) — hover-only */
+.demo-overlay-controls {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.demo-embed-wrap:hover .demo-overlay-controls {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.demo-time-badge {
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 8px;
+  background: rgba(17, 17, 17, 0.55);
+  color: #ffffff;
+  font-size: 11px;
+  font-family: 'Inter', monospace;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(6px);
+  white-space: nowrap;
+}
+
+.demo-fs-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(17, 17, 17, 0.55);
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+  transition: background 0.2s ease, transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+.demo-fs-btn:hover {
+  background: rgba(17, 17, 17, 0.80);
+  transform: scale(1.08);
+}
+
+/* In fullscreen, shift controls to full-viewport corner */
+.demo-embed-wrap.demo-fs .demo-overlay-controls {
+  bottom: 20px;
+  right: 20px;
+}
+
+.demo-embed-wrap.demo-fs .demo-fs-btn,
+.demo-embed-wrap.demo-fs .demo-time-badge {
+  height: 38px;
+  font-size: 12px;
+}
+
+.demo-embed-wrap.demo-fs .demo-fs-btn {
+  width: 38px;
+}
+
 .agents-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1311,6 +1425,14 @@ footer {
   .agents h2 { font-size: 26px; }
   .agents-sub { font-size: 14px; }
   .agents-grid { grid-template-columns: 1fr; gap: 12px; }
+
+  /* Mobile: break out of 16px padding, height set dynamically by JS */
+  .demo-embed-wrap {
+    width: calc(100% + 32px);
+    margin-left: -16px;
+    margin-right: -16px;
+    border-radius: 10px;
+  }
 
   .faq { padding: 60px 16px 60px; }
   .faq h2 { font-size: 26px; }

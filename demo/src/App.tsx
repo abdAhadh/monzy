@@ -112,37 +112,20 @@ function ProgressBar({
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 select-none">
-      {/* Timestamp — visible on hover */}
-      <AnimatePresence>
-        {hovered && (
-          <motion.div
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 4 }}
-            transition={{ duration: 0.15 }}
-            className="flex items-center justify-end px-4 py-1.5"
-          >
-            <span className="text-[11px] font-mono text-[#8792A2]">
-              {formatTime(voTime)} <span className="text-[#C8D4E0]">/</span> {formatTime(TOTAL_DURATION)}
-            </span>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* Track */}
       <div
         ref={barRef}
         onClick={handleBarClick}
-        className="w-full bg-[#E3E8EF] cursor-pointer relative"
+        className="w-full bg-[#E8E4DC] cursor-pointer relative"
         style={{ height: hovered ? 6 : 2, transition: 'height 0.15s ease' }}
       >
         <div
-          className="h-full bg-[#635BFF] transition-none"
+          className="h-full bg-[#A87C28] transition-none"
           style={{ width: `${progress * 100}%` }}
         />
         {hovered && (
           <div
-            className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#635BFF] border-2 border-white shadow-md pointer-events-none"
+            className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#A87C28] border-2 border-white shadow-md pointer-events-none"
             style={{ left: `${progress * 100}%`, marginLeft: -6 }}
           />
         )}
@@ -222,6 +205,15 @@ export default function App() {
     return () => vo.removeEventListener('timeupdate', update);
   }, []);
 
+  // Broadcast time to parent (marketing site embed)
+  useEffect(() => {
+    if (window.parent === window) return; // not embedded
+    window.parent.postMessage(
+      { type: 'monzy-time', current: voTime, total: TOTAL_DURATION },
+      '*'
+    );
+  }, [voTime]);
+
   // Seek handler
   const handleSeek = useCallback((t: number) => {
     if (voRef.current) {
@@ -257,7 +249,7 @@ export default function App() {
 
   return (
     <div
-      className="w-screen h-screen flex flex-col overflow-hidden bg-white font-sans"
+      className="w-screen h-screen flex flex-col overflow-hidden bg-[#FAF9F6] font-sans"
         onMouseMove={() => {
         setScreenHovered(true);
         if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
@@ -327,7 +319,7 @@ export default function App() {
             className="fixed inset-0 z-[55] flex items-center justify-center pointer-events-none"
           >
             <button
-              className="w-24 h-24 rounded-full bg-[#635BFF] flex items-center justify-center shadow-xl pointer-events-auto"
+              className="w-24 h-24 rounded-full bg-[#111111] flex items-center justify-center shadow-xl pointer-events-auto"
               onClick={togglePlay}
             >
               {isPlaying ? (
@@ -353,7 +345,7 @@ export default function App() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
             className="fixed inset-0 z-[60] flex items-center justify-center cursor-pointer"
-            style={{ background: 'rgba(255,255,255,0.55)' }}
+            style={{ background: 'rgba(250,249,246,0.70)' }}
             onClick={startDemo}
           >
             <motion.div
@@ -361,7 +353,7 @@ export default function App() {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="w-24 h-24 rounded-full bg-[#635BFF] flex items-center justify-center shadow-xl">
+              <div className="w-24 h-24 rounded-full bg-[#111111] flex items-center justify-center shadow-xl">
                 <svg width="28" height="34" viewBox="0 0 20 24" fill="none">
                   <path d="M2 2L18 12L2 22V2Z" fill="white" />
                 </svg>
