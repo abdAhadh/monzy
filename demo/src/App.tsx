@@ -3,6 +3,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { SCENES } from './types';
 
 import TopBar from './components/TopBar';
+import MonzyLogo from './components/MonzyLogo';
+
+// True when loaded inside an iframe (e.g. embedded in monzyai.com)
+const isEmbedded = window.self !== window.top;
 
 import Scene01Intro from './scenes/Scene01Intro';
 import Scene02Sync from './scenes/Scene02Sync';
@@ -390,6 +394,20 @@ export default function App() {
         )}
       </AnimatePresence>
     </div>
+
+    {/* Mobile-only "visit monzyai.com" pill — outside the scaled canvas,
+        hidden when embedded in the marketing site iframe */}
+    {!isEmbedded && viewScale.scale < 1 && (
+      <a
+        href="https://monzyai.com"
+        target="_self"
+        style={{ textDecoration: 'none' }}
+        className="fixed bottom-5 right-4 z-[100] flex items-center gap-2 bg-white border border-[#E8E4DC] rounded-xl px-3 py-2 shadow-sm"
+      >
+        <MonzyLogo size={20} />
+        <span className="text-[#111111] text-sm font-semibold tracking-tight">Monzy</span>
+      </a>
+    )}
     </div>
   );
 }
