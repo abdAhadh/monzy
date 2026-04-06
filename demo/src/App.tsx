@@ -158,6 +158,24 @@ export default function App() {
   const [screenHovered, setScreenHovered] = useState(false);
   const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // ── Contain-scale: always render at 1280×768 desktop resolution ──────────────
+  const [viewScale, setViewScale] = useState({ scale: 1, offsetX: 0, offsetY: 0 });
+  useEffect(() => {
+    const CANVAS_W = 1280;
+    const CANVAS_H = 768;
+    const compute = () => {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const scale = Math.min(vw / CANVAS_W, vh / CANVAS_H);
+      const offsetX = (vw - CANVAS_W * scale) / 2;
+      const offsetY = (vh - CANVAS_H * scale) / 2;
+      setViewScale({ scale, offsetX, offsetY });
+    };
+    compute();
+    window.addEventListener('resize', compute);
+    return () => window.removeEventListener('resize', compute);
+  }, []);
+
   const voRef  = useRef<HTMLAudioElement>(null);
   const bgmRef = useRef<HTMLAudioElement>(null);
 
@@ -248,9 +266,18 @@ export default function App() {
   }, [hasStarted, togglePlay]);
 
   return (
+    // Outer shell: full viewport, cream background fills letterbox areas
+    <div className="w-screen h-screen overflow-hidden bg-[#FAF9F6]">
+    {/* Inner canvas: always 1280×768, scaled to fit any screen */}
     <div
-      className="w-screen h-screen flex flex-col overflow-hidden bg-[#FAF9F6] font-sans"
-        onMouseMove={() => {
+      style={{
+        width: 1280,
+        height: 768,
+        transformOrigin: 'top left',
+        transform: `translate(${viewScale.offsetX}px, ${viewScale.offsetY}px) scale(${viewScale.scale})`,
+      }}
+      className="flex flex-col font-sans bg-[#FAF9F6] relative"
+      onMouseMove={() => {
         setScreenHovered(true);
         if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
         if (isPlaying) {
@@ -362,6 +389,7 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
+    </div>
     </div>
   );
 }
