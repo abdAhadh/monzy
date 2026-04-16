@@ -11,7 +11,7 @@ export default {
         mono: ['JetBrains Mono', 'Menlo', 'monospace'],
       },
       colors: {
-        // Monzy design tokens
+        // Ratio design tokens
         st: {
           bg:           '#FAF9F6',
           surface:      '#FFFFFF',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import MonzyLogo from '../components/MonzyLogo';
+import RatioLogo from '../components/RatioLogo';
 
 interface Props { isActive: boolean; }
 
@@ -19,15 +19,15 @@ export default function Scene01Intro({ isActive }: Props) {
 
       {/* Center content */}
       <div className="flex-1 flex flex-col items-center justify-center relative z-10 text-center px-8 gap-5">
-        {/* Monzy branding — above headline */}
+        {/* Ratio branding — above headline */}
         <motion.div
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="flex items-center gap-2.5"
         >
-          <MonzyLogo size={32} />
-          <span className="text-xl font-semibold text-[#111111] tracking-tight">Monzy</span>
+          <RatioLogo size={32} />
+          <span className="text-xl font-semibold text-[#111111] tracking-tight">Ratio</span>
         </motion.div>
 
         <motion.h1
@@ -36,7 +36,7 @@ export default function Scene01Intro({ isActive }: Props) {
           transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
           className="text-5xl font-semibold text-[#111111] tracking-tight leading-tight max-w-xl"
         >
-          Your AI Accounts Receivables Specialist.
+          Your AI Accounts Receivable Agent.
         </motion.h1>
 
         <motion.p

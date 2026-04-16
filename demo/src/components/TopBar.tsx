@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import MonzyLogo from './MonzyLogo';
+import RatioLogo from './RatioLogo';
 import NavDots from './NavDots';
 import { SCENES, NAV_GROUPS } from '../types';
 
@@ -17,25 +17,25 @@ export default function TopBar({ currentScene, onSceneChange, isPlaying, onToggl
   const groupIndex = NAV_GROUPS.indexOf(activeGroup);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-[#E8E4DC]">
+    <div className="fixed top-0 left-0 right-0 z-50 border-b border-[#2A2A4E]" style={{ background: '#1A1A2E' }}>
       <div className="flex items-center justify-between px-5 h-12">
         {/* Left: Logo + title */}
         <div className="flex items-center gap-2.5">
           <a
-            href="https://monzyai.com"
+            href="https://tryratio.io"
             target="_self"
             className="flex items-center gap-2.5 no-underline"
             style={{ textDecoration: 'none' }}
           >
-            <MonzyLogo size={24} />
-            <span className="font-semibold text-[#111111] text-sm tracking-tight">Monzy</span>
+            <RatioLogo size={24} />
+            <span className="font-semibold text-white text-sm tracking-tight">Ratio</span>
           </a>
-          <span className="text-[#E8E4DC] text-sm font-light">|</span>
+          <span className="text-[#3A3A5E] text-sm font-light">|</span>
           <motion.span
             key={scene?.title}
             initial={{ opacity: 0, x: -4 }}
             animate={{ opacity: 1, x: 0 }}
-            className="text-[#777777] text-xs font-medium"
+            className="text-[#9999BB] text-xs font-medium"
           >
             {scene?.title}
           </motion.span>

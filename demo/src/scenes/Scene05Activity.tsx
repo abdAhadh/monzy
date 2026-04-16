@@ -96,7 +96,7 @@ function WhatsAppPanel({ delivered, reply, arUpdated }: { delivered: boolean; re
       </div>
 
       <div className="flex-1 flex flex-col min-h-0 p-3 bg-[#ECE5DD] gap-2 overflow-auto">
-        {/* Monzy's outgoing message */}
+        {/* Ratio's outgoing message */}
         <motion.div className="self-end max-w-[85%]"
           initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.1 }}>
@@ -173,7 +173,7 @@ function CallPanel({ line1, line2, line3, done, arUpdated }: {
         </div>
         <div className="font-mono text-xl font-semibold" style={{ color: '#A87C28' }}>{m}:{s}</div>
         {!done && <Waveform bars={7} color="#A87C28" height={22} />}
-        <div className="text-[10px] text-[#999999]">AI voice agent · Monzy</div>
+        <div className="text-[10px] text-[#999999]">AI voice agent · Ratio</div>
       </div>
 
       {/* Subtitle-style transcript — one line at a time */}
@@ -181,11 +181,11 @@ function CallPanel({ line1, line2, line3, done, arUpdated }: {
         {(() => {
           // Derive the single active subtitle from flags
           const active = line3
-            ? { speaker: 'Monzy', color: '#A87C28', bg: '#FDF6E8', text: 'Understood. Logging payment promise of ₹1,20,000 within 7 days. Thank you.' }
+            ? { speaker: 'Ratio', color: '#A87C28', bg: '#FDF6E8', text: 'Understood. Logging payment promise of ₹1,20,000 within 7 days. Thank you.' }
             : line2
             ? { speaker: 'Kapoor', color: '#555555', bg: '#F0EDE6', text: 'Yes, we are aware. Will process the full payment by next week, maximum.' }
             : line1
-            ? { speaker: 'Monzy', color: '#A87C28', bg: '#FDF6E8', text: 'Hi, calling about Invoice #1234 for ₹1,20,000 overdue by 28 days. When can we expect payment?' }
+            ? { speaker: 'Ratio', color: '#A87C28', bg: '#FDF6E8', text: 'Hi, calling about Invoice #1234 for ₹1,20,000 overdue by 28 days. When can we expect payment?' }
             : null;
 
           const key = line3 ? 'l3' : line2 ? 'l2' : line1 ? 'l1' : 'none';
@@ -292,16 +292,16 @@ function EmailPanel({ replyVisible, extracted, arUpdated }: {
       <div className="flex-1 overflow-auto px-3 py-2 flex flex-col gap-1.5 min-h-0"
         style={{ background: '#F6F8FC' }}>
 
-        {/* Message 1 — Monzy's outgoing (sent) */}
+        {/* Message 1 — Ratio's outgoing (sent) */}
         <div className="rounded-lg overflow-hidden" style={{ background: '#FFFFFF', border: '1px solid #E0E0E0' }}>
           {/* Sender row */}
           <div className="flex items-center gap-3 px-3 py-2.5">
             <div className="w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
-              style={{ background: '#4285F4' }}>M</div>
+              style={{ background: '#4285F4' }}>R</div>
             <div className="flex-1 min-w-0">
               <div className="flex items-baseline gap-1.5">
-                <span style={{ fontSize: 13, fontWeight: 600, color: '#202124' }}>Monzy AR</span>
-                <span style={{ fontSize: 11, color: '#5F6368' }}>&lt;ar@monzyai.com&gt;</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: '#202124' }}>Ratio AR</span>
+                <span style={{ fontSize: 11, color: '#5F6368' }}>&lt;ar@tryratio.io&gt;</span>
               </div>
               <span style={{ fontSize: 11, color: '#5F6368' }}>to accounts@mehtafoods.com</span>
             </div>

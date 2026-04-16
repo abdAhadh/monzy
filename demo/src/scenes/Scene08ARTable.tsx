@@ -145,7 +145,7 @@ export default function Scene08ARTable({ isActive }: Props) {
           className="flex items-center gap-2 mt-4"
         >
           <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#A87C28' }} />
-          <span className="text-[10px] text-[#999999] font-mono">Updated by Monzy · based on WhatsApp, call, email and dispute data · 10:12 AM</span>
+          <span className="text-[10px] text-[#999999] font-mono">Updated by Ratio · based on WhatsApp, call, email and dispute data · 10:12 AM</span>
         </motion.div>
       </div>
 

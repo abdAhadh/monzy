@@ -88,7 +88,7 @@ export default function Scene18Dashboard({ isActive }: Props) {
           <div className="flex-[40] border-l border-[#E8E4DC] flex flex-col overflow-hidden">
             <div className="px-4 py-3 border-b border-[#E8E4DC] bg-white flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#1EA672' }} />
-              <span className="text-xs font-medium text-[#111111]">Monzy still working...</span>
+              <span className="text-xs font-medium text-[#111111]">Ratio still working...</span>
             </div>
             <div className="flex-1 overflow-auto bg-white">
               <ActivityFeed items={FEED_ITEMS} startDelay={0.2} />

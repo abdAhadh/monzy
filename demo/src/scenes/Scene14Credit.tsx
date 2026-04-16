@@ -105,7 +105,7 @@ export default function Scene14Credit({ isActive }: Props) {
                 transition={{ delay: 0.2, duration: 0.5 }}
                 className="text-sm font-semibold text-[#111111]"
               >
-                Monzy Recommendation: Next Cycle
+                Ratio Recommendation: Next Cycle
               </motion.span>
             </div>
             <motion.p

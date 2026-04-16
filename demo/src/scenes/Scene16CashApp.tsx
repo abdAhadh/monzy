@@ -109,11 +109,11 @@ function AnanyaAvatar({ size = 36 }: { size?: number }) {
   );
 }
 
-/* ── Monzy bot icon ───────────────────────────────────────────── */
-function MonzyBotAvatar() {
+/* ── Ratio bot icon ───────────────────────────────────────────── */
+function RatioBotAvatar() {
   return (
     <svg width="32" height="32" viewBox="0 0 35 35" fill="none" className="flex-shrink-0 rounded-lg shadow-sm" style={{ borderRadius: 8 }}>
-      <path d="M11.974 35C5.361 35 0 29.639 0 23.026V11.974C0 5.361 5.361 0 11.974 0H23.026C29.639 0 35 5.361 35 11.974V23.026C35 29.639 29.639 35 23.026 35H11.974Z" fill="#111111"/>
+      <path d="M11.974 35C5.361 35 0 29.639 0 23.026V11.974C0 5.361 5.361 0 11.974 0H23.026C29.639 0 35 5.361 35 11.974V23.026C35 29.639 29.639 35 23.026 35H11.974Z" fill="#1A1A2E"/>
       <path d="M13.7021 15.125C16.7591 13.666 19.1901 11.156 20.5521 8.05396C19.6631 7.11996 18.5061 6.45296 17.2611 6.05296L16.5941 5.82996C16.5441 5.92696 16.5131 6.03296 16.5051 6.14096C15.4371 9.16696 13.2571 11.612 10.3231 12.991C8.27605 13.97 6.76405 15.749 6.05205 17.885L5.83105 18.551C5.92705 18.601 6.03305 18.631 6.14105 18.64C6.98705 18.951 7.83105 19.352 8.63205 19.842C9.78905 17.78 11.5621 16.13 13.7021 15.125ZM26.6031 15.304C24.9401 17.826 22.6161 19.841 19.8851 21.131C17.6181 22.199 15.8821 24.2 15.0821 26.602L14.8591 27.358C15.7231 28.124 16.7391 28.699 17.8401 29.048L18.5061 29.271C18.5571 29.174 18.5871 29.068 18.5961 28.959C19.6631 25.934 21.8431 23.488 24.7781 22.11C26.8241 21.131 28.3811 19.352 29.0491 17.216L29.2711 16.55C28.3371 16.283 27.4471 15.837 26.6031 15.304ZM13.0791 25.047C14.1871 22.37 16.2471 20.199 18.8621 18.952C21.2641 17.796 23.2651 16.018 24.6441 13.838C23.6211 12.859 22.7761 11.747 22.1541 10.413C20.4881 13.459 17.9041 15.903 14.7701 17.396C12.9461 18.241 11.4781 19.709 10.5881 21.488C11.5671 22.423 12.3681 23.579 12.9901 24.868L13.0791 25.047Z" fill="white"/>
     </svg>
   );
@@ -138,16 +138,16 @@ function SlackNotification({ visible }: { visible: boolean }) {
             <span className="text-xs font-mono" style={{ color: 'rgba(255,255,255,0.5)' }}>/</span>
             <span className="text-xs font-semibold" style={{ color: '#ECB22E' }}>#ar-team</span>
             <span className="ml-auto text-[10px] font-mono"
-              style={{ color: 'rgba(255,255,255,0.4)' }}>sent via Monzy</span>
+              style={{ color: 'rgba(255,255,255,0.4)' }}>sent via Ratio</span>
           </div>
 
           {/* Message body */}
           <div className="p-4 bg-white">
             <div className="flex gap-3">
-              <MonzyBotAvatar />
+              <RatioBotAvatar />
               <div className="flex-1 min-w-0">
                 <div className="flex items-baseline gap-2 mb-1.5">
-                  <span className="text-sm font-semibold text-[#111111]">Monzy</span>
+                  <span className="text-sm font-semibold text-[#111111]">Ratio</span>
                   <span className="text-[10px] text-[#999999] font-mono">Today 10:33 AM</span>
                   <span className="ml-auto text-[10px] font-semibold px-2 py-0.5 rounded border"
                     style={{ background: '#FDF6E8', borderColor: '#F5E8C8', color: '#A87C28' }}>APP</span>
@@ -265,7 +265,7 @@ export default function Scene16CashApp({ isActive }: Props) {
           </div>
           <div className="flex items-center gap-2 px-4 py-2 bg-white">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-[10px] text-[#999999] font-mono">Monzy connected · pulling transactions live</span>
+            <span className="text-[10px] text-[#999999] font-mono">Ratio connected · pulling transactions live</span>
           </div>
         </motion.div>
 

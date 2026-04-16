@@ -90,7 +90,7 @@ export default function Scene10Dispute({ isActive, variant }: Props) {
           <ChatBubble
             message="Hi Ratan team, a quick follow-up on Invoice #2847 for ₹3,87,000 due 32 days ago. Please share your payment timeline."
             time="10:02 AM"
-            isMonzy
+            isAgent
             ticks="✓✓"
             delay={0.1}
           />
@@ -99,7 +99,7 @@ export default function Scene10Dispute({ isActive, variant }: Props) {
             <ChatBubble
               message="We received 180 units but invoice says 200. Can't process payment until this is resolved."
               time="10:18 AM"
-              isMonzy={false}
+              isAgent={false}
               delay={0.5}
             />
           )}
@@ -124,7 +124,7 @@ export default function Scene10Dispute({ isActive, variant }: Props) {
               <ChatBubble
                 message="Updated invoice #2847-R attached  ₹3,52,400"
                 time="10:22 AM"
-                isMonzy
+                isAgent
                 ticks="✓✓"
                 delay={0}
               />
@@ -235,7 +235,7 @@ export default function Scene10Dispute({ isActive, variant }: Props) {
                       transition={{ duration: 0.8, delay: d, repeat: Infinity }}
                     />
                   ))}
-                  <span className="text-[10px] text-[#A87C28]">Monzy updating invoice...</span>
+                  <span className="text-[10px] text-[#A87C28]">Ratio updating invoice...</span>
                 </motion.div>
               )}
             </motion.div>

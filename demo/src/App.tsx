@@ -3,9 +3,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { SCENES } from './types';
 
 import TopBar from './components/TopBar';
-import MonzyLogo from './components/MonzyLogo';
+import RatioLogo from './components/RatioLogo';
 
-// True when loaded inside an iframe (e.g. embedded in monzyai.com)
+// True when loaded inside an iframe (e.g. embedded in tryratio.io)
 const isEmbedded = window.self !== window.top;
 
 import Scene01Intro from './scenes/Scene01Intro';
@@ -55,21 +55,21 @@ function formatTime(s: number): string {
 
 // ── Subtitle cues — keyed to actual audio timestamps ─────────────────────────
 const SUBTITLE_CUES: { start: number; end: number; text: string }[] = [
-  { start: 0.0,   end: 3.8,   text: "This is Monzy. Your AI Accounts Receivables Specialist." },
+  { start: 0.0,   end: 3.8,   text: "This is Ratio. Your AI Accounts Receivable Agent." },
   { start: 4.8,   end: 13.6,  text: "It connects to your ERP, CRM, accounting systems and bank accounts to extract your AR data automatically." },
   { start: 14.6,  end: 20.2,  text: "Then it reads your payment history and automatically buckets customers by their risk levels." },
-  { start: 21.2,  end: 27.0,  text: "For each bucket, you can set a follow-up journey. Monzy runs it for every customer automatically." },
-  { start: 27.9,  end: 35.3,  text: "A WhatsApp reminder goes out. The customer replies with a commitment date. Monzy updates the AR record instantly." },
-  { start: 35.8,  end: 42.7,  text: "When a customer prefers a call, Monzy remembers it, gets data on the receivables and updates your AR record." },
+  { start: 21.2,  end: 27.0,  text: "For each bucket, you can set a follow-up journey. Ratio runs it for every customer automatically." },
+  { start: 27.9,  end: 35.3,  text: "A WhatsApp reminder goes out. The customer replies with a commitment date. Ratio updates the AR record instantly." },
+  { start: 35.8,  end: 42.7,  text: "When a customer prefers a call, Ratio remembers it, gets data on the receivables and updates your AR record." },
   { start: 43.1,  end: 48.8,  text: "An email reply comes in and payment details are extracted automatically." },
-  { start: 49.3,  end: 59.4,  text: "We know you run into disputes, which let's say is a quantity mismatch. Monzy documents it and escalates it to the right person in your team." },
+  { start: 49.3,  end: 59.4,  text: "We know you run into disputes, which let's say is a quantity mismatch. Ratio documents it and escalates it to the right person in your team." },
   { start: 60.0,  end: 63.0,  text: "Every customer handled. Every record updated." },
-  { start: 63.9,  end: 75.2,  text: "By ensuring communication with each and every customer or partner, Monzy ensures a real-time AR view — their status, risk level, and last update." },
-  { start: 76.2,  end: 90.8,  text: "Monzy also tracks credit health over time. If one of your distributors has been slipping with more delays, more disputes, Monzy recommends pulling back their credit limit and tightening the payment window to reduce your risk." },
-  { start: 91.8,  end: 102.7, text: "Monzy handles cash applications as well. Bank transactions come in, Monzy matches them to invoices. TDS reconciled, PDCs logged, all automatically." },
-  { start: 103.3, end: 111.2, text: "If a payment doesn't match, Monzy flags it and pings the AR manager on Slack before anyone even notices." },
-  { start: 112.1, end: 116.6, text: "Get a real-time view of your AR, while Monzy runs in the background." },
-  { start: 117.6, end: 125.0, text: "Let your AR team only focus on high risk accounts, while Monzy surfaces them and cuts your DSO in half." },
+  { start: 63.9,  end: 75.2,  text: "By ensuring communication with each and every customer or partner, Ratio ensures a real-time AR view — their status, risk level, and last update." },
+  { start: 76.2,  end: 90.8,  text: "Ratio also tracks credit health over time. If one of your distributors has been slipping with more delays, more disputes, Ratio recommends pulling back their credit limit and tightening the payment window to reduce your risk." },
+  { start: 91.8,  end: 102.7, text: "Ratio handles cash applications as well. Bank transactions come in, Ratio matches them to invoices. TDS reconciled, PDCs logged, all automatically." },
+  { start: 103.3, end: 111.2, text: "If a payment doesn't match, Ratio flags it and pings the AR manager on Slack before anyone even notices." },
+  { start: 112.1, end: 116.6, text: "Get a real-time view of your AR, while Ratio runs in the background." },
+  { start: 117.6, end: 125.0, text: "Let your AR team only focus on high risk accounts, while Ratio surfaces them and cuts your DSO in half." },
 ];
 
 function SubtitleOverlay({ time }: { time: number }) {
@@ -231,7 +231,7 @@ export default function App() {
   useEffect(() => {
     if (window.parent === window) return; // not embedded
     window.parent.postMessage(
-      { type: 'monzy-time', current: voTime, total: TOTAL_DURATION },
+      { type: 'ratio-time', current: voTime, total: TOTAL_DURATION },
       '*'
     );
   }, [voTime]);
@@ -395,17 +395,17 @@ export default function App() {
       </AnimatePresence>
     </div>
 
-    {/* Mobile-only "visit monzyai.com" pill — outside the scaled canvas,
+    {/* Mobile-only "visit tryratio.io" pill — outside the scaled canvas,
         hidden when embedded in the marketing site iframe */}
     {!isEmbedded && viewScale.scale < 1 && (
       <a
-        href="https://monzyai.com"
+        href="https://tryratio.io"
         target="_self"
         style={{ textDecoration: 'none' }}
         className="fixed bottom-5 right-4 z-[100] flex items-center gap-2 bg-white border border-[#E8E4DC] rounded-xl px-3 py-2 shadow-sm"
       >
-        <MonzyLogo size={20} />
-        <span className="text-[#111111] text-sm font-semibold tracking-tight">Monzy</span>
+        <RatioLogo size={20} />
+        <span className="text-[#111111] text-sm font-semibold tracking-tight">Ratio</span>
       </a>
     )}
     </div>
